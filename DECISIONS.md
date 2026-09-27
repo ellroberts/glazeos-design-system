@@ -74,7 +74,9 @@ No value was invented. Every pick below is one of the values in the audit's tabl
 - Control height 52 (5) · 53 (1) → **`--control-md: 52px`**. Highest usage: 5 vs 1.
 - Large control height 58 (5) · 59 (1) → **`--control-lg: 58px`**. Highest usage: 5 vs 1.
 - Small control height 42 (5) · 44 (7) · 46 (5) · 48 (5) → **`--control-sm: var(--space-12)` = 48px**. Already named: 48px = `--space-12`. This beats 44px's higher usage (7).
-- Icon disc 28 (17) · 32 (18) · 34 (7) · 36 (6) · 38 (2) · 40 (8) · 42 (5) · 52 (5) → **`--disc: var(--space-8)` = 32px**. Already named: `--space-8` (also the highest usage, 18). All discs are now one size.
+- Icon disc 28 (17) · 32 (18) · 34 (7) · 36 (6) · 38 (2) · 40 (8) · 42 (5) · 52 (5) → **split into two sizes, not merged to one** (corrected in the second commit):
+  - **`--disc: var(--space-8)` = 32px** (`.gos-disc--md`, the default) for 28–42px. These were all doing the same small-icon job: step numbers, avatars, FAQ +/−, guarantee icons and the small tile arrow. Already named: `--space-8` (also the highest usage, 18).
+  - **`--disc-lg: 52px`** (`.gos-disc--lg`) is kept as its own size. Among discs, 52px was used only by `.m-tile--big .go`, the arrow on the big bento tile. It was a deliberate size for the "big" tile variant, not a near-duplicate of the small discs. The audit's 52px count (5) also includes `.m-btn` min-height and `.m-gtree` margin, which aren't discs.
 - Pill horizontal padding 12 (33) · 13 (6) · 14 (26) · 15 (9) · 17 (4) · 18 (22) → **`--pill-x: var(--space-3)` = 12px**. Already named: `--space-3` (also the highest usage).
 - Pill vertical padding 6 (12) · 7 (6) · 8 (41) · 9 (7) · 10 (26) → **`--pill-y: var(--space-2)` = 8px**. Already named: `--space-2` (also the highest usage).
 - Card padding 22 (21) · 24 (27) · 26 (9) · 28 (17) · 30 (10) · 31 (1) · 32 (18) · 34 (7) → **`--card-pad: var(--space-6)` = 24px**. Two named (24 = `--space-6`, 32 = `--space-8`); highest usage among them: 27 vs 18.
@@ -150,6 +152,6 @@ No value was invented. Every pick below is one of the values in the audit's tabl
   - `--ghost` = outline on dark (`.m-btn--ghost` / `.cta__ghost`)
   - `--light` = white fill (`.btn--light`)
 - **Button sizes.** `--sm` / `--md` / `--lg` = 48 / 52 / 58px (the three control-height merges above). Font sizes are 15 / 15 / 17px (the small/body and lead merges). The horizontal padding (20 / 24 / 30px) is kept from the original buttons.
-- **Families with no size modifiers.** Icon disc and tags have a single size because their ⚠ groups merged to one value. Adding `--sm` / `--lg` there would need invented values.
+- **Families with no size modifiers.** Tags have a single size because their ⚠ groups merged to one value. (Icon disc has `--md` / `--lg`; see the icon-disc entry above.) Adding `--sm` / `--lg` there would need invented values.
 - **Letter-spacing and line-height** weren't audited, so each component keeps the literal value from the rule it replaces.
 - **Heading line-height.** `1.04` (home) was chosen over `1.1` (inner) as the base heading line-height, following the home master.

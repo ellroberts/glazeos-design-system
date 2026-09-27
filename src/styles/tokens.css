@@ -100,7 +100,8 @@
   --control-sm: var(--space-12);  /* 48px - merged 42/44/46 */
   --control-md: 52px;             /* merged 53 */
   --control-lg: 58px;             /* merged 59 */
-  --disc: var(--space-8);         /* 32px icon disc - merged 28/34/36/38/40/42/52 */
+  --disc: var(--space-8);         /* 32px icon disc - merged 28/34/36/38/40/42 */
+  --disc-lg: 52px;                /* big-tile arrow only (was .m-tile--big .go) - kept, not merged */
 
   /* Layout */
   --maxw: 72.5rem;                /* 1160px page width - merged 1280px */

@@ -47,10 +47,10 @@ Anything genuinely fixed (neutral greys, the spacing scale, radii, shadow geomet
 
 ## Using it in the Master Template
 
-Install it from GitHub. Replace `<owner>` with the account the repo lives under:
+Install it from GitHub:
 
 ```bash
-npm install github:<owner>/glazeos-design-system
+npm install github:ellroberts/glazeos-design-system
 ```
 
 Then load the CSS once, after the client theme variables are set:

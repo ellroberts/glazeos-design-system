@@ -102,7 +102,8 @@
   --control-sm: var(--space-12);  /* 48px - merged 42/44/46 */
   --control-md: 52px;             /* merged 53 */
   --control-lg: 58px;             /* merged 59 */
-  --disc: var(--space-8);         /* 32px icon disc - merged 28/34/36/38/40/42/52 */
+  --disc: var(--space-8);         /* 32px icon disc - merged 28/34/36/38/40/42 */
+  --disc-lg: 52px;                /* big-tile arrow only (was .m-tile--big .go) - kept, not merged */
 
   /* Layout */
   --maxw: 72.5rem;                /* 1160px page width - merged 1280px */
@@ -1057,9 +1058,9 @@ select.gos-field__input { appearance: auto; }
    R. Icon disc  🔁  replaces .m-step .n, .m-blist .n, .m-gcov .ico, .m-gcard .ico,
    .m-talk .ico, .m-tile .go, .m-jc .av and the FAQ +/− disc.
    variant  --gold | --gold-outline | --glass | --surface | --light | --primary
-   size     single size (--disc, 32px): the audit's eight disc sizes (28-52px)
-            merged to one value, so there are no size modifiers.
-   Markup: <span class="gos-disc gos-disc--gold">1</span>  or an <svg> inside.
+   size     --md (32px, default: every small-icon job, merged from 28-42px)
+            | --lg (52px: the big tile's arrow, was .m-tile--big .go)
+   Markup: <span class="gos-disc gos-disc--gold gos-disc--md">1</span>  or an <svg> inside.
    ============================================================================= */
 
 .gos-disc {
@@ -1085,6 +1086,10 @@ select.gos-field__input { appearance: auto; }
 .gos-disc--surface { background: var(--surface); color: var(--primary); }
 .gos-disc--light { background: var(--on-dark-strong); color: var(--ink); }
 .gos-disc--primary { background: var(--primary); color: #fff; }
+
+/* ---- sizes ---- */
+.gos-disc--md { width: var(--disc); height: var(--disc); }
+.gos-disc--lg { width: var(--disc-lg); height: var(--disc-lg); }
 
 /* =============================================================================
    S. Tick & link lists  🔁  replaces .m-towns, .checklist, .page .areas / .links /

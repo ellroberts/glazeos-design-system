@@ -4,6 +4,8 @@
   "private": false,
   "description": "Plain-CSS design system (tokens + components) for GlazeOS client websites. No client-side JavaScript.",
   "type": "module",
+  "license": "UNLICENSED",
+  "repository": "github:ellroberts/glazeos-design-system",
   "main": "dist/glazeos.css",
   "style": "dist/glazeos.css",
   "sideEffects": [

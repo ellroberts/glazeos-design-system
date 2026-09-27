@@ -23,7 +23,7 @@ export const AllVariants = {
 
 export const Tiles = {
   render: () => `<div style="display:grid;grid-template-columns:1.64fr 1fr;gap:var(--gap-md)">
-    <a href="#" class="gos-tile gos-tile--lg"><span class="gos-tag gos-tag--gold">Most popular</span><span class="gos-tile__in"><span><b class="gos-tile__title">Whole house</b><span class="gos-tile__body">Every window and door, one fixed price.</span></span><span class="gos-disc gos-disc--light">${I.arrow}</span></span></a>
+    <a href="#" class="gos-tile gos-tile--lg"><span class="gos-tag gos-tag--gold">Most popular</span><span class="gos-tile__in"><span><b class="gos-tile__title">Whole house</b><span class="gos-tile__body">Every window and door, one fixed price.</span></span><span class="gos-disc gos-disc--light gos-disc--lg">${I.arrow}</span></span></a>
     <a href="#" class="gos-tile gos-tile--md"><span class="gos-tile__in"><span><b class="gos-tile__title">Windows</b><span class="gos-tile__body">uPVC, aluminium, sash.</span></span><span class="gos-disc gos-disc--light">${I.arrow}</span></span></a>
     <div class="gos-tile gos-tile--dark gos-tile--md"><div><b class="gos-tile__title">Not sure which?</b><p>Send a photo of the opening and we'll tell you what it needs.</p></div><a href="#" class="gos-btn gos-btn--primary gos-btn--md">Send a photo ${I.arrow}</a></div>
   </div>`,
