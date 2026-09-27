@@ -1,0 +1,22 @@
+/* =============================================================================
+   N. Section heading block  🔁  replaces .m-sechead / .m-rhead and
+   .section-head / .section-head--split, plus the .m-h1 / .m-h2 / .lede styles
+   layout  --stack (title over lede; default) | --split (title left, lede right)
+   Headings: .gos-h1, .gos-h2 (+ <em> turns gold)
+   ============================================================================= */
+
+.gos-sechead { display: flex; flex-direction: column; gap: var(--space-3); max-width: 40rem; margin-bottom: var(--head-offset); }
+.gos-sechead__main { display: flex; flex-direction: column; gap: var(--space-3); max-width: var(--measure-lg); }
+.gos-sechead__aside { max-width: var(--measure-xs); font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--body); }
+
+/* ---- layout ---- */
+.gos-sechead--stack { flex-direction: column; }
+.gos-sechead--split { flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--gap-md) var(--space-12); max-width: none; }
+
+/* ---- headings ---- */
+.gos-h1 { font-size: var(--text-h1); line-height: 1; letter-spacing: -.035em; }
+.gos-h2 { font-size: var(--text-h2); }
+.gos-h1 em, .gos-h2 em { font-style: normal; color: var(--gold); }
+
+.gos-lede { margin: 0; max-width: 60ch; font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--body); }
+.gos-lede--on-dark { color: var(--on-dark-body); }

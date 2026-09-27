@@ -1,0 +1,60 @@
+/* =============================================================================
+   E. Chips  🔁  replaces .m-chip, .chip, .ft-local a / .ft-social a, and adds the
+   selectable radio chip (.m-jobchips) as a shared control.
+   Chip:
+     variant  --static (credential chip) | --link (hover fills) | --on-dark
+     size     --sm | --md
+   Choice chips (radio group):
+     <div class="gos-choices">
+       <label class="gos-choice"><input type="radio" name="job" checked><span>Windows</span></label>
+     </div>
+   ============================================================================= */
+
+.gos-chips { display: flex; flex-wrap: wrap; gap: var(--gap-xs); list-style: none; margin: 0; padding: 0; }
+
+.gos-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid var(--line);
+  border-radius: var(--pill);
+  background: var(--paper);
+  color: var(--body2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color .25s, color .25s, border-color .25s;
+}
+.gos-chip__icon { display: flex; color: var(--gold); }
+
+/* ---- variants ---- */
+.gos-chip--static { cursor: default; }
+.gos-chip--link:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-chip--link:hover .gos-chip__icon { color: #fff; }
+.gos-chip--on-dark { background: transparent; border-color: var(--ft-line); color: var(--on-dark-body); font-weight: var(--weight-medium); }
+.gos-chip--on-dark:hover { border-color: var(--gold); color: #fff; }
+
+/* ---- sizes ---- */
+.gos-chip--sm { padding: var(--pill-y) var(--pill-x); font-size: var(--text-xs); }
+.gos-chip--md { min-height: var(--space-10); padding: 0 var(--gap-sm); font-size: var(--text-sm); }
+
+/* ---- choice chips (radio / checkbox) ---- */
+.gos-choices { display: flex; flex-wrap: wrap; gap: var(--gap-xs); }
+.gos-choice { position: relative; display: block; cursor: pointer; }
+.gos-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.gos-choice span {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.gos-choice input:checked + span { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-choice input:focus-visible + span { outline: var(--focus-ring); outline-offset: var(--focus-offset); }

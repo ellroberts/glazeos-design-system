@@ -1,0 +1,12 @@
+/* =============================================================================
+   L. Star rating  🔁  replaces .m-stars and .ft-rating .stars
+   size  --sm (13px icons) | --md (15px icons, default)
+   Markup: <span class="gos-stars gos-stars--md" aria-label="5 out of 5"><svg…/>×5</span>
+   ============================================================================= */
+
+.gos-stars { display: inline-flex; gap: 2px; color: var(--gold); }
+.gos-stars svg { width: 15px; height: 15px; flex: none; }
+
+/* ---- sizes ---- */
+.gos-stars--sm svg { width: 13px; height: 13px; }
+.gos-stars--md svg { width: 15px; height: 15px; }

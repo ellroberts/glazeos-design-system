@@ -1,0 +1,52 @@
+/* =============================================================================
+   J. Stat displays  🔁  replaces .m-stats / .m-stat, .trust / .trust__item,
+   .m-rating, .ft-rating and the display numbers (.m-gcov .big, .m-band .big)
+   .gos-stats  container
+     variant  --floating (white card that overlaps the hero) | --strip (inline, divided)
+   .gos-stat   value + label
+     size     --sm | --md | --lg (display) | --xl (band)
+     variant  --on-dark (gold value, light label)
+   ============================================================================= */
+
+.gos-stats { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--gap-md); }
+.gos-stats__nums { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-md); }
+.gos-stats__sep { width: 1px; height: var(--control-sm); background: var(--line); }
+
+/* ---- container variants ---- */
+.gos-stats--floating {
+  position: relative;
+  z-index: 3;
+  padding: var(--card-pad);
+  border: var(--border) solid var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+}
+.gos-stats--strip { justify-content: flex-start; padding-block: var(--card-pad); border-bottom: var(--border) solid var(--line); }
+@media (max-width: 64rem) {
+  .gos-stats__sep { display: none; }
+  .gos-stats .gos-stat { flex: 1 1 40%; }
+}
+
+/* ---- stat ---- */
+.gos-stat { display: flex; flex-direction: column; gap: 2px; }
+.gos-stat__value { display: block; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: 1.05; color: var(--primary); }
+.gos-stat__label { font-size: var(--text-sm); color: var(--mute); }
+
+/* ---- stat sizes ---- */
+.gos-stat--sm .gos-stat__value { font-size: var(--text-lg); }
+.gos-stat--md .gos-stat__value { font-size: var(--text-xl); }
+.gos-stat--lg .gos-stat__value { font-size: var(--text-display); line-height: .9; letter-spacing: -.04em; }
+.gos-stat--xl .gos-stat__value { font-size: var(--text-display-xl); line-height: .85; letter-spacing: -.05em; }
+
+/* ---- stat variants ---- */
+.gos-stat--on-dark .gos-stat__value { color: var(--gold); }
+.gos-stat--on-dark .gos-stat__label { color: var(--on-dark-muted); }
+
+/* ---- rating (number + stars + source) ---- */
+.gos-rating { display: inline-flex; align-items: center; gap: var(--gap-sm); text-decoration: none; color: inherit; }
+.gos-rating__value { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); color: var(--primary); }
+.gos-rating__text { font-size: var(--text-sm); color: var(--body); }
+.gos-rating--on-dark .gos-rating__value,
+.gos-rating--on-dark .gos-rating__text { color: #fff; }

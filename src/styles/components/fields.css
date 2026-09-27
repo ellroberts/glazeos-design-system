@@ -1,0 +1,64 @@
+/* =============================================================================
+   F. Form fields & form furniture  🔁  replaces .m-field / .field, .m-row /
+   .form__row, .m-person / .form__person, .m-reassure / .m-foot3 / .form__note,
+   and adds the inline postcode form (.m-check) and fieldset/legend/optional.
+   Field size:  --sm (48px) | --md (52px, default)
+   Markup:
+   <div class="gos-field">
+     <label class="gos-field__label" for="pc">Postcode <span class="gos-field__opt">(optional)</span></label>
+     <input class="gos-field__input" id="pc">
+   </div>
+   ============================================================================= */
+
+.gos-form { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+.gos-field { display: flex; flex-direction: column; gap: var(--gap-xs); flex: 1 1 0; min-width: 0; margin: 0; padding: 0; border: 0; }
+.gos-field__label,
+.gos-field legend {
+  padding: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.gos-field__opt { font-weight: var(--weight-medium); letter-spacing: 0; text-transform: none; }
+
+.gos-field__input {
+  width: 100%;
+  height: var(--control-md);
+  padding: 0 var(--space-4);
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+.gos-field__input:focus-visible { border-color: var(--primary); background: var(--paper); box-shadow: var(--ring); }
+textarea.gos-field__input { height: auto; min-height: var(--space-24); padding: var(--space-3) var(--space-4); resize: vertical; }
+select.gos-field__input { appearance: auto; }
+
+/* ---- sizes ---- */
+.gos-field--sm .gos-field__input { height: var(--control-sm); }
+.gos-field--md .gos-field__input { height: var(--control-md); }
+
+/* ---- row: two fields side by side, stacked on phones ---- */
+.gos-row { display: flex; gap: var(--gap-sm); }
+@media (max-width: 40rem) { .gos-row { flex-direction: column; } }
+
+/* ---- inline form: one input + button (was .m-check) ---- */
+.gos-inline-form { display: flex; gap: var(--gap-xs); }
+.gos-inline-form .gos-field__input { flex: 1; min-width: 0; height: var(--control-sm); background: var(--paper); }
+.gos-inline-form .gos-btn { min-height: var(--control-sm); }
+@media (max-width: 30rem) { .gos-inline-form { flex-direction: column; } }
+
+/* ---- the person who calls back ---- */
+.gos-person { display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--text-sm); color: var(--body2); }
+.gos-person img { width: var(--disc); height: var(--disc); border-radius: 50%; object-fit: cover; }
+
+/* ---- reassurance line(s) under a form ---- */
+.gos-reassure { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-xs) var(--gap-sm); font-size: var(--text-sm); color: var(--body); }
+.gos-reassure--center { justify-content: center; }
+.gos-reassure > span { display: inline-flex; align-items: center; gap: var(--gap-xs); }
+.gos-reassure .gos-reassure__icon { display: flex; color: var(--status-good); }

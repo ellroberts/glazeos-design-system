@@ -1,0 +1,63 @@
+/* =============================================================================
+   Z. Footer  ✅  the only fully shared component in the Master Template. Its own
+   one-off button, call pill, badges, stars and wrapper are replaced by the shared
+   families: .gos-btn, .gos-call, .gos-badge, .gos-stars, .gos-wrap, .gos-cta.
+   variant  --default (primary background)
+   Structure:
+   <footer class="gos-footer">
+     <div class="gos-cta">…</div>                         (Q. CTA band)
+     <div class="gos-footer__main"><div class="gos-wrap gos-footer__grid">…columns…</div></div>
+     <div class="gos-footer__bottom"><div class="gos-wrap">…legal…</div></div>
+   </footer>
+   ============================================================================= */
+
+.gos-footer { background: var(--primary); color: var(--on-dark-muted); font-family: var(--font-body); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+.gos-footer a { color: inherit; text-decoration: none; }
+.gos-footer a:hover { color: #fff; }
+.gos-footer ul { list-style: none; margin: 0; padding: 0; }
+.gos-footer p, .gos-footer address { margin: 0; font-style: normal; }
+
+.gos-footer__h {
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border) solid var(--ft-line);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ---- variants ---- */
+.gos-footer--default { background: var(--primary); }
+
+/* ---- main grid ---- */
+.gos-footer__main { padding-block: var(--section-y) var(--space-2); }
+.gos-footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: var(--space-12); }
+.gos-footer__logo { width: auto; height: 56px; }
+.gos-footer__name { font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-bold); color: #fff; }
+.gos-footer__about { max-width: 38ch; margin-top: var(--space-4); }
+.gos-footer__nap { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-5); }
+.gos-footer__tel { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); letter-spacing: -.01em; color: #fff !important; }
+.gos-footer__hours li { display: flex; justify-content: space-between; gap: var(--space-4); max-width: 260px; padding: var(--space-1) 0; }
+.gos-footer__hours li span:first-child { color: #fff; }
+.gos-footer__links a { display: block; padding: var(--space-2) 0; }
+.gos-footer__more { display: inline-flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); padding: var(--space-2) 0; color: var(--gold) !important; font-weight: var(--weight-semibold); }
+.gos-footer__local { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-5); padding-block: var(--gap-md) var(--space-2); border-top: var(--border) solid var(--ft-line); }
+
+/* ---- legal bar ---- */
+.gos-footer__bottom { margin-top: var(--space-8); background: color-mix(in srgb, var(--shade) 28%, transparent); }
+.gos-footer__bottom .gos-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3) var(--gap-md); padding-block: var(--space-5); font-size: var(--text-sm); }
+.gos-footer__legal { display: flex; gap: var(--space-5); }
+.gos-footer__legal a { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 64rem) {
+  .gos-footer__grid { grid-template-columns: 1fr 1fr; }
+  .gos-footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 40rem) {
+  .gos-footer__grid { grid-template-columns: 1fr; }
+  .gos-footer__bottom .gos-wrap { padding-bottom: var(--space-24); } /* clears the sticky call bar */
+}

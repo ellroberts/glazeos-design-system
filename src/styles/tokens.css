@@ -1,0 +1,183 @@
+/* =============================================================================
+   GlazeOS Design Tokens - Single Source of Truth (v0.1.0)
+   Built from the Master Template audit (DS_AUDIT.md, 27 Sep 2026).
+   Every merge of near-duplicate values is recorded in DECISIONS.md.
+
+   CLIENT COLOURS ARE NOT DEFINED HERE. Each client site injects these at :root
+   (Master Template: app/layout.js), and every token/component below reads them:
+     --primary  --secondary  --gold  --brand  --brand-dark  --accent  --accent-ink
+     --cta  --cta-dark  --cta-ink  --ink  --muted  --surface
+     --font-heading  --font-body
+   Only genuinely fixed values (neutral greys, scales, shadow geometry, type
+   sizes) are literal values in this file.
+   ============================================================================= */
+
+/* Global box sizing reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* ===== COLOURS ===== */
+
+  /* Neutrals (fixed) */
+  --paper: #fff;
+  --line: #E2E8EE;          /* hairline border - merged --line2, #E4EAF0, #E6ECF2 */
+  --line-control: #D6DEE6;  /* inputs, chips, outline buttons - merged #D3DDE6 */
+  --ground: #E9EEF3;        /* pale ground / map fallback - merged #E7EDF3, #DCE5EC */
+  --placeholder: #C2D0DC;   /* "photo missing" grey - merged #C9D7E2, #C8D4DE */
+  --field-bg: #F8FAFC;      /* form input background */
+  --faint: #8D9BA8;         /* placeholder labels */
+  --faint-2: #B4BFC9;       /* muted icons (comparison crosses) */
+
+  /* Text greys (fixed) */
+  --body2: #2E3E4C;         /* strongest body text - merged #3A4A58 */
+  --body: #4A5A68;          /* body text - merged #5A6B7A */
+  --mute: #6C7E8C;          /* muted / label text - merged #7A8B9A.
+                               NB: --muted (with a d) is the client's own muted colour. */
+
+  /* On accent */
+  --gold-ink: #141414;      /* text/icons on any gold background (DECISIONS: resolved #2) */
+
+  /* Status (fixed on purpose - a traffic light reads the same on every site) */
+  --status-good: #0f7b4f;   /* merged #1B8A3E */
+  --status-good-tint: #E6F4EA;
+  --status-warn: #b26a00;
+  --status-bad: #b3261e;
+
+  /* Scrims (fixed navy base; mixed to an alpha where used) */
+  --scrim: #061422;         /* merged rgba bases 8,26,44 / 10,30,49 / 16,44,70 */
+  --shade: #000;
+
+  /* White overlays for dark sections */
+  --on-dark-glass: rgba(255, 255, 255, .08);    /* glass card fill - merged .05/.06/.07 */
+  --ft-line: rgba(255, 255, 255, .14);          /* subtle fill / hairline - merged .1/.12/.13 */
+  --on-dark-divider: rgba(255, 255, 255, .16);  /* merged .18 */
+  --on-dark-faint: rgba(255, 255, 255, .2);     /* stepper line / placeholder - merged .22/.24/.26 */
+  --on-dark-border: rgba(255, 255, 255, .3);    /* outline button / pill border - merged .32 */
+  --on-dark-stripe: rgba(255, 255, 255, .55);
+  --on-dark-muted: rgba(255, 255, 255, .72);    /* captions, meta - merged .62-.78 */
+  --on-dark-body: rgba(255, 255, 255, .82);     /* body text on dark - merged .8-.9 */
+  --on-dark-strong: rgba(255, 255, 255, .92);   /* near-white - merged .94 */
+
+  /* Client-derived mixes (read client vars; nothing hardcoded) */
+  --brand-tint: color-mix(in srgb, var(--brand) 9%, #fff);
+  --hairline: color-mix(in srgb, var(--ink) 10%, transparent);
+  --hairline-2: color-mix(in srgb, var(--ink) 16%, transparent);
+  --gradient: linear-gradient(145deg, var(--ink) 0%, color-mix(in srgb, var(--brand-dark) 70%, var(--ink)) 55%, var(--brand) 100%);
+  --gold-soft: color-mix(in srgb, var(--gold) 9%, transparent);   /* merged gold 10% */
+  --gold-line: color-mix(in srgb, var(--gold) 55%, transparent);  /* merged gold 60% */
+  --gold-edge: color-mix(in srgb, var(--gold) 70%, transparent);
+  --primary-tint-5: color-mix(in srgb, var(--primary) 5%, #fff);
+  --primary-tint-10: color-mix(in srgb, var(--primary) 10%, #fff);
+
+  /* ===== SPACING ===== */
+
+  /* Base scale (4px grid, rem) */
+  --space-1: 0.25rem;   /*  4px */
+  --space-2: 0.5rem;    /*  8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px - was referenced with a fallback but never defined */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-24: 6rem;     /* 96px */
+
+  /* Semantic spacing (each points at the value its merge picked) */
+  --gap-xs: var(--space-2);       /* 8px  - merged 9/10 */
+  --gap-sm: var(--space-4);       /* 16px - merged 12/14/18 */
+  --gap-md: var(--space-6);       /* 24px - merged 20/22 */
+  --pill-x: var(--space-3);       /* 12px - merged 13/14/15/17/18 */
+  --pill-y: var(--space-2);       /* 8px  - merged 6/7/9/10 */
+  --card-pad: var(--space-6);     /* 24px - merged 22/26/28/30/31/32/34 */
+  --head-offset: var(--space-8);  /* 32px - section head to content, merged 28/30/36 */
+  --inset: var(--space-4);        /* 16px - overlay inset from a card edge, merged 18-30 */
+
+  /* Control sizes */
+  --control-sm: var(--space-12);  /* 48px - merged 42/44/46 */
+  --control-md: 52px;             /* merged 53 */
+  --control-lg: 58px;             /* merged 59 */
+  --disc: var(--space-8);         /* 32px icon disc - merged 28/34/36/38/40/42/52 */
+
+  /* Layout */
+  --maxw: 72.5rem;                /* 1160px page width - merged 1280px */
+  --gutter: var(--space-10);      /* 2.5rem total side gutter - merged clamp(16px,4vw,80px) */
+  --section-y: clamp(var(--space-12), 6vw, 5rem);   /* merged .m-sec / .ft-cta / .ft-main */
+  --measure-xs: 340px;            /* merged 330 */
+  --measure-sm: 420px;            /* merged 440/460/462 */
+  --measure-md: 560px;            /* merged 520/540 */
+  --measure-lg: 660px;            /* merged 700 */
+  --tile-min: 208px;              /* merged 220/236 */
+  --nav-h: 82px;
+  --nav-h-sm: 68px;
+  --sticky-inset: 10px;           /* merged 0.6rem */
+  --sticky-pad-y: 14px;           /* merged 0.8rem */
+
+  /* ===== TYPOGRAPHY ===== */
+
+  /* Families: headings and body are client vars (--font-heading, --font-body) */
+  --fs: 'Caveat', 'Segoe Script', cursive;   /* signature only */
+
+  /* Sizes */
+  --text-xs: 12px;                           /* micro labels - merged 9/10/11, .72/.75rem */
+  --text-sm: 15px;                           /* small + body - merged 13/14/16, .8-1.03rem */
+  --text-md: 17px;                           /* lead - merged 18/19, 1.05-1.1rem */
+  --text-lg: 20px;                           /* small heading - merged 21-26, 1.15-1.25rem */
+  --text-xl: 28px;                           /* big numbers - merged 32/34/46, 1.9rem, clamp(26..34) */
+  --text-quote: clamp(17px, 1.5vw, 20px);    /* merged clamp(22..30), clamp(22..32) */
+  --text-title: clamp(24px, 2.4vw, 30px);    /* card heading - merged clamp(26..34) */
+  --text-h2: clamp(30px, 4vw, 48px);         /* merged five other H2 sizes */
+  --text-h1: clamp(38px, 5vw, 58px);         /* merged global h1 */
+  --text-display: clamp(60px, 7vw, 84px);
+  --text-display-xl: clamp(88px, 12.5vw, 180px);
+  --text-signature: 40px;
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;                        /* headings site-wide (800 retired) and buttons */
+
+  /* Line height & tracking */
+  --leading-tight: 1.04;
+  --leading-snug: 1.25;
+  --leading-body: 1.5;
+  --leading-relaxed: 1.6;
+  --tracking-tight: -0.03em;
+  --tracking-label: 0.14em;
+
+  /* ===== BORDERS & RADII ===== */
+  --border: 1px;
+  --radius: 12px;                  /* small / controls - merged 9/10/11, --radius-sm */
+  --radius-lg: 16px;               /* medium - merged 14/18 */
+  --r: 20px;                       /* large cards - merged 22/24, --radius-panel */
+  --pill: 999px;                   /* merged --radius-pill 100px */
+  --radius-focus: 6px;             /* merged 4px */
+  --radius-track: 5px;
+  --focus-ring: 3px solid var(--gold);
+  --focus-offset: 3px;
+
+  /* ===== SHADOWS ===== */
+  /* All tinted from one theme variable (DECISIONS: resolved #1). Change this one
+     line to tint every shadow from a different client colour. */
+  --shadow-tint: var(--brand);
+
+  --shadow-sm: 0 10px 30px -12px color-mix(in srgb, var(--shadow-tint) 50%, transparent);    /* small overlay pill */
+  --shadow: 0 12px 40px color-mix(in srgb, var(--shadow-tint) 10%, transparent);             /* flat card */
+  --shadow-lift: 0 18px 50px color-mix(in srgb, var(--shadow-tint) 16%, transparent);        /* hover lift */
+  --shadow-overlay: 0 24px 60px -24px color-mix(in srgb, var(--shadow-tint) 50%, transparent); /* dropdowns, menus */
+  --shadow-float: 0 30px 60px -38px color-mix(in srgb, var(--shadow-tint) 35%, transparent);  /* floating card */
+  --shadow-raised: 0 34px 50px -28px color-mix(in srgb, var(--shadow-tint) 35%, transparent); /* raised column */
+  --shadow-card: 0 34px 70px -34px color-mix(in srgb, var(--shadow-tint) 70%, transparent);   /* heavy form card */
+  --shadow-sticky: 0 10px 30px color-mix(in srgb, var(--shadow-tint) 22%, transparent);       /* sticky call bar */
+  --shadow-glow: 0 30px 80px -34px color-mix(in srgb, var(--gold) 45%, transparent);          /* gold glow */
+  --ring: 0 0 0 4px color-mix(in srgb, var(--shadow-tint) 10%, transparent);                  /* field focus halo */
+  --text-shadow: 0 1px 2px color-mix(in srgb, var(--shadow-tint) 35%, transparent);           /* text on photos */
+
+  /* ===== MOTION ===== */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --lift: translateY(-1px);
+}

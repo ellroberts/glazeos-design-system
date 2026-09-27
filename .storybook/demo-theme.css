@@ -1,0 +1,43 @@
+/*
+ * Storybook only — NOT part of the package. Stands in for the per-client
+ * variables the Master Template injects at :root (app/layout.js), using the
+ * demo-glazing client's theme and the layout's defaults (gold #F0A81E,
+ * primary = brand, secondary = ink, cta = brand, cta-ink = white).
+ */
+:root,
+:root[data-client='demo'] {
+  --brand: #0f4c81;
+  --brand-dark: #0a3459;
+  --accent: #f6a01a;
+  --accent-ink: #16202b;
+  --ink: #16202b;
+  --muted: #5b6b7c;
+  --surface: #f5f7fa;
+  --primary: #0f4c81;
+  --secondary: #16202b;
+  --gold: #F0A81E;
+  --cta: #0f4c81;
+  --cta-dark: #0a3459;
+  --cta-ink: #FFFFFF;
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* A second, made-up client, to show every client colour really is swappable. */
+:root[data-client='green'] {
+  --brand: #1f6b4a;
+  --brand-dark: #144a33;
+  --accent: #F0A81E;
+  --accent-ink: #13231b;
+  --ink: #13231b;
+  --muted: #5a6b62;
+  --surface: #f3f7f4;
+  --primary: #1f6b4a;
+  --secondary: #13231b;
+  --gold: #F0A81E;
+  --cta: #1f6b4a;
+  --cta-dark: #144a33;
+  --cta-ink: #FFFFFF;
+}
+
+body { margin: 0; }

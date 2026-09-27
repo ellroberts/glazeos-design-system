@@ -1,0 +1,27 @@
+/* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
+@import './components/buttons.css';
+@import './components/call-pill.css';
+@import './components/tags.css';
+@import './components/kicker.css';
+@import './components/chips.css';
+@import './components/fields.css';
+@import './components/form-card.css';
+@import './components/cards.css';
+@import './components/glass.css';
+@import './components/stats.css';
+@import './components/badges.css';
+@import './components/stars.css';
+@import './components/faq.css';
+@import './components/section-head.css';
+@import './components/layout.css';
+@import './components/sticky-bar.css';
+@import './components/cta-band.css';
+@import './components/icon-disc.css';
+@import './components/lists.css';
+@import './components/portrait.css';
+@import './components/map.css';
+@import './components/compare-table.css';
+@import './components/steps.css';
+@import './components/content.css';
+@import './components/nav.css';
+@import './components/footer.css';

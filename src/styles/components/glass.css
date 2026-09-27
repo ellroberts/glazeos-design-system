@@ -1,0 +1,65 @@
+/* =============================================================================
+   I. Cards on dark sections (glass)  🏠  new shared family
+   .gos-glass   base glass panel (the shared recipe of .m-rc / .m-rbox / .m-bars / .m-gcard)
+     variant  --default | --gold (gold-bordered, was .m-gcov)
+     size     --sm | --md
+   .gos-review  review card (was .m-rc)
+   .gos-score   big score box (was .m-rbox)
+   .gos-bars    bar-chart card (was .m-bars)
+   .gos-promise icon + heading + text (was .m-gcard)
+   Place inside a dark section (e.g. .gos-section--dark).
+   ============================================================================= */
+
+.gos-glass {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: var(--card-pad);
+  border: var(--border) solid var(--ft-line);
+  border-radius: var(--radius-lg);
+  background: var(--on-dark-glass);
+  color: #fff;
+}
+
+/* ---- variants ---- */
+.gos-glass--default { border-color: var(--ft-line); }
+.gos-glass--gold { border: 2px solid var(--gold); border-radius: var(--r); box-shadow: var(--shadow-glow); }
+
+/* ---- sizes ---- */
+.gos-glass--sm { padding: var(--gap-sm); gap: var(--gap-xs); }
+.gos-glass--md { padding: var(--card-pad); }
+
+/* ---- review ---- */
+.gos-review__quote { flex: 1; margin: 0; font-family: var(--font-heading); font-size: var(--text-quote); font-weight: var(--weight-semibold); line-height: 1.4; letter-spacing: -.01em; color: #fff; }
+.gos-review__cite { font-size: var(--text-sm); font-style: normal; color: var(--on-dark-muted); }
+.gos-review__cite b { color: #fff; }
+
+/* ---- score box ---- */
+.gos-score { flex-direction: row; align-items: center; }
+.gos-score__value { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: 1; letter-spacing: var(--tracking-tight); color: var(--gold); }
+.gos-score__meta { display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--text-sm); color: var(--on-dark-muted); }
+
+/* ---- bar chart ---- */
+.gos-bars__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--gap-sm); }
+.gos-bars__title { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+.gos-bars__sub { font-size: var(--text-sm); color: var(--on-dark-muted); }
+.gos-bars ul { list-style: none; margin: 0; padding: 0; }
+.gos-bars li { display: grid; grid-template-columns: 76px minmax(0, 1fr) 42px; align-items: center; gap: var(--gap-sm); padding: var(--gap-xs) 0; font-size: var(--text-sm); }
+.gos-bars__label { color: var(--on-dark-body); }
+.gos-bars__track { display: block; height: 10px; overflow: hidden; border-radius: var(--radius-track); background: var(--ft-line); }
+.gos-bars__track i { display: block; width: var(--w, 50%); height: 100%; border-radius: var(--radius-track); background: var(--on-dark-body); }
+.gos-bars__pct { text-align: right; font-weight: var(--weight-bold); }
+.gos-bars li.is-high .gos-bars__label { color: #fff; font-weight: var(--weight-bold); }
+.gos-bars li.is-high .gos-bars__track i { background: var(--gold); }
+.gos-bars li.is-high .gos-bars__pct { color: var(--gold); }
+.gos-bars li.is-late { margin-top: var(--gap-xs); padding-top: var(--gap-sm); border-top: var(--border) solid var(--on-dark-divider); }
+.gos-bars li.is-late .gos-bars__label,
+.gos-bars li.is-late .gos-bars__pct { color: var(--on-dark-muted); }
+.gos-bars li.is-late .gos-bars__track i { background: repeating-linear-gradient(135deg, var(--on-dark-stripe) 0 4px, var(--on-dark-faint) 4px 8px); }
+.gos-bars__foot { margin: 0; font-size: var(--text-sm); line-height: 1.55; color: var(--on-dark-muted); }
+
+/* ---- promise card ---- */
+.gos-promise__head { display: flex; align-items: center; gap: var(--gap-sm); }
+.gos-promise__title { font-size: var(--text-lg); font-weight: var(--weight-semibold); letter-spacing: -.015em; color: #fff; }
+.gos-promise p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--on-dark-strong); }
+.gos-promise p.is-dim { color: var(--on-dark-muted); }

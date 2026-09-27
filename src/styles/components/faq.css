@@ -1,0 +1,44 @@
+/* =============================================================================
+   M. FAQ accordion  🔁  replaces .m-faq and .faq / .faq__item (identical structure)
+   layout  --cols-1 (default, inner pages) | --cols-2 (home page grid)
+   Markup (no JS — native <details>):
+   <div class="gos-faq gos-faq--cols-2">
+     <details class="gos-faq__item" open><summary>Question?</summary><p>Answer.</p></details>
+   </div>
+   ============================================================================= */
+
+.gos-faq { display: grid; grid-template-columns: 1fr; gap: var(--gap-xs) var(--gap-md); }
+.gos-faq--cols-1 { grid-template-columns: 1fr; max-width: 48rem; }
+.gos-faq--cols-2 { grid-template-columns: 1fr 1fr; }
+@media (max-width: 64rem) { .gos-faq--cols-2 { grid-template-columns: 1fr; } }
+
+.gos-faq__item { border: var(--border) solid var(--line); border-radius: var(--radius-lg); background: var(--paper); transition: border-color .3s; }
+.gos-faq__item[open] { border-color: var(--primary); }
+.gos-faq__item summary {
+  position: relative;
+  padding: var(--gap-sm) 56px var(--gap-sm) var(--card-pad);
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+}
+.gos-faq__item summary::-webkit-details-marker { display: none; }
+.gos-faq__item summary::after {
+  content: '+';
+  position: absolute; right: var(--inset); top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: var(--disc); height: var(--disc);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--primary);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
+.gos-faq__item[open] summary::after { content: '−'; background: var(--primary); color: #fff; }
+.gos-faq__item p { margin: 0; padding: 0 var(--card-pad) var(--gap-md); font-size: var(--text-sm); line-height: 1.65; color: var(--body); }
+
+.gos-faq-ask { margin-top: var(--gap-sm); font-size: var(--text-sm); color: var(--body); }
+.gos-faq-ask a { font-weight: var(--weight-semibold); color: var(--ink); }

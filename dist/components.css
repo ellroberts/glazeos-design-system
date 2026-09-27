@@ -1,0 +1,1266 @@
+/*! glazeos-design-system v0.1.0 — components — built 2026-09-27 */
+/* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
+/* =============================================================================
+   A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
+   Two independent axes:
+     variant  --primary | --secondary | --tertiary | --ghost | --light
+     size     --sm | --md | --lg
+   plus the layout modifier --block (full width, e.g. form submit).
+   Markup:  <a class="gos-btn gos-btn--primary gos-btn--lg">Get a quote</a>
+   ============================================================================= */
+
+.gos-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  min-height: var(--control-md);
+  padding: 0 var(--space-6);
+  border: var(--border) solid transparent;
+  border-radius: var(--pill);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .25s var(--ease-out), background-color .25s, border-color .25s;
+}
+.gos-btn:hover { transform: var(--lift); }
+.gos-btn svg { flex-shrink: 0; }
+
+/* ---- variants ---- */
+/* primary: the main call to action (was .m-btn--gold / .btn--accent / .ft-btn) */
+.gos-btn--primary { background: var(--gold); color: var(--gold-ink); }
+.gos-btn--primary:hover { color: var(--gold-ink); }
+
+/* secondary: filled in the client's primary colour (was .m-btn--ink / .btn--primary) */
+.gos-btn--secondary { background: var(--primary); color: #fff; }
+.gos-btn--secondary:hover { color: #fff; }
+
+/* tertiary: outline on a light background (was .m-btn--line / .btn--ghost on light) */
+.gos-btn--tertiary { background: transparent; border-color: var(--line-control); color: var(--primary); }
+.gos-btn--tertiary:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ghost: outline on a dark background (was .m-btn--ghost / .btn--ghost.cta__ghost) */
+.gos-btn--ghost { background: transparent; border-color: var(--on-dark-border); color: #fff; }
+.gos-btn--ghost:hover { border-color: #fff; color: #fff; }
+
+/* light: white filled, for dark backgrounds (was .btn--light; new on the home page) */
+.gos-btn--light { background: var(--paper); color: var(--ink); }
+.gos-btn--light:hover { background: var(--brand-tint); color: var(--ink); }
+
+/* ---- sizes ---- */
+.gos-btn--sm { min-height: var(--control-sm); padding: 0 var(--space-5); font-size: var(--text-sm); }
+.gos-btn--md { min-height: var(--control-md); padding: 0 var(--space-6); font-size: var(--text-sm); }
+.gos-btn--lg { min-height: var(--control-lg); padding: 0 30px; font-size: var(--text-md); }
+
+/* ---- layout ---- */
+.gos-btn--block { display: flex; width: 100%; }
+
+/* =============================================================================
+   B. Call pill  ✅  one implementation replacing .m-pill, .ft-call and .m-talk
+   variant  --on-dark (default look) | --on-light | --card (boxed, was .m-talk)
+   size     --sm | --md | --lg
+   Markup:
+   <a class="gos-call gos-call--on-dark gos-call--md" href="tel:…">
+     <span class="gos-call__icon"><svg…/></span>
+     <span><small class="gos-call__note">Speak to Dan</small><b class="gos-call__number">01234 567890</b></span>
+   </a>
+   ============================================================================= */
+
+.gos-call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  min-height: var(--control-sm);
+  padding: 0 var(--pill-x);
+  border: var(--border) solid var(--on-dark-border);
+  border-radius: var(--pill);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1.15;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gos-call__icon { display: flex; flex-shrink: 0; color: var(--gold); }
+.gos-call__note { display: block; font-size: var(--text-xs); font-weight: var(--weight-medium); color: var(--on-dark-muted); }
+.gos-call__number { display: block; font-family: var(--font-heading); font-weight: var(--weight-semibold); }
+
+/* ---- variants ---- */
+.gos-call--on-dark { border-color: var(--on-dark-border); color: #fff; }
+.gos-call--on-light { border-color: var(--line-control); color: var(--ink); }
+.gos-call--on-light .gos-call__note { color: var(--mute); }
+.gos-call--on-light .gos-call__icon { color: var(--primary); }
+.gos-call--card {
+  max-width: var(--measure-sm);
+  padding: var(--space-4);
+  gap: var(--gap-sm);
+  border-color: var(--on-dark-faint);
+  border-radius: var(--radius-lg);
+  background: var(--on-dark-glass);
+  white-space: normal;
+}
+.gos-call--card .gos-call__icon {
+  width: var(--disc); height: var(--disc);
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--ft-line);
+}
+
+/* ---- sizes ---- */
+.gos-call--sm { min-height: var(--control-sm); padding-inline: var(--pill-x); }
+.gos-call--md { min-height: var(--control-md); padding-inline: var(--space-5); }
+.gos-call--lg { min-height: var(--control-lg); padding-inline: var(--space-6); gap: var(--gap-sm); }
+.gos-call--lg .gos-call__number { font-size: var(--text-lg); letter-spacing: -.01em; }
+
+/* =============================================================================
+   C. Tags & status pills  🏠  new shared family (home-only until now)
+   Replaces .m-eyebrow, .m-gpill, .m-freepill, .m-tile .tag, .m-jc .ph .tag,
+   .m-map .pill and the unused .m-pip.
+   variant  --glass | --gold | --gold-outline | --success | --light | --outline
+   size     (single size - see note at the bottom)
+   Optional leading dot: <i class="gos-tag__dot"></i>
+   ============================================================================= */
+
+.gos-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid transparent;
+  border-radius: var(--pill);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: .1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.gos-tag__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* ---- variants ---- */
+.gos-tag--glass { background: var(--ft-line); border-color: var(--on-dark-divider); color: #fff; }       /* was .m-eyebrow */
+.gos-tag--gold { background: var(--gold); color: var(--gold-ink); }                                   /* was .m-tile .tag */
+.gos-tag--gold-outline { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); } /* was .m-gpill */
+.gos-tag--success { background: var(--status-good-tint); color: var(--status-good); }                 /* was .m-freepill */
+.gos-tag--light { background: var(--paper); color: var(--primary); text-transform: none; letter-spacing: 0; font-weight: var(--weight-semibold); box-shadow: var(--shadow-sm); } /* was .m-jc .ph .tag / .m-map .pill */
+.gos-tag--light .gos-tag__dot { background: var(--primary); }
+.gos-tag--outline { border-color: var(--line); color: var(--mute); }                                   /* was .m-pip */
+
+/* ---- sizes ----
+   One size only: the audit's pill-padding (6-10 / 12-18px) and micro-label
+   (9-12px) groups each merged to a single value, so an --sm/--lg here would
+   need invented numbers. Add sizes when the design calls for them. */
+
+/* =============================================================================
+   D. Kickers & micro-labels  🔁  replaces .m-kicker, .eyebrow, .m-guar-kicker,
+   .ft-kick and the uppercase micro-labels (.m-cred .t, .m-notlist .lbl, .ft-h …)
+   Kicker:
+     variant  --muted (default look) | --gold | --primary
+     line     --line-start (default) | --line-both | --line-none
+   Micro-label: .gos-label (+ --on-dark)
+   ============================================================================= */
+
+.gos-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: .16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.gos-kicker::before,
+.gos-kicker::after { content: ''; width: 22px; height: 1px; background: var(--gold); flex: none; }
+.gos-kicker::after { display: none; }
+
+/* ---- variants (colour) ---- */
+.gos-kicker--muted { color: var(--mute); }
+.gos-kicker--gold { color: var(--gold); }
+.gos-kicker--primary { color: var(--primary); }
+
+/* ---- line placement ---- */
+.gos-kicker--line-start::after { display: none; }
+.gos-kicker--line-both::after { display: block; }
+.gos-kicker--line-none::before,
+.gos-kicker--line-none::after { display: none; }
+
+/* ---- micro-label ---- */
+.gos-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.gos-label--on-dark { color: #fff; }
+
+/* =============================================================================
+   E. Chips  🔁  replaces .m-chip, .chip, .ft-local a / .ft-social a, and adds the
+   selectable radio chip (.m-jobchips) as a shared control.
+   Chip:
+     variant  --static (credential chip) | --link (hover fills) | --on-dark
+     size     --sm | --md
+   Choice chips (radio group):
+     <div class="gos-choices">
+       <label class="gos-choice"><input type="radio" name="job" checked><span>Windows</span></label>
+     </div>
+   ============================================================================= */
+
+.gos-chips { display: flex; flex-wrap: wrap; gap: var(--gap-xs); list-style: none; margin: 0; padding: 0; }
+
+.gos-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid var(--line);
+  border-radius: var(--pill);
+  background: var(--paper);
+  color: var(--body2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color .25s, color .25s, border-color .25s;
+}
+.gos-chip__icon { display: flex; color: var(--gold); }
+
+/* ---- variants ---- */
+.gos-chip--static { cursor: default; }
+.gos-chip--link:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-chip--link:hover .gos-chip__icon { color: #fff; }
+.gos-chip--on-dark { background: transparent; border-color: var(--ft-line); color: var(--on-dark-body); font-weight: var(--weight-medium); }
+.gos-chip--on-dark:hover { border-color: var(--gold); color: #fff; }
+
+/* ---- sizes ---- */
+.gos-chip--sm { padding: var(--pill-y) var(--pill-x); font-size: var(--text-xs); }
+.gos-chip--md { min-height: var(--space-10); padding: 0 var(--gap-sm); font-size: var(--text-sm); }
+
+/* ---- choice chips (radio / checkbox) ---- */
+.gos-choices { display: flex; flex-wrap: wrap; gap: var(--gap-xs); }
+.gos-choice { position: relative; display: block; cursor: pointer; }
+.gos-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.gos-choice span {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.gos-choice input:checked + span { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-choice input:focus-visible + span { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+/* =============================================================================
+   F. Form fields & form furniture  🔁  replaces .m-field / .field, .m-row /
+   .form__row, .m-person / .form__person, .m-reassure / .m-foot3 / .form__note,
+   and adds the inline postcode form (.m-check) and fieldset/legend/optional.
+   Field size:  --sm (48px) | --md (52px, default)
+   Markup:
+   <div class="gos-field">
+     <label class="gos-field__label" for="pc">Postcode <span class="gos-field__opt">(optional)</span></label>
+     <input class="gos-field__input" id="pc">
+   </div>
+   ============================================================================= */
+
+.gos-form { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+.gos-field { display: flex; flex-direction: column; gap: var(--gap-xs); flex: 1 1 0; min-width: 0; margin: 0; padding: 0; border: 0; }
+.gos-field__label,
+.gos-field legend {
+  padding: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.gos-field__opt { font-weight: var(--weight-medium); letter-spacing: 0; text-transform: none; }
+
+.gos-field__input {
+  width: 100%;
+  height: var(--control-md);
+  padding: 0 var(--space-4);
+  border: var(--border) solid var(--line-control);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+.gos-field__input:focus-visible { border-color: var(--primary); background: var(--paper); box-shadow: var(--ring); }
+textarea.gos-field__input { height: auto; min-height: var(--space-24); padding: var(--space-3) var(--space-4); resize: vertical; }
+select.gos-field__input { appearance: auto; }
+
+/* ---- sizes ---- */
+.gos-field--sm .gos-field__input { height: var(--control-sm); }
+.gos-field--md .gos-field__input { height: var(--control-md); }
+
+/* ---- row: two fields side by side, stacked on phones ---- */
+.gos-row { display: flex; gap: var(--gap-sm); }
+@media (max-width: 40rem) { .gos-row { flex-direction: column; } }
+
+/* ---- inline form: one input + button (was .m-check) ---- */
+.gos-inline-form { display: flex; gap: var(--gap-xs); }
+.gos-inline-form .gos-field__input { flex: 1; min-width: 0; height: var(--control-sm); background: var(--paper); }
+.gos-inline-form .gos-btn { min-height: var(--control-sm); }
+@media (max-width: 30rem) { .gos-inline-form { flex-direction: column; } }
+
+/* ---- the person who calls back ---- */
+.gos-person { display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--text-sm); color: var(--body2); }
+.gos-person img { width: var(--disc); height: var(--disc); border-radius: 50%; object-fit: cover; }
+
+/* ---- reassurance line(s) under a form ---- */
+.gos-reassure { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-xs) var(--gap-sm); font-size: var(--text-sm); color: var(--body); }
+.gos-reassure--center { justify-content: center; }
+.gos-reassure > span { display: inline-flex; align-items: center; gap: var(--gap-xs); }
+.gos-reassure .gos-reassure__icon { display: flex; color: var(--status-good); }
+
+/* =============================================================================
+   G. Form card  🔁  replaces .m-card (hero + booking form) and .qf (inner quote form)
+   variant  --floating (heavy shadow, over a photo or dark section) | --flat (border + soft shadow)
+   size     --sm (compact, was the undefined .qf--compact) | --md
+   Markup:
+   <form class="gos-form-card gos-form-card--floating gos-form-card--md">
+     <div class="gos-form-card__head">
+       <div><h2 class="gos-form-card__title">Get your fixed price</h2><p class="gos-form-card__lede">…</p></div>
+       <span class="gos-tag gos-tag--success">Free · no deposit</span>
+     </div>
+     …fields…
+   </form>
+   ============================================================================= */
+
+.gos-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: var(--card-pad);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+}
+.gos-form-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--gap-sm); }
+.gos-form-card__title { font-size: var(--text-lg); letter-spacing: -.02em; }
+.gos-form-card__lede { margin: var(--space-1) 0 0; font-size: var(--text-sm); color: var(--body); }
+@media (max-width: 40rem) { .gos-form-card__head { flex-wrap: wrap; } }
+
+/* ---- variants ---- */
+.gos-form-card--floating { box-shadow: var(--shadow-card); }
+.gos-form-card--flat { border: var(--border) solid var(--line); box-shadow: var(--shadow); }
+
+/* ---- sizes ---- */
+.gos-form-card--sm { gap: var(--gap-xs); }
+.gos-form-card--sm .gos-form-card__title { font-size: var(--text-md); }
+.gos-form-card--md { gap: var(--gap-sm); }
+
+/* =============================================================================
+   H. Content cards (light backgrounds)  🔁
+   .gos-card   replaces .m-step, .card, .card--link, .m-cred, .creds__item,
+               .m-notlist, .empty
+     variant  --default | --surface | --dark | --link
+     size     --sm | --md | --lg (padding)
+   .gos-tile   image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
+   .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
+   ============================================================================= */
+
+.gos-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  padding: var(--card-pad);
+  border: var(--border) solid var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+  transition: transform .4s var(--ease-out), box-shadow .4s, border-color .3s;
+}
+.gos-card__title { font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+.gos-card__meta { font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+.gos-card__body { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--body); }
+
+/* ---- variants ---- */
+.gos-card--default { background: var(--paper); }
+.gos-card--surface { background: var(--surface); }
+.gos-card--dark { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-card--dark .gos-card__meta { color: var(--on-dark-muted); }
+.gos-card--dark .gos-card__body { color: var(--on-dark-body); }
+.gos-card--link { text-decoration: none; color: inherit; }
+.gos-card--link:hover { transform: var(--lift); box-shadow: var(--shadow-lift); border-color: var(--primary); }
+
+/* ---- sizes ---- */
+.gos-card--sm { padding: var(--gap-sm); }
+.gos-card--md { padding: var(--card-pad); }
+.gos-card--lg { padding: var(--head-offset); }
+
+/* =============== tile =============== */
+.gos-tile {
+  position: relative;
+  display: block;
+  min-height: var(--tile-min);
+  overflow: hidden;
+  border-radius: var(--r);
+  background: linear-gradient(155deg, var(--ground), var(--placeholder));
+  color: #fff;
+  text-decoration: none;
+}
+.gos-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.gos-tile::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--scrim) 5%, transparent) 35%, color-mix(in srgb, var(--scrim) 86%, transparent));
+}
+.gos-tile .gos-tag { position: absolute; top: var(--inset); left: var(--inset); z-index: 1; }
+.gos-tile__in { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gap-sm); }
+.gos-tile__title { display: block; font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-semibold); letter-spacing: -.02em; }
+.gos-tile__body { display: block; margin-top: var(--space-1); font-size: var(--text-sm); color: var(--on-dark-body); }
+
+.gos-tile--md { min-height: var(--tile-min); }
+.gos-tile--lg { grid-row: span 2; min-height: calc(var(--tile-min) * 2 + var(--gap-md)); }
+.gos-tile--lg .gos-tile__title { font-size: var(--text-h2); font-weight: var(--weight-bold); }
+.gos-tile--lg .gos-tile__body { max-width: var(--measure-sm); }
+
+.gos-tile--dark { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-sm); padding: var(--card-pad); background: var(--primary); text-align: center; }
+.gos-tile--dark::after { display: none; }
+.gos-tile--dark p { max-width: var(--measure-xs); margin: var(--gap-xs) auto 0; font-size: var(--text-sm); line-height: 1.55; color: var(--on-dark-muted); }
+
+/* =============== job card =============== */
+.gos-job { overflow: hidden; border: var(--border) solid var(--line); border-radius: var(--r); background: var(--paper); }
+.gos-job__photo { position: relative; display: flex; align-items: center; justify-content: center; min-height: 180px; background: linear-gradient(165deg, var(--ground), var(--placeholder)); color: var(--mute); }
+.gos-job__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.gos-job__photo .gos-tag { position: absolute; top: var(--inset); left: var(--inset); z-index: 1; }
+.gos-job__text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-xs); padding: var(--card-pad); }
+.gos-job__meta { font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .1em; line-height: 1.45; text-transform: uppercase; color: var(--primary); }
+.gos-job__quote { margin: 0; font-family: var(--font-heading); font-size: var(--text-quote); font-weight: var(--weight-semibold); letter-spacing: -.02em; line-height: var(--leading-snug); color: var(--primary); }
+.gos-job__by { display: flex; align-items: center; gap: var(--gap-xs); margin-top: auto; font-size: var(--text-sm); color: var(--mute); }
+
+.gos-job--feature { display: flex; flex-direction: column; box-shadow: var(--shadow-float); }
+.gos-job--feature .gos-job__photo { flex: 1 1 auto; min-height: 340px; }
+.gos-job--feature .gos-job__text { gap: var(--gap-sm); background: var(--primary); color: #fff; }
+.gos-job--feature .gos-job__meta { color: var(--on-dark-muted); }
+.gos-job--feature .gos-job__quote { color: #fff; }
+.gos-job--feature .gos-job__by { align-self: stretch; padding-top: var(--gap-sm); border-top: var(--border) solid var(--on-dark-divider); color: var(--on-dark-muted); }
+
+.gos-job--side { display: grid; grid-template-columns: minmax(0, 35%) minmax(0, 1fr); }
+@media (max-width: 40rem) {
+  .gos-job--side { grid-template-columns: 1fr; }
+  .gos-job--side .gos-job__photo { min-height: 0; aspect-ratio: 16 / 9; }
+}
+
+/* =============================================================================
+   I. Cards on dark sections (glass)  🏠  new shared family
+   .gos-glass   base glass panel (the shared recipe of .m-rc / .m-rbox / .m-bars / .m-gcard)
+     variant  --default | --gold (gold-bordered, was .m-gcov)
+     size     --sm | --md
+   .gos-review  review card (was .m-rc)
+   .gos-score   big score box (was .m-rbox)
+   .gos-bars    bar-chart card (was .m-bars)
+   .gos-promise icon + heading + text (was .m-gcard)
+   Place inside a dark section (e.g. .gos-section--dark).
+   ============================================================================= */
+
+.gos-glass {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: var(--card-pad);
+  border: var(--border) solid var(--ft-line);
+  border-radius: var(--radius-lg);
+  background: var(--on-dark-glass);
+  color: #fff;
+}
+
+/* ---- variants ---- */
+.gos-glass--default { border-color: var(--ft-line); }
+.gos-glass--gold { border: 2px solid var(--gold); border-radius: var(--r); box-shadow: var(--shadow-glow); }
+
+/* ---- sizes ---- */
+.gos-glass--sm { padding: var(--gap-sm); gap: var(--gap-xs); }
+.gos-glass--md { padding: var(--card-pad); }
+
+/* ---- review ---- */
+.gos-review__quote { flex: 1; margin: 0; font-family: var(--font-heading); font-size: var(--text-quote); font-weight: var(--weight-semibold); line-height: 1.4; letter-spacing: -.01em; color: #fff; }
+.gos-review__cite { font-size: var(--text-sm); font-style: normal; color: var(--on-dark-muted); }
+.gos-review__cite b { color: #fff; }
+
+/* ---- score box ---- */
+.gos-score { flex-direction: row; align-items: center; }
+.gos-score__value { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: 1; letter-spacing: var(--tracking-tight); color: var(--gold); }
+.gos-score__meta { display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--text-sm); color: var(--on-dark-muted); }
+
+/* ---- bar chart ---- */
+.gos-bars__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--gap-sm); }
+.gos-bars__title { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+.gos-bars__sub { font-size: var(--text-sm); color: var(--on-dark-muted); }
+.gos-bars ul { list-style: none; margin: 0; padding: 0; }
+.gos-bars li { display: grid; grid-template-columns: 76px minmax(0, 1fr) 42px; align-items: center; gap: var(--gap-sm); padding: var(--gap-xs) 0; font-size: var(--text-sm); }
+.gos-bars__label { color: var(--on-dark-body); }
+.gos-bars__track { display: block; height: 10px; overflow: hidden; border-radius: var(--radius-track); background: var(--ft-line); }
+.gos-bars__track i { display: block; width: var(--w, 50%); height: 100%; border-radius: var(--radius-track); background: var(--on-dark-body); }
+.gos-bars__pct { text-align: right; font-weight: var(--weight-bold); }
+.gos-bars li.is-high .gos-bars__label { color: #fff; font-weight: var(--weight-bold); }
+.gos-bars li.is-high .gos-bars__track i { background: var(--gold); }
+.gos-bars li.is-high .gos-bars__pct { color: var(--gold); }
+.gos-bars li.is-late { margin-top: var(--gap-xs); padding-top: var(--gap-sm); border-top: var(--border) solid var(--on-dark-divider); }
+.gos-bars li.is-late .gos-bars__label,
+.gos-bars li.is-late .gos-bars__pct { color: var(--on-dark-muted); }
+.gos-bars li.is-late .gos-bars__track i { background: repeating-linear-gradient(135deg, var(--on-dark-stripe) 0 4px, var(--on-dark-faint) 4px 8px); }
+.gos-bars__foot { margin: 0; font-size: var(--text-sm); line-height: 1.55; color: var(--on-dark-muted); }
+
+/* ---- promise card ---- */
+.gos-promise__head { display: flex; align-items: center; gap: var(--gap-sm); }
+.gos-promise__title { font-size: var(--text-lg); font-weight: var(--weight-semibold); letter-spacing: -.015em; color: #fff; }
+.gos-promise p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--on-dark-strong); }
+.gos-promise p.is-dim { color: var(--on-dark-muted); }
+
+/* =============================================================================
+   J. Stat displays  🔁  replaces .m-stats / .m-stat, .trust / .trust__item,
+   .m-rating, .ft-rating and the display numbers (.m-gcov .big, .m-band .big)
+   .gos-stats  container
+     variant  --floating (white card that overlaps the hero) | --strip (inline, divided)
+   .gos-stat   value + label
+     size     --sm | --md | --lg (display) | --xl (band)
+     variant  --on-dark (gold value, light label)
+   ============================================================================= */
+
+.gos-stats { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--gap-md); }
+.gos-stats__nums { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-md); }
+.gos-stats__sep { width: 1px; height: var(--control-sm); background: var(--line); }
+
+/* ---- container variants ---- */
+.gos-stats--floating {
+  position: relative;
+  z-index: 3;
+  padding: var(--card-pad);
+  border: var(--border) solid var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+}
+.gos-stats--strip { justify-content: flex-start; padding-block: var(--card-pad); border-bottom: var(--border) solid var(--line); }
+@media (max-width: 64rem) {
+  .gos-stats__sep { display: none; }
+  .gos-stats .gos-stat { flex: 1 1 40%; }
+}
+
+/* ---- stat ---- */
+.gos-stat { display: flex; flex-direction: column; gap: 2px; }
+.gos-stat__value { display: block; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: 1.05; color: var(--primary); }
+.gos-stat__label { font-size: var(--text-sm); color: var(--mute); }
+
+/* ---- stat sizes ---- */
+.gos-stat--sm .gos-stat__value { font-size: var(--text-lg); }
+.gos-stat--md .gos-stat__value { font-size: var(--text-xl); }
+.gos-stat--lg .gos-stat__value { font-size: var(--text-display); line-height: .9; letter-spacing: -.04em; }
+.gos-stat--xl .gos-stat__value { font-size: var(--text-display-xl); line-height: .85; letter-spacing: -.05em; }
+
+/* ---- stat variants ---- */
+.gos-stat--on-dark .gos-stat__value { color: var(--gold); }
+.gos-stat--on-dark .gos-stat__label { color: var(--on-dark-muted); }
+
+/* ---- rating (number + stars + source) ---- */
+.gos-rating { display: inline-flex; align-items: center; gap: var(--gap-sm); text-decoration: none; color: inherit; }
+.gos-rating__value { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); color: var(--primary); }
+.gos-rating__text { font-size: var(--text-sm); color: var(--body); }
+.gos-rating--on-dark .gos-rating__value,
+.gos-rating--on-dark .gos-rating__text { color: #fff; }
+
+/* =============================================================================
+   K. Accreditation badges  🔁  replaces .m-badge, .ft-badge and .trust__item--badge
+   variant  --logo (white box, logo or name; default) | --plain (no border, for dark) | --text (tick + name)
+   size     --sm (88×48, was footer) | --lg (116×76, was hero)
+   ============================================================================= */
+
+.gos-badges { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-sm); }
+
+.gos-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 116px;
+  height: 76px;
+  padding: var(--space-3);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  color: var(--body2);
+}
+.gos-badge img { max-width: 100%; max-height: 100%; width: auto; object-fit: contain; }
+
+/* ---- variants ---- */
+.gos-badge--logo { background: var(--paper); }
+.gos-badge--plain { border-color: transparent; }
+.gos-badge--text {
+  width: auto; height: auto; padding: 0;
+  gap: var(--gap-xs);
+  border: 0; background: none;
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+.gos-badge__tick { display: flex; flex: none; color: var(--primary); }
+
+/* ---- sizes ---- */
+.gos-badge--sm { width: auto; min-width: 88px; height: var(--control-sm); padding: var(--space-2) var(--space-3); border-radius: var(--radius); }
+.gos-badge--lg { width: 116px; height: 76px; }
+
+/* =============================================================================
+   L. Star rating  🔁  replaces .m-stars and .ft-rating .stars
+   size  --sm (13px icons) | --md (15px icons, default)
+   Markup: <span class="gos-stars gos-stars--md" aria-label="5 out of 5"><svg…/>×5</span>
+   ============================================================================= */
+
+.gos-stars { display: inline-flex; gap: 2px; color: var(--gold); }
+.gos-stars svg { width: 15px; height: 15px; flex: none; }
+
+/* ---- sizes ---- */
+.gos-stars--sm svg { width: 13px; height: 13px; }
+.gos-stars--md svg { width: 15px; height: 15px; }
+
+/* =============================================================================
+   M. FAQ accordion  🔁  replaces .m-faq and .faq / .faq__item (identical structure)
+   layout  --cols-1 (default, inner pages) | --cols-2 (home page grid)
+   Markup (no JS — native <details>):
+   <div class="gos-faq gos-faq--cols-2">
+     <details class="gos-faq__item" open><summary>Question?</summary><p>Answer.</p></details>
+   </div>
+   ============================================================================= */
+
+.gos-faq { display: grid; grid-template-columns: 1fr; gap: var(--gap-xs) var(--gap-md); }
+.gos-faq--cols-1 { grid-template-columns: 1fr; max-width: 48rem; }
+.gos-faq--cols-2 { grid-template-columns: 1fr 1fr; }
+@media (max-width: 64rem) { .gos-faq--cols-2 { grid-template-columns: 1fr; } }
+
+.gos-faq__item { border: var(--border) solid var(--line); border-radius: var(--radius-lg); background: var(--paper); transition: border-color .3s; }
+.gos-faq__item[open] { border-color: var(--primary); }
+.gos-faq__item summary {
+  position: relative;
+  padding: var(--gap-sm) 56px var(--gap-sm) var(--card-pad);
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+}
+.gos-faq__item summary::-webkit-details-marker { display: none; }
+.gos-faq__item summary::after {
+  content: '+';
+  position: absolute; right: var(--inset); top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: var(--disc); height: var(--disc);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--primary);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
+.gos-faq__item[open] summary::after { content: '−'; background: var(--primary); color: #fff; }
+.gos-faq__item p { margin: 0; padding: 0 var(--card-pad) var(--gap-md); font-size: var(--text-sm); line-height: 1.65; color: var(--body); }
+
+.gos-faq-ask { margin-top: var(--gap-sm); font-size: var(--text-sm); color: var(--body); }
+.gos-faq-ask a { font-weight: var(--weight-semibold); color: var(--ink); }
+
+/* =============================================================================
+   N. Section heading block  🔁  replaces .m-sechead / .m-rhead and
+   .section-head / .section-head--split, plus the .m-h1 / .m-h2 / .lede styles
+   layout  --stack (title over lede; default) | --split (title left, lede right)
+   Headings: .gos-h1, .gos-h2 (+ <em> turns gold)
+   ============================================================================= */
+
+.gos-sechead { display: flex; flex-direction: column; gap: var(--space-3); max-width: 40rem; margin-bottom: var(--head-offset); }
+.gos-sechead__main { display: flex; flex-direction: column; gap: var(--space-3); max-width: var(--measure-lg); }
+.gos-sechead__aside { max-width: var(--measure-xs); font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--body); }
+
+/* ---- layout ---- */
+.gos-sechead--stack { flex-direction: column; }
+.gos-sechead--split { flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--gap-md) var(--space-12); max-width: none; }
+
+/* ---- headings ---- */
+.gos-h1 { font-size: var(--text-h1); line-height: 1; letter-spacing: -.035em; }
+.gos-h2 { font-size: var(--text-h2); }
+.gos-h1 em, .gos-h2 em { font-style: normal; color: var(--gold); }
+
+.gos-lede { margin: 0; max-width: 60ch; font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--body); }
+.gos-lede--on-dark { color: var(--on-dark-body); }
+
+/* =============================================================================
+   O. Layout primitives  🔁  replaces .m-wrap / .ft-wrap / .container and
+   .m-sec / .section, plus the tinted/dark section backgrounds
+   .gos-wrap     centred page width (--maxw, --gutter)
+     size        --narrow | (default)
+   .gos-section  vertical rhythm (--section-y)
+     variant     --default | --surface | --dark | --gradient
+     size        --tight | (default)
+   ============================================================================= */
+
+.gos-wrap { width: min(100% - var(--gutter), var(--maxw)); margin-inline: auto; }
+.gos-wrap--narrow { max-width: 62rem; }
+
+.gos-section { padding-block: var(--section-y); }
+
+/* ---- variants ---- */
+.gos-section--default { background: var(--paper); }
+.gos-section--surface { background: var(--surface); }   /* was .m-conn--grey / .section--surface / .section--tint */
+.gos-section--dark { background: var(--primary); color: #fff; }
+.gos-section--dark :where(h1, h2, h3, h4) { color: #fff; }
+.gos-section--gradient { background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%); color: #fff; }
+
+/* ---- sizes ---- */
+.gos-section--tight { padding-block: clamp(var(--space-8), 4vw, var(--space-12)); }
+
+/* ---- simple responsive grids ---- */
+.gos-grid { display: grid; gap: var(--gap-md); }
+.gos-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); }
+.gos-grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); }
+
+/* =============================================================================
+   P. Sticky mobile call / quote bar  🔁  replaces .m-sticky and .page .sticky
+   Shows below 60rem only. Two pills: call (client primary) + quote (gold).
+   Markup:
+   <div class="gos-sticky" aria-label="Contact shortcuts">
+     <a class="gos-sticky__call" href="tel:…">Call Dan</a>
+     <a class="gos-sticky__quote" href="#quote">Get a quote</a>
+   </div>
+   ============================================================================= */
+
+.gos-sticky { display: none; }
+
+@media (max-width: 60rem) {
+  .gos-sticky {
+    position: fixed;
+    left: var(--sticky-inset);
+    right: var(--sticky-inset);
+    bottom: calc(var(--sticky-inset) + env(safe-area-inset-bottom));
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+  .gos-sticky a {
+    padding: var(--sticky-pad-y) var(--space-2);
+    border-radius: var(--pill);
+    box-shadow: var(--shadow-sticky);
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-align: center;
+    text-decoration: none;
+  }
+  .gos-sticky__call { background: var(--primary); color: #fff; }
+  .gos-sticky__quote { background: var(--gold); color: var(--gold-ink); }
+}
+
+/* Storybook / previews: show the bar inline at any width */
+.gos-sticky--static {
+  position: static;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.gos-sticky--static a {
+  padding: var(--sticky-pad-y) var(--space-2);
+  border-radius: var(--pill);
+  box-shadow: var(--shadow-sticky);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  text-decoration: none;
+}
+.gos-sticky--static .gos-sticky__call { background: var(--primary); color: #fff; }
+.gos-sticky--static .gos-sticky__quote { background: var(--gold); color: var(--gold-ink); }
+
+@media print { .gos-sticky { display: none; } }
+
+/* =============================================================================
+   Q. CTA band  🔁  replaces .ft-cta (footer) and .page .cta (CtaBand.jsx).
+   One band per page: the footer's. Pages should stop adding a second one.
+   variant  --gradient (default, secondary → primary) | --flat (primary)
+   Uses: .gos-kicker, .gos-btn, .gos-call, .gos-stars, .gos-badge inside.
+   ============================================================================= */
+
+.gos-cta {
+  padding-block: var(--section-y);
+  border-top: 3px solid var(--gold);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: #fff;
+}
+.gos-cta__in { display: grid; grid-template-columns: minmax(0, 1.2fr) auto; align-items: center; gap: var(--gap-md) var(--space-12); }
+.gos-cta__title { margin-top: var(--space-2); font-size: var(--text-h2); color: #fff; }
+.gos-cta__lede { max-width: 54ch; margin: var(--space-3) 0 0; font-size: var(--text-md); color: var(--on-dark-body); }
+.gos-cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-sm); }
+.gos-cta__trust {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--gap-md);
+  padding-top: var(--gap-md);
+  border-top: var(--border) solid var(--ft-line);
+}
+
+/* ---- variants ---- */
+.gos-cta--gradient { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+.gos-cta--flat { background: var(--primary); }
+
+@media (max-width: 64rem) { .gos-cta__in { grid-template-columns: 1fr; } }
+@media (max-width: 40rem) {
+  .gos-cta__actions { flex-direction: column; align-items: stretch; }
+  .gos-cta__actions > * { width: 100%; justify-content: center; }
+}
+@media print { .gos-cta { display: none; } }
+
+/* =============================================================================
+   R. Icon disc  🔁  replaces .m-step .n, .m-blist .n, .m-gcov .ico, .m-gcard .ico,
+   .m-talk .ico, .m-tile .go, .m-jc .av and the FAQ +/− disc.
+   variant  --gold | --gold-outline | --glass | --surface | --light | --primary
+   size     single size (--disc, 32px): the audit's eight disc sizes (28-52px)
+            merged to one value, so there are no size modifiers.
+   Markup: <span class="gos-disc gos-disc--gold">1</span>  or an <svg> inside.
+   ============================================================================= */
+
+.gos-disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--disc);
+  height: var(--disc);
+  border: var(--border) solid transparent;
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+.gos-disc svg { width: 16px; height: 16px; }
+
+/* ---- variants ---- */
+.gos-disc--gold { background: var(--gold); color: var(--gold-ink); }
+.gos-disc--gold-outline { background: var(--gold-soft); border-color: var(--gold-edge); color: var(--gold); }
+.gos-disc--glass { background: var(--ft-line); border-color: var(--on-dark-faint); color: #fff; }
+.gos-disc--surface { background: var(--surface); color: var(--primary); }
+.gos-disc--light { background: var(--on-dark-strong); color: var(--ink); }
+.gos-disc--primary { background: var(--primary); color: #fff; }
+
+/* =============================================================================
+   S. Tick & link lists  🔁  replaces .m-towns, .checklist, .page .areas / .links /
+   .nearby and the hero trust row (.m-trust)
+   .gos-ticklist  icon + text rows
+     variant  --links (bordered link rows, was .m-towns) | --plain (was .checklist)
+     layout   --cols-1 | --cols-2
+   .gos-trust     inline icon + text row over a photo or dark background
+   ============================================================================= */
+
+.gos-ticklist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; column-gap: var(--gap-md); }
+.gos-ticklist li { display: flex; align-items: flex-start; gap: var(--gap-xs); }
+.gos-ticklist__icon { display: flex; flex-shrink: 0; margin-top: .2em; color: var(--gold); }
+.gos-ticklist__icon svg { width: 13px; height: 13px; }
+
+/* ---- variants ---- */
+.gos-ticklist--plain li + li { margin-top: var(--space-3); }
+.gos-ticklist--links { border-top: var(--border) solid var(--line); }
+.gos-ticklist--links li { display: block; }
+.gos-ticklist--links a {
+  display: flex; align-items: center; gap: var(--gap-xs);
+  padding: var(--space-3) 0;
+  border-bottom: var(--border) solid var(--line);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+.gos-ticklist--links a:hover { color: var(--primary); }
+.gos-ticklist--links .gos-ticklist__icon { margin-top: 0; }
+
+/* ---- layout ---- */
+.gos-ticklist--cols-1 { grid-template-columns: 1fr; }
+.gos-ticklist--cols-2 { grid-template-columns: 1fr 1fr; }
+@media (max-width: 30rem) { .gos-ticklist--cols-2 { grid-template-columns: 1fr; } }
+
+/* ---- trust row ---- */
+.gos-trust { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-xs) var(--gap-md); }
+.gos-trust > * {
+  display: inline-flex; align-items: center; gap: var(--gap-xs);
+  font-size: var(--text-sm);
+  color: var(--on-dark-strong);
+  text-decoration: none;
+  text-shadow: var(--text-shadow);
+  white-space: nowrap;
+}
+.gos-trust__icon { display: flex; flex-shrink: 0; color: var(--gold); }
+
+/* =============================================================================
+   T. Owner portrait & letter  🔁  replaces .m-portrait / .m-letter / .m-sig and
+   .owner / .owner__shot / .owner__body / .owner__role
+   .gos-portrait  photo with an optional caption scrim
+     variant  --caption (name overlay) | --plain
+   .gos-letter    the owner's letter; .gos-signature for the handwritten name
+   ============================================================================= */
+
+.gos-portrait {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r);
+  background: linear-gradient(160deg, var(--primary), var(--secondary));
+}
+.gos-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.gos-portrait__placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-xs);
+  font-size: var(--text-sm); color: var(--on-dark-faint);
+}
+.gos-portrait__caption { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; color: #fff; }
+.gos-portrait__caption b { display: block; font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-semibold); letter-spacing: -.015em; }
+.gos-portrait__caption span { font-size: var(--text-sm); color: var(--on-dark-muted); }
+
+/* ---- variants ---- */
+.gos-portrait--plain .gos-portrait__caption { display: none; }
+.gos-portrait--caption::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--scrim) 92%, transparent));
+}
+
+/* ---- letter ---- */
+.gos-letter { display: flex; flex-direction: column; gap: var(--gap-md); }
+.gos-letter p { margin: 0; max-width: var(--measure-md); font-size: var(--text-md); line-height: 1.65; color: var(--body); }
+.gos-letter p.is-lead { color: var(--body2); }
+
+.gos-signature { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-md); }
+.gos-signature__name { font-family: var(--fs); font-size: var(--text-signature); line-height: 1; color: var(--ink); }
+.gos-signature__sep { width: 1px; height: 34px; background: var(--line); }
+
+/* =============================================================================
+   U. Map  🔁  replaces .m-map (home) and .page .map (contact page)
+   variant  --grid (graph-paper fallback behind the iframe; default) | --plain
+   size     --md (340px min) | --lg (26rem tall)
+   Markup:
+   <div class="gos-map gos-map--grid gos-map--md">
+     <iframe src="…" title="…" loading="lazy"></iframe>
+     <span class="gos-tag gos-tag--light gos-map__pill"><i class="gos-tag__dot"></i>Roughly 25 miles from Leeds</span>
+   </div>
+   ============================================================================= */
+
+.gos-map {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  border: var(--border) solid var(--line);
+  border-radius: var(--r);
+  background-color: var(--ground);
+}
+.gos-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.gos-map__pill { position: absolute; left: var(--inset); bottom: var(--inset); z-index: 2; pointer-events: none; }
+.gos-map__pill .gos-tag__dot { background: var(--gold); }
+
+/* ---- variants ---- */
+.gos-map--grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--scrim) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--scrim) 7%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.gos-map--plain { background-image: none; }
+
+/* ---- sizes ---- */
+.gos-map--md { min-height: 340px; }
+.gos-map--lg { min-height: 26rem; }
+@media (max-width: 64rem) { .gos-map--md { min-height: 300px; } }
+
+/* =============================================================================
+   V. Comparison table  🏠  new shared family (was .m-table, home only)
+   The client's column is raised and dark; the competitor column is muted.
+   Markup:
+   <table class="gos-compare">
+     <thead><tr><th class="gos-compare__label">What matters</th><th class="gos-compare__us"><b>Acme</b><small>Local, owner-run</small></th><th class="gos-compare__them">National chains</th></tr></thead>
+     <tbody><tr><th class="gos-compare__q" scope="row">Fixed price</th><td class="gos-compare__us">…</td><td class="gos-compare__them">…</td></tr></tbody>
+     <tfoot>…</tfoot>
+   </table>
+   ============================================================================= */
+
+.gos-compare { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: var(--text-sm); }
+.gos-compare th:first-child, .gos-compare td:first-child { width: 44%; }
+.gos-compare__us, .gos-compare__them { width: 28%; text-align: center; }
+
+.gos-compare thead th { padding: var(--card-pad) var(--gap-sm); font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--mute); }
+.gos-compare thead .gos-compare__label { text-align: left; padding-left: var(--space-1); }
+.gos-compare thead .gos-compare__us { border-radius: var(--r) var(--r) 0 0; background: var(--primary); color: #fff; }
+.gos-compare thead .gos-compare__us b { display: block; font-family: var(--font-heading); font-size: var(--text-lg); letter-spacing: -.01em; text-transform: none; }
+.gos-compare thead .gos-compare__us small,
+.gos-compare tfoot .gos-compare__us small { display: block; margin-top: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--on-dark-muted); }
+
+.gos-compare__q { padding: var(--card-pad) var(--space-1); border-top: var(--border) solid var(--line); text-align: left; font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--ink); }
+.gos-compare td { padding: var(--card-pad) var(--gap-sm); border-top: var(--border) solid var(--line); }
+.gos-compare td.gos-compare__us { border-top: 0; font-family: var(--font-heading); font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--ink); }
+.gos-compare tbody tr:nth-child(odd) td.gos-compare__us { background: var(--primary-tint-5); }
+.gos-compare tbody tr:last-child td.gos-compare__us { background: var(--primary-tint-10); font-weight: var(--weight-bold); }
+.gos-compare td.gos-compare__them { font-size: var(--text-md); color: var(--mute); }
+.gos-compare__icon { display: inline-flex; margin-right: var(--space-2); vertical-align: -2px; }
+.gos-compare__us .gos-compare__icon { color: var(--ink); }
+.gos-compare__them .gos-compare__icon { color: var(--faint-2); }
+
+.gos-compare tfoot .gos-compare__q { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--mute); }
+.gos-compare tfoot td.gos-compare__us { border-radius: 0 0 var(--r) var(--r); background: var(--primary); color: #fff; box-shadow: var(--shadow-raised); }
+.gos-compare tfoot td.gos-compare__us strong { display: block; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: -.02em; }
+.gos-compare tfoot td.gos-compare__them { font-size: var(--text-sm); }
+
+@media (max-width: 40rem) {
+  .gos-compare thead th, .gos-compare td { padding: var(--space-3) var(--space-2); }
+  .gos-compare__icon { display: none; }
+}
+
+/* =============================================================================
+   W. Process & stepper  🏠  new shared family (was .m-steps / .m-step and .m-blist)
+   .gos-steps    horizontal row of step cards; the last step is the dark card
+     layout  --cols-3 | --cols-5
+   .gos-stepper  vertical numbered list with a connecting line
+     variant --on-dark (default, was .m-blist) | --on-light
+   ============================================================================= */
+
+/* ---- step cards ---- */
+.gos-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-sm); list-style: none; margin: 0; padding: 0; }
+.gos-steps--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.gos-steps--cols-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 64rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 40rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-5 { grid-template-columns: 1fr; } }
+
+.gos-step { display: flex; flex-direction: column; gap: var(--gap-xs); padding: var(--card-pad); border: var(--border) solid var(--line); border-radius: var(--r); background: var(--paper); }
+.gos-step__title { margin-top: var(--gap-xs); font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+.gos-step__when { font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+.gos-step p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--body); }
+.gos-step:last-child { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gos-step:last-child .gos-step__when { color: var(--on-dark-muted); }
+.gos-step:last-child p { color: var(--on-dark-body); }
+
+/* ---- vertical stepper ---- */
+.gos-stepper { display: flex; flex-direction: column; gap: var(--gap-sm); list-style: none; margin: 0; padding: 0; }
+.gos-stepper li { position: relative; display: flex; gap: var(--gap-sm); }
+.gos-stepper li:not(:last-child)::before {
+  content: ''; position: absolute;
+  left: calc(var(--disc) / 2); top: calc(var(--disc) + 2px); bottom: calc(-1 * var(--gap-sm));
+  width: 1px; background: var(--on-dark-faint);
+}
+.gos-stepper__title { display: block; font-family: var(--font-heading); font-size: var(--text-md); font-weight: var(--weight-semibold); }
+.gos-stepper p { margin: var(--space-1) 0 0; max-width: var(--measure-sm); font-size: var(--text-sm); line-height: 1.55; }
+
+/* ---- variants ---- */
+.gos-stepper--on-dark { color: #fff; }
+.gos-stepper--on-dark p { color: var(--on-dark-muted); }
+.gos-stepper--on-light { color: var(--ink); }
+.gos-stepper--on-light li:not(:last-child)::before { background: var(--line); }
+.gos-stepper--on-light p { color: var(--body); }
+
+/* =============================================================================
+   X. Inner-page content patterns  📄  shared versions of the inner-only blocks
+   .gos-answer   direct answer to the page's question (was .answer)
+   .gos-proof    area page local proof, directly under the H1 (was .area-proof).
+                 SEO guardrail in the Master Template: never bury it.
+   .gos-crumb    breadcrumb (was .crumb)
+   .gos-prose    long-form copy (was .prose)
+   .gos-meta     small muted metadata line (was .reviewed / .post__meta / .meta)
+   ============================================================================= */
+
+/* ---- direct answer ---- */
+.gos-answer { max-width: 62ch; padding: var(--space-1) 0 var(--space-1) var(--card-pad); border-left: 3px solid var(--gold); }
+.gos-answer__q { margin: 0 0 var(--space-2); font-family: var(--font-heading); font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--ink); }
+.gos-answer__a { margin: 0; font-size: var(--text-md); line-height: 1.65; color: var(--ink); }
+
+/* ---- local proof ---- */
+.gos-proof { padding: var(--space-12) var(--card-pad); border-left: 6px solid var(--gold); background: var(--surface); }
+.gos-proof__text { max-width: 62ch; margin: var(--space-4) 0 0; font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+.gos-proof__meta { margin: var(--card-pad) 0 0; font-size: var(--text-sm); color: var(--mute); }
+
+/* ---- breadcrumb ---- */
+.gos-crumb { margin-bottom: var(--card-pad); font-size: var(--text-sm); color: var(--mute); }
+.gos-crumb ol { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
+.gos-crumb li + li::before { content: '/'; margin-right: var(--space-2); color: var(--line-control); }
+.gos-crumb a { color: var(--mute); }
+.gos-crumb [aria-current] { color: var(--ink); }
+
+/* ---- prose ---- */
+.gos-prose { max-width: 68ch; font-size: var(--text-md); line-height: 1.65; color: var(--body2); }
+.gos-prose > * { margin: 0; }
+.gos-prose > * + * { margin-top: var(--space-4); }
+.gos-prose h2 { margin-top: var(--space-12); font-size: var(--text-title); color: var(--ink); }
+.gos-prose h3 { margin-top: var(--space-8); font-size: var(--text-lg); color: var(--ink); }
+.gos-prose ul, .gos-prose ol { padding-left: 1.35rem; }
+.gos-prose li + li { margin-top: var(--space-2); }
+.gos-prose a { color: var(--primary); text-underline-offset: 3px; }
+
+/* ---- metadata line ---- */
+.gos-meta { font-size: var(--text-sm); color: var(--mute); }
+
+/* =============================================================================
+   Y. Header / nav  ✅  one stylesheet (was copied verbatim into master.css AND
+   header.css). Same markup on every page; the only difference is the background.
+   variant  --overlay (sits over the hero photo, home) | --solid (secondary bar, inner pages)
+   size     --md (82px, default) | --sm (68px)
+   Scroll behaviour hooks (the host adds these classes with its own tiny script):
+     .gos-head.is-stuck / .is-shown / .is-anim   (was .m-head …)
+   No JavaScript ships in this package; with JS off the nav just sits at the top.
+   ============================================================================= */
+
+.gos-head { position: relative; z-index: 50; }
+
+.gos-announce {
+  position: relative; z-index: 3;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border) solid var(--ft-line);
+  background: color-mix(in srgb, var(--scrim) 70%, transparent);
+  color: var(--on-dark-strong);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+}
+.gos-announce__dot { display: inline-block; width: 7px; height: 7px; margin-right: var(--space-2); border-radius: 50%; background: var(--gold); vertical-align: middle; }
+
+.gos-nav { position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md); height: var(--nav-h); }
+
+/* ---- variants ---- */
+.gos-navbar--overlay { background: transparent; color: #fff; }
+.gos-navbar--solid { background: var(--secondary); color: #fff; }
+.gos-navbar--solid .gos-nav { padding-block: var(--space-2); }
+
+/* ---- sizes ---- */
+.gos-nav--md { height: var(--nav-h); }
+.gos-nav--sm { height: var(--nav-h-sm); }
+
+/* ---- brand ---- */
+.gos-brand { display: flex; flex-shrink: 0; align-items: center; color: #fff; text-decoration: none; }
+.gos-brand img { width: auto; height: 56px; }
+.gos-brand__name { display: block; font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -.015em; line-height: 1.02; }
+.gos-brand__place { display: block; font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold); }
+
+/* ---- links + dropdowns ---- */
+.gos-links { display: flex; align-items: center; gap: var(--gap-md); list-style: none; margin: 0; padding: 0; }
+.gos-links > li { position: relative; }
+.gos-links a { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-2) 0; color: var(--on-dark-body); font-size: var(--text-sm); font-weight: var(--weight-medium); text-decoration: none; }
+.gos-links a:hover, .gos-links a[aria-current="page"] { color: #fff; }
+.gos-sub {
+  position: absolute; top: 100%; left: calc(-1 * var(--space-3));
+  min-width: 220px; padding: var(--space-2);
+  list-style: none; margin: 0;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-overlay);
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: .2s;
+}
+.gos-links > li:hover > .gos-sub, .gos-links > li:focus-within > .gos-sub { opacity: 1; visibility: visible; transform: none; }
+.gos-sub a { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius); color: var(--ink); font-size: var(--text-sm); }
+.gos-sub a:hover { background: var(--surface); color: var(--ink); }
+
+.gos-navright { display: flex; align-items: center; gap: var(--space-3); }
+
+/* ---- mobile menu (native <details>) ---- */
+.gos-burger { display: none; position: relative; }
+.gos-burger summary { display: flex; align-items: center; gap: var(--gap-xs); padding: var(--space-2) 0; list-style: none; cursor: pointer; color: #fff; font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+.gos-burger summary::-webkit-details-marker { display: none; }
+.gos-menu {
+  position: absolute; right: 0; top: 100%; z-index: 9;
+  width: min(92vw, 320px); padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-overlay);
+}
+.gos-menu a { display: block; padding: var(--space-3); border-radius: var(--radius); color: var(--ink); font-weight: var(--weight-medium); text-decoration: none; }
+.gos-menu a:hover { background: var(--surface); }
+.gos-menu__group { padding: var(--space-3) var(--space-3) var(--space-1); font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+
+@media (max-width: 80rem) { .gos-links, .gos-nav { gap: var(--gap-sm); } }
+@media (max-width: 64rem) {
+  .gos-links { display: none; }
+  .gos-navright .gos-call { display: none; }
+  .gos-burger { display: block; }
+}
+@media (max-width: 40rem) {
+  .gos-nav { height: var(--nav-h-sm); }
+  .gos-brand img { height: 44px; }
+}
+
+/* ---- hide-on-scroll hooks ---- */
+.gos-head.is-stuck .gos-navbar { position: fixed; top: 0; left: 0; right: 0; background: var(--secondary); color: #fff; transform: translateY(-100%); }
+.gos-head.is-stuck.is-shown .gos-navbar { transform: none; }
+.gos-head.is-anim .gos-navbar { transition: transform .3s ease; }
+.gos-head.is-stuck .gos-menu { max-height: calc(100dvh - 96px); overflow-y: auto; }
+
+@media print { .gos-announce, .gos-nav { display: none; } }
+
+/* =============================================================================
+   Z. Footer  ✅  the only fully shared component in the Master Template. Its own
+   one-off button, call pill, badges, stars and wrapper are replaced by the shared
+   families: .gos-btn, .gos-call, .gos-badge, .gos-stars, .gos-wrap, .gos-cta.
+   variant  --default (primary background)
+   Structure:
+   <footer class="gos-footer">
+     <div class="gos-cta">…</div>                         (Q. CTA band)
+     <div class="gos-footer__main"><div class="gos-wrap gos-footer__grid">…columns…</div></div>
+     <div class="gos-footer__bottom"><div class="gos-wrap">…legal…</div></div>
+   </footer>
+   ============================================================================= */
+
+.gos-footer { background: var(--primary); color: var(--on-dark-muted); font-family: var(--font-body); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+.gos-footer a { color: inherit; text-decoration: none; }
+.gos-footer a:hover { color: #fff; }
+.gos-footer ul { list-style: none; margin: 0; padding: 0; }
+.gos-footer p, .gos-footer address { margin: 0; font-style: normal; }
+
+.gos-footer__h {
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border) solid var(--ft-line);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ---- variants ---- */
+.gos-footer--default { background: var(--primary); }
+
+/* ---- main grid ---- */
+.gos-footer__main { padding-block: var(--section-y) var(--space-2); }
+.gos-footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: var(--space-12); }
+.gos-footer__logo { width: auto; height: 56px; }
+.gos-footer__name { font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-bold); color: #fff; }
+.gos-footer__about { max-width: 38ch; margin-top: var(--space-4); }
+.gos-footer__nap { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-5); }
+.gos-footer__tel { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); letter-spacing: -.01em; color: #fff !important; }
+.gos-footer__hours li { display: flex; justify-content: space-between; gap: var(--space-4); max-width: 260px; padding: var(--space-1) 0; }
+.gos-footer__hours li span:first-child { color: #fff; }
+.gos-footer__links a { display: block; padding: var(--space-2) 0; }
+.gos-footer__more { display: inline-flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); padding: var(--space-2) 0; color: var(--gold) !important; font-weight: var(--weight-semibold); }
+.gos-footer__local { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-5); padding-block: var(--gap-md) var(--space-2); border-top: var(--border) solid var(--ft-line); }
+
+/* ---- legal bar ---- */
+.gos-footer__bottom { margin-top: var(--space-8); background: color-mix(in srgb, var(--shade) 28%, transparent); }
+.gos-footer__bottom .gos-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3) var(--gap-md); padding-block: var(--space-5); font-size: var(--text-sm); }
+.gos-footer__legal { display: flex; gap: var(--space-5); }
+.gos-footer__legal a { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 64rem) {
+  .gos-footer__grid { grid-template-columns: 1fr 1fr; }
+  .gos-footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 40rem) {
+  .gos-footer__grid { grid-template-columns: 1fr; }
+  .gos-footer__bottom .gos-wrap { padding-bottom: var(--space-24); } /* clears the sticky call bar */
+}
+

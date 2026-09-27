@@ -1,0 +1,95 @@
+/* =============================================================================
+   Y. Header / nav  ✅  one stylesheet (was copied verbatim into master.css AND
+   header.css). Same markup on every page; the only difference is the background.
+   variant  --overlay (sits over the hero photo, home) | --solid (secondary bar, inner pages)
+   size     --md (82px, default) | --sm (68px)
+   Scroll behaviour hooks (the host adds these classes with its own tiny script):
+     .gos-head.is-stuck / .is-shown / .is-anim   (was .m-head …)
+   No JavaScript ships in this package; with JS off the nav just sits at the top.
+   ============================================================================= */
+
+.gos-head { position: relative; z-index: 50; }
+
+.gos-announce {
+  position: relative; z-index: 3;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border) solid var(--ft-line);
+  background: color-mix(in srgb, var(--scrim) 70%, transparent);
+  color: var(--on-dark-strong);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+}
+.gos-announce__dot { display: inline-block; width: 7px; height: 7px; margin-right: var(--space-2); border-radius: 50%; background: var(--gold); vertical-align: middle; }
+
+.gos-nav { position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md); height: var(--nav-h); }
+
+/* ---- variants ---- */
+.gos-navbar--overlay { background: transparent; color: #fff; }
+.gos-navbar--solid { background: var(--secondary); color: #fff; }
+.gos-navbar--solid .gos-nav { padding-block: var(--space-2); }
+
+/* ---- sizes ---- */
+.gos-nav--md { height: var(--nav-h); }
+.gos-nav--sm { height: var(--nav-h-sm); }
+
+/* ---- brand ---- */
+.gos-brand { display: flex; flex-shrink: 0; align-items: center; color: #fff; text-decoration: none; }
+.gos-brand img { width: auto; height: 56px; }
+.gos-brand__name { display: block; font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -.015em; line-height: 1.02; }
+.gos-brand__place { display: block; font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold); }
+
+/* ---- links + dropdowns ---- */
+.gos-links { display: flex; align-items: center; gap: var(--gap-md); list-style: none; margin: 0; padding: 0; }
+.gos-links > li { position: relative; }
+.gos-links a { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-2) 0; color: var(--on-dark-body); font-size: var(--text-sm); font-weight: var(--weight-medium); text-decoration: none; }
+.gos-links a:hover, .gos-links a[aria-current="page"] { color: #fff; }
+.gos-sub {
+  position: absolute; top: 100%; left: calc(-1 * var(--space-3));
+  min-width: 220px; padding: var(--space-2);
+  list-style: none; margin: 0;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-overlay);
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: .2s;
+}
+.gos-links > li:hover > .gos-sub, .gos-links > li:focus-within > .gos-sub { opacity: 1; visibility: visible; transform: none; }
+.gos-sub a { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius); color: var(--ink); font-size: var(--text-sm); }
+.gos-sub a:hover { background: var(--surface); color: var(--ink); }
+
+.gos-navright { display: flex; align-items: center; gap: var(--space-3); }
+
+/* ---- mobile menu (native <details>) ---- */
+.gos-burger { display: none; position: relative; }
+.gos-burger summary { display: flex; align-items: center; gap: var(--gap-xs); padding: var(--space-2) 0; list-style: none; cursor: pointer; color: #fff; font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+.gos-burger summary::-webkit-details-marker { display: none; }
+.gos-menu {
+  position: absolute; right: 0; top: 100%; z-index: 9;
+  width: min(92vw, 320px); padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-overlay);
+}
+.gos-menu a { display: block; padding: var(--space-3); border-radius: var(--radius); color: var(--ink); font-weight: var(--weight-medium); text-decoration: none; }
+.gos-menu a:hover { background: var(--surface); }
+.gos-menu__group { padding: var(--space-3) var(--space-3) var(--space-1); font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+
+@media (max-width: 80rem) { .gos-links, .gos-nav { gap: var(--gap-sm); } }
+@media (max-width: 64rem) {
+  .gos-links { display: none; }
+  .gos-navright .gos-call { display: none; }
+  .gos-burger { display: block; }
+}
+@media (max-width: 40rem) {
+  .gos-nav { height: var(--nav-h-sm); }
+  .gos-brand img { height: 44px; }
+}
+
+/* ---- hide-on-scroll hooks ---- */
+.gos-head.is-stuck .gos-navbar { position: fixed; top: 0; left: 0; right: 0; background: var(--secondary); color: #fff; transform: translateY(-100%); }
+.gos-head.is-stuck.is-shown .gos-navbar { transform: none; }
+.gos-head.is-anim .gos-navbar { transition: transform .3s ease; }
+.gos-head.is-stuck .gos-menu { max-height: calc(100dvh - 96px); overflow-y: auto; }
+
+@media print { .gos-announce, .gos-nav { display: none; } }

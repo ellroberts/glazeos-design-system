@@ -1,0 +1,58 @@
+/* =============================================================================
+   P. Sticky mobile call / quote bar  🔁  replaces .m-sticky and .page .sticky
+   Shows below 60rem only. Two pills: call (client primary) + quote (gold).
+   Markup:
+   <div class="gos-sticky" aria-label="Contact shortcuts">
+     <a class="gos-sticky__call" href="tel:…">Call Dan</a>
+     <a class="gos-sticky__quote" href="#quote">Get a quote</a>
+   </div>
+   ============================================================================= */
+
+.gos-sticky { display: none; }
+
+@media (max-width: 60rem) {
+  .gos-sticky {
+    position: fixed;
+    left: var(--sticky-inset);
+    right: var(--sticky-inset);
+    bottom: calc(var(--sticky-inset) + env(safe-area-inset-bottom));
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+  .gos-sticky a {
+    padding: var(--sticky-pad-y) var(--space-2);
+    border-radius: var(--pill);
+    box-shadow: var(--shadow-sticky);
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-align: center;
+    text-decoration: none;
+  }
+  .gos-sticky__call { background: var(--primary); color: #fff; }
+  .gos-sticky__quote { background: var(--gold); color: var(--gold-ink); }
+}
+
+/* Storybook / previews: show the bar inline at any width */
+.gos-sticky--static {
+  position: static;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.gos-sticky--static a {
+  padding: var(--sticky-pad-y) var(--space-2);
+  border-radius: var(--pill);
+  box-shadow: var(--shadow-sticky);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  text-decoration: none;
+}
+.gos-sticky--static .gos-sticky__call { background: var(--primary); color: #fff; }
+.gos-sticky--static .gos-sticky__quote { background: var(--gold); color: var(--gold-ink); }
+
+@media print { .gos-sticky { display: none; } }

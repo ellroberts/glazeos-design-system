@@ -1,0 +1,32 @@
+/* =============================================================================
+   R. Icon disc  🔁  replaces .m-step .n, .m-blist .n, .m-gcov .ico, .m-gcard .ico,
+   .m-talk .ico, .m-tile .go, .m-jc .av and the FAQ +/− disc.
+   variant  --gold | --gold-outline | --glass | --surface | --light | --primary
+   size     single size (--disc, 32px): the audit's eight disc sizes (28-52px)
+            merged to one value, so there are no size modifiers.
+   Markup: <span class="gos-disc gos-disc--gold">1</span>  or an <svg> inside.
+   ============================================================================= */
+
+.gos-disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--disc);
+  height: var(--disc);
+  border: var(--border) solid transparent;
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+.gos-disc svg { width: 16px; height: 16px; }
+
+/* ---- variants ---- */
+.gos-disc--gold { background: var(--gold); color: var(--gold-ink); }
+.gos-disc--gold-outline { background: var(--gold-soft); border-color: var(--gold-edge); color: var(--gold); }
+.gos-disc--glass { background: var(--ft-line); border-color: var(--on-dark-faint); color: #fff; }
+.gos-disc--surface { background: var(--surface); color: var(--primary); }
+.gos-disc--light { background: var(--on-dark-strong); color: var(--ink); }
+.gos-disc--primary { background: var(--primary); color: #fff; }

@@ -1,0 +1,58 @@
+/* =============================================================================
+   A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
+   Two independent axes:
+     variant  --primary | --secondary | --tertiary | --ghost | --light
+     size     --sm | --md | --lg
+   plus the layout modifier --block (full width, e.g. form submit).
+   Markup:  <a class="gos-btn gos-btn--primary gos-btn--lg">Get a quote</a>
+   ============================================================================= */
+
+.gos-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  min-height: var(--control-md);
+  padding: 0 var(--space-6);
+  border: var(--border) solid transparent;
+  border-radius: var(--pill);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .25s var(--ease-out), background-color .25s, border-color .25s;
+}
+.gos-btn:hover { transform: var(--lift); }
+.gos-btn svg { flex-shrink: 0; }
+
+/* ---- variants ---- */
+/* primary: the main call to action (was .m-btn--gold / .btn--accent / .ft-btn) */
+.gos-btn--primary { background: var(--gold); color: var(--gold-ink); }
+.gos-btn--primary:hover { color: var(--gold-ink); }
+
+/* secondary: filled in the client's primary colour (was .m-btn--ink / .btn--primary) */
+.gos-btn--secondary { background: var(--primary); color: #fff; }
+.gos-btn--secondary:hover { color: #fff; }
+
+/* tertiary: outline on a light background (was .m-btn--line / .btn--ghost on light) */
+.gos-btn--tertiary { background: transparent; border-color: var(--line-control); color: var(--primary); }
+.gos-btn--tertiary:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ghost: outline on a dark background (was .m-btn--ghost / .btn--ghost.cta__ghost) */
+.gos-btn--ghost { background: transparent; border-color: var(--on-dark-border); color: #fff; }
+.gos-btn--ghost:hover { border-color: #fff; color: #fff; }
+
+/* light: white filled, for dark backgrounds (was .btn--light; new on the home page) */
+.gos-btn--light { background: var(--paper); color: var(--ink); }
+.gos-btn--light:hover { background: var(--brand-tint); color: var(--ink); }
+
+/* ---- sizes ---- */
+.gos-btn--sm { min-height: var(--control-sm); padding: 0 var(--space-5); font-size: var(--text-sm); }
+.gos-btn--md { min-height: var(--control-md); padding: 0 var(--space-6); font-size: var(--text-sm); }
+.gos-btn--lg { min-height: var(--control-lg); padding: 0 30px; font-size: var(--text-md); }
+
+/* ---- layout ---- */
+.gos-btn--block { display: flex; width: 100%; }

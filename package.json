@@ -1,0 +1,35 @@
+{
+  "name": "glazeos-design-system",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Plain-CSS design system (tokens + components) for GlazeOS client websites. No client-side JavaScript.",
+  "type": "module",
+  "main": "dist/glazeos.css",
+  "style": "dist/glazeos.css",
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/html": "^10.6.0",
+    "@storybook/html-vite": "^10.6.0",
+    "storybook": "^10.6.0",
+    "vite": "^7.1.2"
+  },
+  "exports": {
+    ".": "./dist/glazeos.css",
+    "./styles": "./dist/styles.css",
+    "./components": "./dist/components.css",
+    "./tokens": "./src/styles/tokens.css",
+    "./components/*": "./src/styles/components/*.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src/styles"
+  ]
+}

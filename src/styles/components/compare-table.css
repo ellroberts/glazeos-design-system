@@ -1,0 +1,41 @@
+/* =============================================================================
+   V. Comparison table  🏠  new shared family (was .m-table, home only)
+   The client's column is raised and dark; the competitor column is muted.
+   Markup:
+   <table class="gos-compare">
+     <thead><tr><th class="gos-compare__label">What matters</th><th class="gos-compare__us"><b>Acme</b><small>Local, owner-run</small></th><th class="gos-compare__them">National chains</th></tr></thead>
+     <tbody><tr><th class="gos-compare__q" scope="row">Fixed price</th><td class="gos-compare__us">…</td><td class="gos-compare__them">…</td></tr></tbody>
+     <tfoot>…</tfoot>
+   </table>
+   ============================================================================= */
+
+.gos-compare { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: var(--text-sm); }
+.gos-compare th:first-child, .gos-compare td:first-child { width: 44%; }
+.gos-compare__us, .gos-compare__them { width: 28%; text-align: center; }
+
+.gos-compare thead th { padding: var(--card-pad) var(--gap-sm); font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--mute); }
+.gos-compare thead .gos-compare__label { text-align: left; padding-left: var(--space-1); }
+.gos-compare thead .gos-compare__us { border-radius: var(--r) var(--r) 0 0; background: var(--primary); color: #fff; }
+.gos-compare thead .gos-compare__us b { display: block; font-family: var(--font-heading); font-size: var(--text-lg); letter-spacing: -.01em; text-transform: none; }
+.gos-compare thead .gos-compare__us small,
+.gos-compare tfoot .gos-compare__us small { display: block; margin-top: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--on-dark-muted); }
+
+.gos-compare__q { padding: var(--card-pad) var(--space-1); border-top: var(--border) solid var(--line); text-align: left; font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--ink); }
+.gos-compare td { padding: var(--card-pad) var(--gap-sm); border-top: var(--border) solid var(--line); }
+.gos-compare td.gos-compare__us { border-top: 0; font-family: var(--font-heading); font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--ink); }
+.gos-compare tbody tr:nth-child(odd) td.gos-compare__us { background: var(--primary-tint-5); }
+.gos-compare tbody tr:last-child td.gos-compare__us { background: var(--primary-tint-10); font-weight: var(--weight-bold); }
+.gos-compare td.gos-compare__them { font-size: var(--text-md); color: var(--mute); }
+.gos-compare__icon { display: inline-flex; margin-right: var(--space-2); vertical-align: -2px; }
+.gos-compare__us .gos-compare__icon { color: var(--ink); }
+.gos-compare__them .gos-compare__icon { color: var(--faint-2); }
+
+.gos-compare tfoot .gos-compare__q { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--mute); }
+.gos-compare tfoot td.gos-compare__us { border-radius: 0 0 var(--r) var(--r); background: var(--primary); color: #fff; box-shadow: var(--shadow-raised); }
+.gos-compare tfoot td.gos-compare__us strong { display: block; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: -.02em; }
+.gos-compare tfoot td.gos-compare__them { font-size: var(--text-sm); }
+
+@media (max-width: 40rem) {
+  .gos-compare thead th, .gos-compare td { padding: var(--space-3) var(--space-2); }
+  .gos-compare__icon { display: none; }
+}

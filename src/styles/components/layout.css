@@ -1,0 +1,29 @@
+/* =============================================================================
+   O. Layout primitives  🔁  replaces .m-wrap / .ft-wrap / .container and
+   .m-sec / .section, plus the tinted/dark section backgrounds
+   .gos-wrap     centred page width (--maxw, --gutter)
+     size        --narrow | (default)
+   .gos-section  vertical rhythm (--section-y)
+     variant     --default | --surface | --dark | --gradient
+     size        --tight | (default)
+   ============================================================================= */
+
+.gos-wrap { width: min(100% - var(--gutter), var(--maxw)); margin-inline: auto; }
+.gos-wrap--narrow { max-width: 62rem; }
+
+.gos-section { padding-block: var(--section-y); }
+
+/* ---- variants ---- */
+.gos-section--default { background: var(--paper); }
+.gos-section--surface { background: var(--surface); }   /* was .m-conn--grey / .section--surface / .section--tint */
+.gos-section--dark { background: var(--primary); color: #fff; }
+.gos-section--dark :where(h1, h2, h3, h4) { color: #fff; }
+.gos-section--gradient { background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%); color: #fff; }
+
+/* ---- sizes ---- */
+.gos-section--tight { padding-block: clamp(var(--space-8), 4vw, var(--space-12)); }
+
+/* ---- simple responsive grids ---- */
+.gos-grid { display: grid; gap: var(--gap-md); }
+.gos-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); }
+.gos-grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); }

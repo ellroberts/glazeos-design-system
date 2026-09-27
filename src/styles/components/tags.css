@@ -1,0 +1,38 @@
+/* =============================================================================
+   C. Tags & status pills  🏠  new shared family (home-only until now)
+   Replaces .m-eyebrow, .m-gpill, .m-freepill, .m-tile .tag, .m-jc .ph .tag,
+   .m-map .pill and the unused .m-pip.
+   variant  --glass | --gold | --gold-outline | --success | --light | --outline
+   size     (single size - see note at the bottom)
+   Optional leading dot: <i class="gos-tag__dot"></i>
+   ============================================================================= */
+
+.gos-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--pill-y) var(--pill-x);
+  border: var(--border) solid transparent;
+  border-radius: var(--pill);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: .1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.gos-tag__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* ---- variants ---- */
+.gos-tag--glass { background: var(--ft-line); border-color: var(--on-dark-divider); color: #fff; }       /* was .m-eyebrow */
+.gos-tag--gold { background: var(--gold); color: var(--gold-ink); }                                   /* was .m-tile .tag */
+.gos-tag--gold-outline { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); } /* was .m-gpill */
+.gos-tag--success { background: var(--status-good-tint); color: var(--status-good); }                 /* was .m-freepill */
+.gos-tag--light { background: var(--paper); color: var(--primary); text-transform: none; letter-spacing: 0; font-weight: var(--weight-semibold); box-shadow: var(--shadow-sm); } /* was .m-jc .ph .tag / .m-map .pill */
+.gos-tag--light .gos-tag__dot { background: var(--primary); }
+.gos-tag--outline { border-color: var(--line); color: var(--mute); }                                   /* was .m-pip */
+
+/* ---- sizes ----
+   One size only: the audit's pill-padding (6-10 / 12-18px) and micro-label
+   (9-12px) groups each merged to a single value, so an --sm/--lg here would
+   need invented numbers. Add sizes when the design calls for them. */

@@ -1,0 +1,34 @@
+/* =============================================================================
+   Q. CTA band  🔁  replaces .ft-cta (footer) and .page .cta (CtaBand.jsx).
+   One band per page: the footer's. Pages should stop adding a second one.
+   variant  --gradient (default, secondary → primary) | --flat (primary)
+   Uses: .gos-kicker, .gos-btn, .gos-call, .gos-stars, .gos-badge inside.
+   ============================================================================= */
+
+.gos-cta {
+  padding-block: var(--section-y);
+  border-top: 3px solid var(--gold);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: #fff;
+}
+.gos-cta__in { display: grid; grid-template-columns: minmax(0, 1.2fr) auto; align-items: center; gap: var(--gap-md) var(--space-12); }
+.gos-cta__title { margin-top: var(--space-2); font-size: var(--text-h2); color: #fff; }
+.gos-cta__lede { max-width: 54ch; margin: var(--space-3) 0 0; font-size: var(--text-md); color: var(--on-dark-body); }
+.gos-cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-sm); }
+.gos-cta__trust {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--gap-md);
+  padding-top: var(--gap-md);
+  border-top: var(--border) solid var(--ft-line);
+}
+
+/* ---- variants ---- */
+.gos-cta--gradient { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+.gos-cta--flat { background: var(--primary); }
+
+@media (max-width: 64rem) { .gos-cta__in { grid-template-columns: 1fr; } }
+@media (max-width: 40rem) {
+  .gos-cta__actions { flex-direction: column; align-items: stretch; }
+  .gos-cta__actions > * { width: 100%; justify-content: center; }
+}
+@media print { .gos-cta { display: none; } }

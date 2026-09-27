@@ -1,0 +1,56 @@
+/* =============================================================================
+   B. Call pill  ✅  one implementation replacing .m-pill, .ft-call and .m-talk
+   variant  --on-dark (default look) | --on-light | --card (boxed, was .m-talk)
+   size     --sm | --md | --lg
+   Markup:
+   <a class="gos-call gos-call--on-dark gos-call--md" href="tel:…">
+     <span class="gos-call__icon"><svg…/></span>
+     <span><small class="gos-call__note">Speak to Dan</small><b class="gos-call__number">01234 567890</b></span>
+   </a>
+   ============================================================================= */
+
+.gos-call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  min-height: var(--control-sm);
+  padding: 0 var(--pill-x);
+  border: var(--border) solid var(--on-dark-border);
+  border-radius: var(--pill);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1.15;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gos-call__icon { display: flex; flex-shrink: 0; color: var(--gold); }
+.gos-call__note { display: block; font-size: var(--text-xs); font-weight: var(--weight-medium); color: var(--on-dark-muted); }
+.gos-call__number { display: block; font-family: var(--font-heading); font-weight: var(--weight-semibold); }
+
+/* ---- variants ---- */
+.gos-call--on-dark { border-color: var(--on-dark-border); color: #fff; }
+.gos-call--on-light { border-color: var(--line-control); color: var(--ink); }
+.gos-call--on-light .gos-call__note { color: var(--mute); }
+.gos-call--on-light .gos-call__icon { color: var(--primary); }
+.gos-call--card {
+  max-width: var(--measure-sm);
+  padding: var(--space-4);
+  gap: var(--gap-sm);
+  border-color: var(--on-dark-faint);
+  border-radius: var(--radius-lg);
+  background: var(--on-dark-glass);
+  white-space: normal;
+}
+.gos-call--card .gos-call__icon {
+  width: var(--disc); height: var(--disc);
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--ft-line);
+}
+
+/* ---- sizes ---- */
+.gos-call--sm { min-height: var(--control-sm); padding-inline: var(--pill-x); }
+.gos-call--md { min-height: var(--control-md); padding-inline: var(--space-5); }
+.gos-call--lg { min-height: var(--control-lg); padding-inline: var(--space-6); gap: var(--gap-sm); }
+.gos-call--lg .gos-call__number { font-size: var(--text-lg); letter-spacing: -.01em; }

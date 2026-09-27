@@ -1,0 +1,40 @@
+/* =============================================================================
+   T. Owner portrait & letter  🔁  replaces .m-portrait / .m-letter / .m-sig and
+   .owner / .owner__shot / .owner__body / .owner__role
+   .gos-portrait  photo with an optional caption scrim
+     variant  --caption (name overlay) | --plain
+   .gos-letter    the owner's letter; .gos-signature for the handwritten name
+   ============================================================================= */
+
+.gos-portrait {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r);
+  background: linear-gradient(160deg, var(--primary), var(--secondary));
+}
+.gos-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.gos-portrait__placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-xs);
+  font-size: var(--text-sm); color: var(--on-dark-faint);
+}
+.gos-portrait__caption { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; color: #fff; }
+.gos-portrait__caption b { display: block; font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-semibold); letter-spacing: -.015em; }
+.gos-portrait__caption span { font-size: var(--text-sm); color: var(--on-dark-muted); }
+
+/* ---- variants ---- */
+.gos-portrait--plain .gos-portrait__caption { display: none; }
+.gos-portrait--caption::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--scrim) 92%, transparent));
+}
+
+/* ---- letter ---- */
+.gos-letter { display: flex; flex-direction: column; gap: var(--gap-md); }
+.gos-letter p { margin: 0; max-width: var(--measure-md); font-size: var(--text-md); line-height: 1.65; color: var(--body); }
+.gos-letter p.is-lead { color: var(--body2); }
+
+.gos-signature { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-md); }
+.gos-signature__name { font-family: var(--fs); font-size: var(--text-signature); line-height: 1; color: var(--ink); }
+.gos-signature__sep { width: 1px; height: 34px; background: var(--line); }

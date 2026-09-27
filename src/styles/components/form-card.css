@@ -1,0 +1,36 @@
+/* =============================================================================
+   G. Form card  🔁  replaces .m-card (hero + booking form) and .qf (inner quote form)
+   variant  --floating (heavy shadow, over a photo or dark section) | --flat (border + soft shadow)
+   size     --sm (compact, was the undefined .qf--compact) | --md
+   Markup:
+   <form class="gos-form-card gos-form-card--floating gos-form-card--md">
+     <div class="gos-form-card__head">
+       <div><h2 class="gos-form-card__title">Get your fixed price</h2><p class="gos-form-card__lede">…</p></div>
+       <span class="gos-tag gos-tag--success">Free · no deposit</span>
+     </div>
+     …fields…
+   </form>
+   ============================================================================= */
+
+.gos-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: var(--card-pad);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+}
+.gos-form-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--gap-sm); }
+.gos-form-card__title { font-size: var(--text-lg); letter-spacing: -.02em; }
+.gos-form-card__lede { margin: var(--space-1) 0 0; font-size: var(--text-sm); color: var(--body); }
+@media (max-width: 40rem) { .gos-form-card__head { flex-wrap: wrap; } }
+
+/* ---- variants ---- */
+.gos-form-card--floating { box-shadow: var(--shadow-card); }
+.gos-form-card--flat { border: var(--border) solid var(--line); box-shadow: var(--shadow); }
+
+/* ---- sizes ---- */
+.gos-form-card--sm { gap: var(--gap-xs); }
+.gos-form-card--sm .gos-form-card__title { font-size: var(--text-md); }
+.gos-form-card--md { gap: var(--gap-sm); }

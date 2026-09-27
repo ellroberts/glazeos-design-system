@@ -1,0 +1,39 @@
+/* =============================================================================
+   X. Inner-page content patterns  📄  shared versions of the inner-only blocks
+   .gos-answer   direct answer to the page's question (was .answer)
+   .gos-proof    area page local proof, directly under the H1 (was .area-proof).
+                 SEO guardrail in the Master Template: never bury it.
+   .gos-crumb    breadcrumb (was .crumb)
+   .gos-prose    long-form copy (was .prose)
+   .gos-meta     small muted metadata line (was .reviewed / .post__meta / .meta)
+   ============================================================================= */
+
+/* ---- direct answer ---- */
+.gos-answer { max-width: 62ch; padding: var(--space-1) 0 var(--space-1) var(--card-pad); border-left: 3px solid var(--gold); }
+.gos-answer__q { margin: 0 0 var(--space-2); font-family: var(--font-heading); font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--ink); }
+.gos-answer__a { margin: 0; font-size: var(--text-md); line-height: 1.65; color: var(--ink); }
+
+/* ---- local proof ---- */
+.gos-proof { padding: var(--space-12) var(--card-pad); border-left: 6px solid var(--gold); background: var(--surface); }
+.gos-proof__text { max-width: 62ch; margin: var(--space-4) 0 0; font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+.gos-proof__meta { margin: var(--card-pad) 0 0; font-size: var(--text-sm); color: var(--mute); }
+
+/* ---- breadcrumb ---- */
+.gos-crumb { margin-bottom: var(--card-pad); font-size: var(--text-sm); color: var(--mute); }
+.gos-crumb ol { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
+.gos-crumb li + li::before { content: '/'; margin-right: var(--space-2); color: var(--line-control); }
+.gos-crumb a { color: var(--mute); }
+.gos-crumb [aria-current] { color: var(--ink); }
+
+/* ---- prose ---- */
+.gos-prose { max-width: 68ch; font-size: var(--text-md); line-height: 1.65; color: var(--body2); }
+.gos-prose > * { margin: 0; }
+.gos-prose > * + * { margin-top: var(--space-4); }
+.gos-prose h2 { margin-top: var(--space-12); font-size: var(--text-title); color: var(--ink); }
+.gos-prose h3 { margin-top: var(--space-8); font-size: var(--text-lg); color: var(--ink); }
+.gos-prose ul, .gos-prose ol { padding-left: 1.35rem; }
+.gos-prose li + li { margin-top: var(--space-2); }
+.gos-prose a { color: var(--primary); text-underline-offset: 3px; }
+
+/* ---- metadata line ---- */
+.gos-meta { font-size: var(--text-sm); color: var(--mute); }
