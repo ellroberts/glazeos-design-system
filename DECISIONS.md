@@ -164,3 +164,4 @@ No value was invented. Every pick below is one of the values in the audit's tabl
     - `--ghost` (outline on dark) → white `--paper`, text `--ink`
     - `--light` (white on dark) → `--brand-tint`, text `--ink`
   - New tokens: `--ease-wipe`, `--btn-scale-hover`, `--btn-scale-press`. No existing colour token was added or changed.
+  - Follow-up fix (branch `design/button-wipe-fix`): the label colour no longer fades over the whole 0.75s wipe. It flips in 0.06s at the moment the wipe crosses the middle of the label (starts at 0.17s on hover, 0.27s on leaving; tokens `--btn-ink-delay`, `--btn-ink-delay-out`, `--btn-ink-duration`, timings measured from paused frames in Storybook). On hover the border now takes the wipe colour, so no 1px rim of the resting colour shows. The one exception is primary, which keeps a gold rim (`--btn-wipe-border`), because a white pill on a white page otherwise disappears.
