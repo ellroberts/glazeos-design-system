@@ -181,4 +181,7 @@
   /* ===== MOTION ===== */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --lift: translateY(-1px);
+  --ease-wipe: cubic-bezier(0.4, 0.15, 0, 1);   /* button hover wipe (clip-path + label colour) */
+  --btn-scale-hover: 1.02 1.05;                 /* `scale` x y on button hover / focus */
+  --btn-scale-press: 0.955 0.925;               /* `scale` x y on button :active */
 }

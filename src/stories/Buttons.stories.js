@@ -33,3 +33,17 @@ export const AllSizes = {
 export const Block = {
   render: () => `<div style="max-width:420px">${btn({ variant: 'primary', size: 'lg', block: true })}</div>`,
 };
+
+/** Hover or Tab onto each button to see the diagonal wipe. Each variant wipes to its own colour. */
+export const HoverWipe = {
+  render: () => `
+    <p style="max-width:560px;margin:0 0 24px;font-size:14px;color:var(--body)">
+      Hover or Tab onto a button. On a mouse/trackpad with motion allowed, a diagonal wipe fills it and it grows slightly; pressing shrinks it.
+      On touch screens or with reduced motion there's no wipe or scaling: the fill just changes colour.
+      Wipe colours: primary → white, secondary → gold, tertiary → client primary, ghost → white, light → brand tint.
+    </p>
+    ${row('--primary → white', btn({ variant: 'primary', icon: true }))}
+    ${row('--secondary → gold', btn({ variant: 'secondary', label: 'Call Dan on 01234 567890', icon: true }))}
+    ${row('--tertiary → primary', btn({ variant: 'tertiary', label: 'Read the reviews', icon: true }))}
+    ${dark(row('--ghost → white', btn({ variant: 'ghost', label: 'See recent jobs', icon: true })) + row('--light → brand tint', btn({ variant: 'light', label: 'White on dark', icon: true })), '24px')}`,
+};

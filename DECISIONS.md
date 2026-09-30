@@ -155,3 +155,12 @@ No value was invented. Every pick below is one of the values in the audit's tabl
 - **Families with no size modifiers.** Tags have a single size because their ⚠ groups merged to one value. (Icon disc has `--md` / `--lg`; see the icon-disc entry above.) Adding `--sm` / `--lg` there would need invented values.
 - **Letter-spacing and line-height** weren't audited, so each component keeps the literal value from the rule it replaces.
 - **Heading line-height.** `1.04` (home) was chosen over `1.1` (inner) as the base heading line-height, following the home master.
+- **Button hover: diagonal wipe** (branch `design/button-wipe`, 30 Sep 2026). The look was adapted from a GoHighLevel test site and rebuilt from scratch in plain CSS; none of that site's code was copied. The pill shape, sizes, variants and `--block` are unchanged. The label stays one element (it's not duplicated for the animation), so screen readers and search engines see the text once.
+  - How it works: a `::before` fill behind the label, revealed with `clip-path` from a thin diagonal line in the centre. The label colour switches with it, and the button scales slightly (`scale`, not `transform`; the old 1px `--lift` hover is removed). It only runs on devices that support hover, with a fine pointer and motion allowed. Everywhere else the hover/focus is a plain background-colour change. `:focus-visible` gets the same fill plus the existing gold `--focus-ring`.
+  - Wipe colours (`--btn-wipe-bg` / `--btn-wipe-ink` on each variant):
+    - `--primary` (gold) → white `--paper`, text `--ink`
+    - `--secondary` (client primary) → `--gold`, text `--gold-ink`
+    - `--tertiary` (outline on light) → `--primary`, text white
+    - `--ghost` (outline on dark) → white `--paper`, text `--ink`
+    - `--light` (white on dark) → `--brand-tint`, text `--ink`
+  - New tokens: `--ease-wipe`, `--btn-scale-hover`, `--btn-scale-press`. No existing colour token was added or changed.

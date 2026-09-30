@@ -8,6 +8,9 @@
    ============================================================================= */
 
 .gos-btn {
+  position: relative;
+  isolation: isolate;   /* the wipe's z-index:-1 stays inside the button, behind label + icon */
+  overflow: hidden;     /* the wipe never leaves the pill */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -23,31 +26,60 @@
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: transform .25s var(--ease-out), background-color .25s, border-color .25s;
+  transition: background-color .25s, border-color .25s, color .25s;
 }
-.gos-btn:hover { transform: var(--lift); }
 .gos-btn svg { flex-shrink: 0; }
+.gos-btn:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); border-radius: var(--pill); }
 
-/* ---- variants ---- */
+/* ---- variants ----
+   Each variant sets its hover/focus fill (--btn-wipe-bg) and label colour (--btn-wipe-ink);
+   the base rules below read them, so they stay generic. */
 /* primary: the main call to action (was .m-btn--gold / .btn--accent / .ft-btn) */
-.gos-btn--primary { background: var(--gold); color: var(--gold-ink); }
-.gos-btn--primary:hover { color: var(--gold-ink); }
+.gos-btn--primary { background: var(--gold); color: var(--gold-ink); --btn-wipe-bg: var(--paper); --btn-wipe-ink: var(--ink); }
 
 /* secondary: filled in the client's primary colour (was .m-btn--ink / .btn--primary) */
-.gos-btn--secondary { background: var(--primary); color: #fff; }
-.gos-btn--secondary:hover { color: #fff; }
+.gos-btn--secondary { background: var(--primary); color: #fff; --btn-wipe-bg: var(--gold); --btn-wipe-ink: var(--gold-ink); }
 
 /* tertiary: outline on a light background (was .m-btn--line / .btn--ghost on light) */
-.gos-btn--tertiary { background: transparent; border-color: var(--line-control); color: var(--primary); }
-.gos-btn--tertiary:hover { border-color: var(--primary); color: var(--primary); }
+.gos-btn--tertiary { background: transparent; border-color: var(--line-control); color: var(--primary); --btn-wipe-bg: var(--primary); --btn-wipe-ink: #fff; }
+.gos-btn--tertiary:is(:hover, :focus-visible) { border-color: var(--primary); }
 
 /* ghost: outline on a dark background (was .m-btn--ghost / .btn--ghost.cta__ghost) */
-.gos-btn--ghost { background: transparent; border-color: var(--on-dark-border); color: #fff; }
-.gos-btn--ghost:hover { border-color: #fff; color: #fff; }
+.gos-btn--ghost { background: transparent; border-color: var(--on-dark-border); color: #fff; --btn-wipe-bg: var(--paper); --btn-wipe-ink: var(--ink); }
+.gos-btn--ghost:is(:hover, :focus-visible) { border-color: #fff; }
 
 /* light: white filled, for dark backgrounds (was .btn--light; new on the home page) */
-.gos-btn--light { background: var(--paper); color: var(--ink); }
-.gos-btn--light:hover { background: var(--brand-tint); color: var(--ink); }
+.gos-btn--light { background: var(--paper); color: var(--ink); --btn-wipe-bg: var(--brand-tint); --btn-wipe-ink: var(--ink); }
+
+/* ---- hover / focus ---- */
+/* Diagonal wipe: only where hover is real and motion is welcome. The label is one
+   element and is never duplicated; only its colour changes. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gos-btn {
+    transition:
+      color .75s var(--ease-wipe) .05s,
+      border-color .75s var(--ease-wipe) .05s,
+      scale .45s var(--ease-out);
+  }
+  .gos-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-wipe-bg);
+    clip-path: polygon(calc(50% + 1em) 0%, calc(50% + 1em) 0%, calc(50% - 1em) 100%, calc(50% - 1em) 100%);
+    transition: clip-path .75s var(--ease-wipe) .05s;
+  }
+  .gos-btn:is(:hover, :focus-visible) { color: var(--btn-wipe-ink); scale: var(--btn-scale-hover); }
+  .gos-btn:is(:hover, :focus-visible)::before { clip-path: polygon(-25% 0%, 125% 0%, 125% 100%, -25% 100%); }
+  .gos-btn:active { scale: var(--btn-scale-press); transition-duration: .75s, .75s, .15s; }
+}
+
+/* Everywhere else (touch, coarse pointers, reduced motion): a plain colour change. */
+@media not all and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gos-btn:is(:hover, :focus-visible) { background-color: var(--btn-wipe-bg); color: var(--btn-wipe-ink); }
+}
 
 /* ---- sizes ---- */
 .gos-btn--sm { min-height: var(--control-sm); padding: 0 var(--space-5); font-size: var(--text-sm); }
