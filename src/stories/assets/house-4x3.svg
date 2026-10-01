@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <!-- Storybook placeholder "photo": a house front, 4:3, so the 3:2 slot visibly crops it. -->
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9cc3e4"/><stop offset="1" stop-color="#dce9f3"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#sky)"/>
+  <circle cx="1010" cy="170" r="80" fill="#f7d77a"/>
+  <rect y="720" width="1200" height="180" fill="#7fa36a"/>
+  <polygon points="220,360 600,130 980,360" fill="#8a4b3c"/>
+  <rect x="260" y="360" width="680" height="380" fill="#e8dccb"/>
+  <rect x="320" y="420" width="170" height="130" fill="#3e5d78" stroke="#fff" stroke-width="12"/>
+  <rect x="710" y="420" width="170" height="130" fill="#3e5d78" stroke="#fff" stroke-width="12"/>
+  <rect x="540" y="500" width="120" height="240" fill="#2f4a3a"/>
+  <circle cx="640" cy="620" r="9" fill="#d9b25a"/>
+  <rect x="8" y="8" width="1184" height="884" fill="none" stroke="#c0392b" stroke-width="16" stroke-dasharray="40 20"/>
+</svg>

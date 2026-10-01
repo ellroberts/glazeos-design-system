@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.1.0 — components — built 2026-09-30 */
+/*! glazeos-design-system v0.1.0 — components — built 2026-10-01 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -413,7 +413,8 @@ select.gos-field__input { appearance: auto; }
                .m-notlist, .empty
      variant  --default | --surface | --dark | --link
      size     --sm | --md | --lg (padding)
-   .gos-tile   image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
+     media    optional .gos-card__media, shape --fixed | --natural
+   .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
    .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
    ============================================================================= */
 
@@ -445,6 +446,27 @@ select.gos-field__input { appearance: auto; }
 .gos-card--sm { padding: var(--gap-sm); }
 .gos-card--md { padding: var(--card-pad); }
 .gos-card--lg { padding: var(--head-offset); }
+
+/* ---- media (optional photo slot, first child, inset within the card padding) ----
+     shape  --fixed (default 3:2, the child fills and crops; set --card-media-ratio to change)
+          | --natural (the image keeps its own proportions, never cropped)
+   Takes any child: an <img> or the site's own "photo goes here" frame. */
+.gos-card__media {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  /* card gap (--gap-xs) + this margin = one --gap-sm between the media and the title */
+  margin-bottom: calc(var(--gap-sm) - var(--gap-xs));
+}
+.gos-card__media--fixed {
+  aspect-ratio: var(--card-media-ratio, 3 / 2);
+  background: linear-gradient(165deg, var(--ground), var(--placeholder));
+}
+.gos-card__media--fixed > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gos-card__media--fixed > img { object-fit: cover; }
+.gos-card__media--natural > * { display: block; width: 100%; }
+.gos-card__media--natural > img { height: auto; }
 
 /* =============== tile =============== */
 .gos-tile {
