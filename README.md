@@ -45,6 +45,29 @@ Anything genuinely fixed (neutral greys, the spacing scale, radii, shadow geomet
 <a class="gos-btn gos-btn--tertiary gos-btn--sm" href="/reviews/">Read the reviews</a>
 ```
 
+### Card with a photo
+
+`gos-card` takes an optional photo slot, `gos-card__media`, as its first child. It sits inside the card padding with rounded corners, one `--gap-sm` above the title. Pick its shape with a modifier on the slot (separate from the card's variant and size):
+
+```html
+<!-- Fixed 3:2: the photo fills and crops, so the card never jumps when a photo loads or is missing -->
+<a class="gos-card gos-card--link gos-card--md" href="/areas/leeds/">
+  <div class="gos-card__media gos-card__media--fixed"><img src="leeds.jpg" alt="" width="1200" height="800"></div>
+  <h3 class="gos-card__title">Leeds</h3>
+</a>
+
+<!-- Natural: the photo keeps its own shape (tall door photos), nothing cropped -->
+<div class="gos-card gos-card--default gos-card--md">
+  <div class="gos-card__media gos-card__media--natural"><img src="door.jpg" alt="" width="600" height="1000"></div>
+  <h3 class="gos-card__title">Composite doors</h3>
+</div>
+```
+
+- An empty `--fixed` slot shows a neutral placeholder at full size, and fills with any child (e.g. the site's "photo goes here" frame).
+- Change the fixed shape per card with `style="--card-media-ratio: 4 / 3"`.
+- In a grid, add `align-items: start` so each card hugs its own content.
+- Why it's built this way: see the "Card media slot" entry in [DECISIONS.md](DECISIONS.md).
+
 ## Using it in the Master Template
 
 Install it from GitHub:
@@ -94,7 +117,7 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | E | Chips + choice chips | `chips.css` | 🔁 |
 | F | Form fields | `fields.css` | 🔁 |
 | G | Form card | `form-card.css` | 🔁 |
-| H | Cards, tiles, job cards | `cards.css` | 🔁 |
+| H | Cards, tiles, job cards | `cards.css` | 🔁 (+ optional photo slot, `gos-card__media`) |
 | I | Glass cards (dark sections) | `glass.css` | 🏠 |
 | J | Stat displays + rating | `stats.css` | 🔁 |
 | K | Accreditation badges | `badges.css` | 🔁 |

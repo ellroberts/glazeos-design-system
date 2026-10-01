@@ -1,4 +1,8 @@
 import { I, stars } from './_helpers.js';
+// Local stand-in photos (Storybook only, not shipped). Each has a dashed red edge and a circle, so cropping or stretching shows.
+import house from './assets/house-4x3.svg';
+import doorTall from './assets/door-tall.svg';
+import windowWide from './assets/window-wide.svg';
 
 const card = ({ variant = 'default', size = 'md' }) => {
   const el = variant === 'link' ? 'a href="#"' : 'div';
@@ -34,5 +38,67 @@ export const JobCards = {
     <article class="gos-job gos-job--feature"><div class="gos-job__photo">${I.camera}<span class="gos-tag gos-tag--light"><i class="gos-tag__dot"></i>Leeds</span></div>
       <div class="gos-job__text"><div style="display:flex;justify-content:space-between;width:100%"><span class="gos-job__meta">Whole house · March 2026</span>${stars()}</div><blockquote class="gos-job__quote">“Fitted in two days, tidied up after, and the price didn't move.”</blockquote><div class="gos-job__by"><span class="gos-disc gos-disc--glass">SK</span><span><b>Sarah K.</b> · Verified Google review</span></div></div></article>
     <article class="gos-job gos-job--side"><div class="gos-job__photo">${I.camera}</div><div class="gos-job__text"><span class="gos-job__meta">Composite door</span>${stars('sm')}<blockquote class="gos-job__quote">“Looks brilliant.”</blockquote><div class="gos-job__by"><span class="gos-disc gos-disc--surface">MR</span><span><b>Mark R.</b></span></div></div></article>
+  </div>`,
+};
+
+/* ---- media: optional photo slot at the top of a card ---- */
+const PHOTO = {
+  house: `<img src="${house}" alt="A finished house front" width="1200" height="900">`,
+  door: `<img src="${doorTall}" alt="A new composite front door" width="600" height="1000">`,
+  wide: `<img src="${windowWide}" alt="A new bay window" width="1200" height="500">`,
+};
+/** Same text as the card above, with a media slot first. shape: fixed | natural; photo: '' for an empty slot. */
+const mediaCard = ({ variant = 'default', size = 'md', shape = 'fixed', photo = 'house', body = 'We measure every opening and talk you through the options. No hard sell.', width = '320px' } = {}) => {
+  const el = variant === 'link' ? 'a href="#"' : 'div';
+  return `<${el} class="gos-card gos-card--${variant} gos-card--${size}"${width ? ` style="max-width:${width}"` : ''}><div class="gos-card__media gos-card__media--${shape}">${PHOTO[photo] ?? photo}</div><span class="gos-card__meta">Leeds</span><h3 class="gos-card__title">Whole house in Leeds</h3><p class="gos-card__body">${body}</p></${el.split(' ')[0]}>`;
+};
+const label = (text, inner) => `<div style="display:flex;flex-direction:column;gap:8px"><code style="font-size:12px;color:var(--mute)">${text}</code>${inner}</div>`;
+const wrapRow = (...parts) => `<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">${parts.join('')}</div>`;
+
+/** Fixed shape (3:2): the photo fills the slot and is cropped to it, so the card's size never depends on the photo. */
+export const MediaFixed = {
+  render: () => mediaCard({ shape: 'fixed', photo: 'house' }),
+};
+
+/** Fixed shape with no photo yet: the slot keeps its 3:2 size and shows the neutral placeholder. Any child fills it, e.g. the site's own "photo goes here" frame. */
+export const MediaEmpty = {
+  render: () => wrapRow(
+    label('empty slot', mediaCard({ photo: '' })),
+    label('any child fills the slot', mediaCard({ photo: `<div style="display:flex;align-items:center;justify-content:center;color:var(--mute)">${I.camera}</div>` })),
+  ),
+};
+
+/** Natural shape: a tall door photo at full width, its own proportions, nothing cropped. */
+export const MediaNaturalTall = {
+  render: () => mediaCard({ shape: 'natural', photo: 'door' }),
+};
+
+/** Natural shape: a wide photo at full width, its own proportions, nothing cropped. */
+export const MediaNaturalWide = {
+  render: () => mediaCard({ shape: 'natural', photo: 'wide' }),
+};
+
+/** Link variant with media: the whole card lifts on hover, photo included. */
+export const MediaLink = {
+  render: () => wrapRow(
+    label('link + fixed', mediaCard({ variant: 'link', shape: 'fixed', photo: 'house' })),
+    label('link + natural', mediaCard({ variant: 'link', shape: 'natural', photo: 'door' })),
+  ),
+};
+
+/** Every variant and size with a fixed-shape photo. */
+export const MediaVariantsAndSizes = {
+  render: () => `<div style="display:flex;flex-direction:column;gap:24px">
+    ${wrapRow(...['default', 'surface', 'dark', 'link'].map((v) => label(`--${v}`, mediaCard({ variant: v, width: '260px' }))))}
+    ${wrapRow(...['sm', 'md', 'lg'].map((s) => label(`--${s}`, mediaCard({ size: s, width: '260px' }))))}
+  </div>`,
+};
+
+/** A row of three in a grid with align-items:start: each card hugs its own content instead of stretching to the tallest. */
+export const MediaRowHugging = {
+  render: () => `<div class="gos-grid gos-grid--3" style="align-items:start">
+    ${mediaCard({ shape: 'fixed', photo: 'house', width: '', body: 'Short one.' })}
+    ${mediaCard({ shape: 'fixed', photo: '', width: '', body: 'No photo yet, so the slot shows the placeholder at the same size. This card has a longer description, so it runs to a few more lines than the others.' })}
+    ${mediaCard({ shape: 'natural', photo: 'door', width: '', body: 'A tall door photo, not cropped.' })}
   </div>`,
 };
