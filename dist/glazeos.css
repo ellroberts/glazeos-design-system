@@ -1210,7 +1210,7 @@ select.gos-field__input {
 /* =============================================================================
    R. Icon disc  🔁  replaces .m-step .n, .m-blist .n, .m-gcov .ico, .m-gcard .ico,
    .m-talk .ico, .m-tile .go, .m-jc .av and the FAQ +/− disc.
-   variant  --gold | --gold-outline | --glass | --surface | --light | --primary
+   variant  --gold | --gold-outline | --glass | --surface | --light | --primary | --neutral
    size     --md (32px, default: every small-icon job, merged from 28-42px)
             | --lg (52px: the big tile's arrow, was .m-tile--big .go)
    Markup: <span class="gos-disc gos-disc--gold gos-disc--md">1</span>  or an <svg> inside.
@@ -1239,6 +1239,8 @@ select.gos-field__input {
 .gos-disc--surface { background: var(--surface); color: var(--primary); }
 .gos-disc--light { background: var(--on-dark-strong); color: var(--ink); }
 .gos-disc--primary { background: var(--primary); color: #fff; }
+/* --neutral: a light grey disc with ink text, the same for every client (not tied to --surface or a brand colour). */
+.gos-disc--neutral { background: color-mix(in srgb, var(--ink) 7%, var(--paper)); color: var(--ink); }
 
 /* ---- sizes ---- */
 .gos-disc--md { width: var(--disc); height: var(--disc); }
