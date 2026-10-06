@@ -671,6 +671,7 @@ select.gos-field__input {
      action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
      body     --lead (larger, ink: a card's main statement) | --foot (a closing line, pinned to the bottom)
      media    fit --icon: a large Lucide icon on the brand gradient instead of a photo
+     badge    optional .gos-card__badge (a .gos-disc) inside the media, sitting in its bottom-right corner
      layout   --side: media beside the text (wrap the text in .gos-card__main); stacks, media on top, on phones
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
               arrow: a .gos-disc--light (--lg on the big tile) as the last thing in __in; on hover (mouse only)
@@ -742,6 +743,10 @@ select.gos-field__input {
    brand gradient. Swap the icon for an <img> (and drop --icon) when there's a real photo. */
 .gos-card__media--icon { display: flex; align-items: center; justify-content: center; border-color: transparent; background: linear-gradient(160deg, var(--primary), var(--secondary)); color: var(--gold); }
 .gos-card__media--icon > svg { position: static; width: clamp(48px, 30%, 88px); height: auto; aspect-ratio: 1; stroke-width: 1.5; }
+
+/* badge: a small disc (e.g. gos-disc--light holding an icon) pinned to the media's bottom-right corner, over the photo.
+   Two classes, so it beats the media shapes' "every child fills the slot" rules. */
+.gos-card__media > .gos-card__badge { position: absolute; inset: auto var(--inset) var(--inset) auto; z-index: 1; display: inline-flex; width: var(--disc); height: var(--disc); }
 
 /* layout --side: the media beside the text (right), for wide cards such as a carousel. The text goes in .gos-card__main
    so the media can take the full height of the card. On phones it stacks, media on top, like any card. */
