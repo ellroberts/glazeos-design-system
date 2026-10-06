@@ -22,6 +22,9 @@
     linear-gradient(var(--gold-line), var(--gold-line)) no-repeat left bottom / 100% 1px;
 }
 
+/* The line is the hover signal, so the text keeps its colour (beats a site-wide `a:hover` colour). */
+.gos-link:hover, .gos-link:focus-visible { color: inherit; }
+
 /* Keyboard focus always shows the full line. */
 .gos-link:focus-visible { background-size: 100% 2px; }
 .gos-link--track:focus-visible { background-size: 100% 2px, 100% 1px; }
