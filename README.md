@@ -106,6 +106,21 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 ```
 - Why: see the "Card action and logo fit" entry in [DECISIONS.md](DECISIONS.md).
 
+### Icons
+
+Every icon is from [Lucide](https://lucide.dev), and only the approved ones ship. `glazeos-design-system/icons` exports `icon(name, { size, label })`, which returns an inline `<svg>` string drawn in the text colour. It runs when the site builds the page, so nothing extra loads in the browser.
+
+```js
+import { icon } from 'glazeos-design-system/icons';
+icon('chevron-down', { size: 'md' }); // <svg class="gos-icon gos-icon--md" …>
+```
+
+- Sizes: `sm` 12px, `md` 14px (default), `lg` 20px. The line weight steps down as the size grows (2.5 / 2 / 1.75), so small icons don't look faint.
+- Decorative by default (`aria-hidden`). Pass `label` for an icon that means something on its own.
+- To add an icon: put its Lucide name in `src/icons/icons.json`, run `npm run build`, commit `dist/icons.mjs`. An unknown name throws, so a typo fails the site's build.
+- The Lucide version is pinned (`lucide-static` in devDependencies). Its ISC licence (and the MIT notice for the icons Lucide took from Feather) is reproduced at the top of `dist/icons.mjs`.
+- See them all in Storybook: Foundations → Icons.
+
 ## Using it in the Master Template
 
 Install it from GitHub:
@@ -175,3 +190,4 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | Y | Header & nav | `nav.css` | ✅ |
 | Z | Footer | `footer.css` | ✅ |
 | AA | Text links | `links.css` | 🔁 |
+| AB | Icons (Lucide) | `icons.css` + `dist/icons.mjs` | 🔁 |
