@@ -1357,7 +1357,9 @@ select.gos-field__input { appearance: auto; }
      variant  --track (a faint gold line at rest; the solid line sweeps across it on hover. Was the hero "Liam" link)
             | --draw  (no line at rest; the solid line draws in from the left and leaves to the right. Was the footer
                        column links)
-   Text colour is inherited, so it reads on light and dark backgrounds. The line follows the words across a wrap.
+     colour   inherited by default | --gold (gold text, for dark backgrounds: with --track it is the hero "Liam" link
+              exactly; with --draw the text is gold and the line only appears on hover)
+   The line follows the words across a wrap.
    ============================================================================= */
 
 .gos-link {
@@ -1376,6 +1378,9 @@ select.gos-field__input { appearance: auto; }
 
 /* The line is the hover signal, so the text keeps its colour (beats a site-wide `a:hover` colour). */
 .gos-link:hover, .gos-link:focus-visible { color: inherit; }
+
+/* --gold: gold text, kept on hover and focus. Dark backgrounds only: gold text on white is too low-contrast to read. */
+.gos-link--gold, .gos-link--gold:hover, .gos-link--gold:focus-visible { color: var(--gold); }
 
 /* Keyboard focus always shows the full line. */
 .gos-link:focus-visible { background-size: 100% 2px; }

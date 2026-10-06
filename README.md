@@ -92,6 +92,7 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 
 - `gos-link--track`: a faint gold line at rest; the solid line sweeps across it on hover. Use it where the link must read as a link before anyone hovers it (card actions, links in a sentence).
 - `gos-link--draw`: no line at rest; the solid line draws in from the left and leaves to the right. Use it in lists of links that are already obviously links (footer columns).
+- `gos-link--gold`: gold text instead of the inherited colour, kept on hover. Add it to either effect, on dark backgrounds only (gold text on white is too low-contrast). `gos-link--track gos-link--gold` is the hero "Liam" link; `gos-link--draw gos-link--gold` keeps the line hidden until hover.
 - Keyboard focus always shows the full line. Hover is mouse-only, and with reduced motion on the line appears without the draw.
 
 ```html

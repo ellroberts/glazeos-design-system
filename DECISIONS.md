@@ -190,4 +190,5 @@ No value was invented. Every pick below is one of the values in the audit's tabl
     - `box-decoration-break: clone`, so the line follows the words across a wrap. This replaces the footer's extra `<span>` inside each link.
     - The original links only had a hover state with motion allowed. Here, hover shows the line for any mouse user; the draw itself is the part gated on `prefers-reduced-motion: no-preference`. With reduced motion on, the line appears instantly rather than not at all.
     - Text colour is inherited (`color: inherit`), so the same class works on white cards, the dark hero and the footer.
+    - **`--gold`** (colour modifier, combines with either effect): gold text for dark backgrounds, the hero "Liam" link's own colour, kept on hover and focus. A modifier rather than a third effect, so gold works with both underlines. Not for light backgrounds: `--gold` text on white fails contrast.
     - The text colour also stays put on hover and focus (`.gos-link:hover { color: inherit }`): the line is the hover signal, and a site's own `a:hover` colour (the Master Template has one) would otherwise recolour it.
