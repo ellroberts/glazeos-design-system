@@ -3,6 +3,7 @@ import { I, stars } from './_helpers.js';
 import house from './assets/house-4x3.svg';
 import doorTall from './assets/door-tall.svg';
 import windowWide from './assets/window-wide.svg';
+import logoWide from './assets/logo-wide.svg';
 
 const card = ({ variant = 'default', size = 'md' }) => {
   const el = variant === 'link' ? 'a href="#"' : 'div';
@@ -100,5 +101,47 @@ export const MediaRowHugging = {
     ${mediaCard({ shape: 'fixed', photo: 'house', width: '', body: 'Short one.' })}
     ${mediaCard({ shape: 'fixed', photo: '', width: '', body: 'No photo yet, so the slot shows the placeholder at the same size. This card has a longer description, so it runs to a few more lines than the others.' })}
     ${mediaCard({ shape: 'natural', photo: 'door', width: '', body: 'A tall door photo, not cropped.' })}
+  </div>`,
+};
+
+/* ---- action link + logo fit: the full card, in the order the sites write it ---- */
+const LOGO = `<img src="${logoWide}" alt="Example Trade Body" width="900" height="300">`;
+/** media: 'photo' | 'logo' | 'none'; action: true adds the bottom link. */
+const fullCard = ({ media = 'photo', action = true, body = 'Every installer on the register is checked each year.', width = '300px' } = {}) => {
+  const slot = {
+    photo: `<div class="gos-card__media gos-card__media--fixed">${PHOTO.house}</div>`,
+    logo: `<div class="gos-card__media gos-card__media--fixed gos-card__media--contain">${LOGO}</div>`,
+    none: '',
+  }[media];
+  return `<article class="gos-card gos-card--default gos-card--md"${width ? ` style="max-width:${width}"` : ''}>${slot}<h2 class="gos-card__title"><a href="#">Example Trade Body</a></h2><p class="gos-card__body">${body}</p><p class="gos-card__meta">Member since 2014</p>${action ? '<p class="gos-card__action"><a href="#">Verify on their register</a></p>' : ''}</article>`;
+};
+
+/** Photo, logo and no image, each with and without the bottom link. Move the mouse over an image slot: its border changes colour (mouse only; no fade with reduced motion on). */
+export const ActionAndLogo = {
+  render: () => `<div style="display:flex;flex-direction:column;gap:24px">
+    ${wrapRow(...['photo', 'logo', 'none'].map((m) => label(`${m} + action`, fullCard({ media: m }))))}
+    ${wrapRow(...['photo', 'logo', 'none'].map((m) => label(`${m}, no action`, fullCard({ media: m, action: false }))))}
+  </div>`,
+};
+
+/** Photo card with the bottom link. */
+export const PhotoWithAction = { render: () => fullCard({ media: 'photo' }) };
+/** Photo card without the link. */
+export const PhotoNoAction = { render: () => fullCard({ media: 'photo', action: false }) };
+/** Logo card (gos-card__media--contain): the whole logo on white, padded, never cropped. With the link. */
+export const LogoWithAction = { render: () => fullCard({ media: 'logo' }) };
+/** Logo card without the link. */
+export const LogoNoAction = { render: () => fullCard({ media: 'logo', action: false }) };
+/** No image, with the link. */
+export const NoImageWithAction = { render: () => fullCard({ media: 'none' }) };
+/** No image, no link. */
+export const NoImageNoAction = { render: () => fullCard({ media: 'none', action: false }) };
+
+/** A row of logo cards in a grid (default stretch, not align-items:start): the bodies differ in length, the links still line up along the bottom. */
+export const ActionRowAligned = {
+  render: () => `<div class="gos-grid gos-grid--3">
+    ${fullCard({ media: 'logo', width: '', body: 'Short one.' })}
+    ${fullCard({ media: 'logo', width: '', body: 'A longer description that runs over several lines, so this card has more text than its neighbours and would push its link lower if it were not pinned to the bottom.' })}
+    ${fullCard({ media: 'logo', width: '', body: 'Medium length, about two lines of text here.' })}
   </div>`,
 };

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+  <!-- Storybook placeholder "logo": wide, 3:1, transparent background. The dashed edge shows nothing is cropped. -->
+  <circle cx="150" cy="150" r="90" fill="#1f4e8c"/>
+  <path d="M105 150l30 30 60-60" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="280" y="95" width="540" height="50" rx="8" fill="#1f4e8c"/>
+  <rect x="280" y="170" width="380" height="34" rx="8" fill="#8aa4c4"/>
+  <rect x="8" y="8" width="884" height="284" fill="none" stroke="#c0392b" stroke-width="16" stroke-dasharray="40 20"/>
+</svg>
