@@ -694,8 +694,10 @@ select.gos-field__input {
 .gos-card__body { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--body); }
 /* Last child: margin-top:auto pushes it to the bottom, so in a row of stretched cards every action lines up. */
 .gos-card__body--lead { font-size: var(--text-md); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--ink); }
-.gos-card__body--foot { margin-top: auto; padding-top: var(--gap-sm); border-top: var(--border) solid var(--line); }
-.gos-card__action { margin: auto 0 0; padding-top: var(--gap-xs); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+/* .gos-card + the element (two classes) for the pinned-to-bottom margins, so a site's paragraph reset (e.g. .m p{margin:0})
+   can't undo them. */
+.gos-card .gos-card__body--foot { margin-top: auto; padding-top: var(--gap-sm); border-top: var(--border) solid var(--line); }
+.gos-card .gos-card__action { margin: auto 0 0; padding-top: var(--gap-xs); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
 
 /* ---- variants ---- */
 .gos-card--default { background: var(--paper); }
