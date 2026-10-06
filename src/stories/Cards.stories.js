@@ -113,10 +113,10 @@ const fullCard = ({ media = 'photo', action = true, body = 'Every installer on t
     logo: `<div class="gos-card__media gos-card__media--fixed gos-card__media--contain">${LOGO}</div>`,
     none: '',
   }[media];
-  return `<article class="gos-card gos-card--default gos-card--md"${width ? ` style="max-width:${width}"` : ''}>${slot}<h2 class="gos-card__title"><a href="#">Example Trade Body</a></h2><p class="gos-card__body">${body}</p><p class="gos-card__meta">Member since 2014</p>${action ? '<p class="gos-card__action"><a href="#">Verify on their register</a></p>' : ''}</article>`;
+  return `<article class="gos-card gos-card--default gos-card--md gos-card--hover"${width ? ` style="max-width:${width}"` : ''}>${slot}<h2 class="gos-card__title">Example Trade Body</h2><p class="gos-card__body">${body}</p><p class="gos-card__meta">Member since 2014</p>${action ? '<p class="gos-card__action"><a class="gos-link gos-link--track" href="#">Verify on their register</a></p>' : ''}</article>`;
 };
 
-/** Photo, logo and no image, each with and without the bottom link. Move the mouse over an image slot: its border changes colour (mouse only; no fade with reduced motion on). */
+/** Photo, logo and no image, each with and without the bottom link. Move the mouse over a card: its border changes colour (gos-card--hover, mouse only). Over the link: the gold underline sweeps across (gos-link--track). */
 export const ActionAndLogo = {
   render: () => `<div style="display:flex;flex-direction:column;gap:24px">
     ${wrapRow(...['photo', 'logo', 'none'].map((m) => label(`${m} + action`, fullCard({ media: m }))))}

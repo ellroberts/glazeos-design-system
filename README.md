@@ -66,24 +66,37 @@ Anything genuinely fixed (neutral greys, the spacing scale, radii, shadow geomet
 - An empty `--fixed` slot shows a neutral placeholder at full size, and fills with any child (e.g. the site's "photo goes here" frame).
 - Change the fixed shape per card with `style="--card-media-ratio: 4 / 3"`.
 - In a grid, add `align-items: start` so each card hugs its own content.
-- The slot has a 1px border that turns `--primary` under a real mouse (no colour change on touch, no fade with reduced motion on).
+- The slot has a fixed 1px `--line` border. It doesn't change on hover; for a hover effect, add `gos-card--hover` to the card (below).
 - Why it's built this way: see the "Card media slot" entry in [DECISIONS.md](DECISIONS.md).
 
 ### Logo cards and a bottom link
 
-Add `gos-card__media--contain` to the slot for logos: the whole image sits on white with padding and is never cropped. Add `gos-card__action` as the card's last child for a link that sits at the bottom of the card:
+Add `gos-card__media--contain` to the slot for logos: the whole image sits on white with padding and is never cropped. Add `gos-card__action` as the card's last child for a link that sits at the bottom of the card, and make that link a `gos-link` (below). Add `gos-card--hover` so the card's border changes colour when the mouse is anywhere over it:
 
 ```html
-<article class="gos-card gos-card--default gos-card--md">
+<article class="gos-card gos-card--default gos-card--md gos-card--hover">
   <div class="gos-card__media gos-card__media--fixed gos-card__media--contain"><img src="logo.png" alt="" width="900" height="300"></div>
-  <h2 class="gos-card__title"><a href="/accreditations/example/">Example Trade Body</a></h2>
+  <h2 class="gos-card__title">Example Trade Body</h2>
   <p class="gos-card__body">Every installer on the register is checked each year.</p>
   <p class="gos-card__meta">Member since 2014</p>
-  <p class="gos-card__action"><a href="https://example.org/register">Verify on their register</a></p>
+  <p class="gos-card__action"><a class="gos-link gos-link--track" href="https://example.org/register">Verify on their register</a></p>
 </article>
 ```
 
 - For the links to line up across a row, leave the grid at its default stretch (don't add `align-items: start`).
+- `gos-card--hover` is for cards that hold their own links. A card that is one big link uses `gos-card--link` instead (it lifts as well).
+
+### Text links
+
+`gos-link` is an inline link with a gold underline that draws across on hover. Text colour is inherited, so it works on light and dark backgrounds, and the line follows the words when a link wraps.
+
+- `gos-link--track`: a faint gold line at rest; the solid line sweeps across it on hover. Use it where the link must read as a link before anyone hovers it (card actions, links in a sentence).
+- `gos-link--draw`: no line at rest; the solid line draws in from the left and leaves to the right. Use it in lists of links that are already obviously links (footer columns).
+- Keyboard focus always shows the full line. Hover is mouse-only, and with reduced motion on the line appears without the draw.
+
+```html
+<a class="gos-link gos-link--track" href="/services/">Find out more</a>
+```
 - Why: see the "Card action and logo fit" entry in [DECISIONS.md](DECISIONS.md).
 
 ## Using it in the Master Template
@@ -135,7 +148,7 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | E | Chips + choice chips | `chips.css` | 🔁 |
 | F | Form fields | `fields.css` | 🔁 |
 | G | Form card | `form-card.css` | 🔁 |
-| H | Cards, tiles, job cards | `cards.css` | 🔁 (+ optional photo slot, `gos-card__media`, logo fit `--contain`, bottom link `gos-card__action`) |
+| H | Cards, tiles, job cards | `cards.css` | 🔁 (+ optional photo slot, `gos-card__media`, logo fit `--contain`, bottom link `gos-card__action`, card hover `--hover`) |
 | I | Glass cards (dark sections) | `glass.css` | 🏠 |
 | J | Stat displays + rating | `stats.css` | 🔁 |
 | K | Accreditation badges | `badges.css` | 🔁 |
@@ -154,3 +167,4 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | X | Inner-page content patterns | `content.css` | 📄 |
 | Y | Header & nav | `nav.css` | ✅ |
 | Z | Footer | `footer.css` | ✅ |
+| AA | Text links | `links.css` | 🔁 |

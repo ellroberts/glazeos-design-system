@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.2.0 — everything — built 2026-10-06 */
+/*! glazeos-design-system v0.3.0 — everything — built 2026-10-06 */
 /* GlazeOS foundations: tokens + base element styles. */
 /* =============================================================================
    GlazeOS Design Tokens - Single Source of Truth (v0.1.0)
@@ -651,9 +651,11 @@ select.gos-field__input { appearance: auto; }
    .gos-card   replaces .m-step, .card, .card--link, .m-cred, .creds__item,
                .m-notlist, .empty
      variant  --default | --surface | --dark | --link
+     hover    --hover: the border changes colour when the mouse is anywhere over the card (cards that hold their
+              own links, so the whole card can't be one <a> like --link)
      size     --sm | --md | --lg (padding)
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
-     action   optional .gos-card__action, last child, pinned to the bottom
+     action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
    .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
    ============================================================================= */
@@ -714,15 +716,14 @@ select.gos-field__input { appearance: auto; }
 .gos-card__media--contain { background: var(--paper); }
 .gos-card__media--contain > img { object-fit: contain; padding: var(--space-6); }
 
-/* Border: always there (so nothing shifts), changes colour under a real mouse only. */
+/* Border: a fixed hairline. The hover colour is on the card (--hover), not here. */
 .gos-card__media { border: var(--border) solid var(--line); }
 .gos-card--dark .gos-card__media { border-color: var(--on-dark-border); }
+
+/* --hover: the card's own border changes colour under a real mouse (the card's existing border-color transition) */
 @media (hover: hover) and (pointer: fine) {
-  .gos-card__media:hover { border-color: var(--primary); }
-  .gos-card--dark .gos-card__media:hover { border-color: var(--on-dark-strong); }
-}
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .gos-card__media { transition: border-color .3s; }
+  .gos-card--hover:hover { border-color: var(--primary); }
+  .gos-card--dark.gos-card--hover:hover { border-color: var(--on-dark-strong); }
 }
 
 /* =============== tile =============== */
@@ -1586,5 +1587,43 @@ select.gos-field__input { appearance: auto; }
 @media (max-width: 40rem) {
   .gos-footer__grid { grid-template-columns: 1fr; }
   .gos-footer__bottom .gos-wrap { padding-bottom: var(--space-24); } /* clears the sticky call bar */
+}
+
+/* =============================================================================
+   AA. Text links  🔁  replaces the Master Template's own underline effects:
+       .m-hero-sub a and a.m-stat > span (hero), .ft-links a > span (footer)
+   .gos-link   an inline text link with a gold underline that draws across on hover
+     variant  --track (a faint gold line at rest; the solid line sweeps across it on hover. Was the hero "Liam" link)
+            | --draw  (no line at rest; the solid line draws in from the left and leaves to the right. Was the footer
+                       column links)
+   Text colour is inherited, so it reads on light and dark backgrounds. The line follows the words across a wrap.
+   ============================================================================= */
+
+.gos-link {
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 3px;
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat right bottom / 0 2px;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+.gos-link--track {
+  background:
+    linear-gradient(var(--gold), var(--gold)) no-repeat right bottom / 0 2px,
+    linear-gradient(var(--gold-line), var(--gold-line)) no-repeat left bottom / 100% 1px;
+}
+
+/* Keyboard focus always shows the full line. */
+.gos-link:focus-visible { background-size: 100% 2px; }
+.gos-link--track:focus-visible { background-size: 100% 2px, 100% 1px; }
+
+/* Hover: a real mouse only, so a tap on a touch screen never leaves the line stuck on. */
+@media (hover: hover) and (pointer: fine) {
+  .gos-link:hover { background-size: 100% 2px; background-position: left bottom; }
+  .gos-link--track:hover { background-size: 100% 2px, 100% 1px; background-position: left bottom, left bottom; }
+}
+/* The draw itself only with motion allowed; with reduced motion on, the line simply appears. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gos-link { transition: background-size .5s var(--ease-out); }
 }
 
