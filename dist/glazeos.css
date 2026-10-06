@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.4.0 — everything — built 2026-10-06 */
+/*! glazeos-design-system v0.5.0 — everything — built 2026-10-06 */
 /* GlazeOS foundations: tokens + base element styles. */
 /* =============================================================================
    GlazeOS Design Tokens - Single Source of Truth (v0.1.0)
@@ -1644,4 +1644,18 @@ select.gos-field__input { appearance: auto; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .gos-link { transition: background-size .5s var(--ease-out); }
 }
+
+/* =============================================================================
+   AB. Icons  🔁  Lucide (lucide.dev), the one icon set for every site. The SVG comes from
+       glazeos-design-system/icons: icon('chevron-down', { size: 'md' }). This file is only the sizes.
+   .gos-icon   an inline SVG, drawn in the text colour (stroke: currentColor)
+     size  --sm (12px) | --md (14px) | --lg (20px)
+   The line weight steps down as the icon grows (2.5 / 2 / 1.75 on Lucide's 24-unit grid), so a small icon
+   never looks faint next to a large one: about 1.2px on screen at sm and md.
+   ============================================================================= */
+
+.gos-icon { display: inline-block; flex: none; vertical-align: middle; }
+.gos-icon--sm { width: 12px; height: 12px; stroke-width: 2.5; }
+.gos-icon--md { width: 14px; height: 14px; stroke-width: 2; }
+.gos-icon--lg { width: 20px; height: 20px; stroke-width: 1.75; }
 
