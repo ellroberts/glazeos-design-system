@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.3.0 — everything — built 2026-10-06 */
+/*! glazeos-design-system v0.4.0 — everything — built 2026-10-06 */
 /* GlazeOS foundations: tokens + base element styles. */
 /* =============================================================================
    GlazeOS Design Tokens - Single Source of Truth (v0.1.0)
@@ -1601,6 +1601,9 @@ select.gos-field__input { appearance: auto; }
               exactly; with --draw the text is gold and the line only appears on hover)
               | --gold-deep (darker gold text, --gold-text, for light backgrounds; the underline stays --gold)
    The line follows the words across a wrap.
+   .gos-link-host  a block that is one link (a hero stat, a tile) with the underline on one piece of text inside it:
+                   gos-link-host on the <a>, gos-link on that text (e.g. a <span>). Hovering or focusing anywhere
+                   on the block draws the line.
    ============================================================================= */
 
 .gos-link {
@@ -1625,14 +1628,17 @@ select.gos-field__input { appearance: auto; }
 /* --gold-deep: the readable gold for light backgrounds (--gold-text passes AA on white and --surface). */
 .gos-link--gold-deep, .gos-link--gold-deep:hover, .gos-link--gold-deep:focus-visible { color: var(--gold-text); }
 
-/* Keyboard focus always shows the full line. */
-.gos-link:focus-visible { background-size: 100% 2px; }
-.gos-link--track:focus-visible { background-size: 100% 2px, 100% 1px; }
+/* --host: the block link around a gos-link. No underline or colour of its own. */
+.gos-link-host { color: inherit; text-decoration: none; }
+
+/* Keyboard focus always shows the full line (on the link, or on the host around it). */
+.gos-link:focus-visible, .gos-link-host:focus-visible .gos-link { background-size: 100% 2px; }
+.gos-link--track:focus-visible, .gos-link-host:focus-visible .gos-link--track { background-size: 100% 2px, 100% 1px; }
 
 /* Hover: a real mouse only, so a tap on a touch screen never leaves the line stuck on. */
 @media (hover: hover) and (pointer: fine) {
-  .gos-link:hover { background-size: 100% 2px; background-position: left bottom; }
-  .gos-link--track:hover { background-size: 100% 2px, 100% 1px; background-position: left bottom, left bottom; }
+  .gos-link:hover, .gos-link-host:hover .gos-link { background-size: 100% 2px; background-position: left bottom; }
+  .gos-link--track:hover, .gos-link-host:hover .gos-link--track { background-size: 100% 2px, 100% 1px; background-position: left bottom, left bottom; }
 }
 /* The draw itself only with motion allowed; with reduced motion on, the line simply appears. */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {

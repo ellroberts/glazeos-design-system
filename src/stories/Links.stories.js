@@ -31,3 +31,8 @@ export const AllVariants = {
 export const Wrapping = {
   render: () => `<p style="max-width:220px;font-size:var(--text-sm)">${link({ label: 'A longer link that wraps across two lines in a narrow column' })}</p>`,
 };
+
+/** gos-link-host: the whole block is one link and the underline sits on its label. Hover anywhere on the stat (the number or the label): the label's line sweeps across. This is the Master Template's hero stats. */
+export const HostBlock = {
+  render: () => dark(`<div style="display:flex;gap:64px;flex-wrap:wrap">${[['2,800', 'Windows fitted'], ['4.6 wks', 'Average survey to fit']].map(([v, l]) => `<a class="gos-link-host" href="#" style="display:block"><b style="display:block;font-size:44px;line-height:1.1;color:var(--gold)">${v}</b><span class="gos-link gos-link--track" style="font-size:var(--text-sm);color:rgba(255,255,255,.78)">${l}</span></a>`).join('')}</div>`, '32px'),
+};
