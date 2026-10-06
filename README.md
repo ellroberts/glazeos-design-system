@@ -86,6 +86,23 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - For the links to line up across a row, leave the grid at its default stretch (don't add `align-items: start`).
 - `gos-card--hover` is for cards that hold their own links. A card that is one big link uses `gos-card--link` instead (it lifts as well).
 
+### Icon media, side layout, lead and foot text
+
+- `gos-card__media--icon`: put a Lucide icon (`icon('shield-check', { size: 'lg' })`) in the media slot instead of a photo. It sits large and gold on the brand gradient. When there's a real photo, use an `<img>` and drop `--icon`.
+- `gos-card--side`: the media beside the text, for a single wide card (a carousel). Wrap the title and text in `<div class="gos-card__main">`. It stacks, media on top, under 40rem.
+- `gos-card__body--lead`: a card's main statement (17px, ink). `gos-card__body--foot`: a small closing line pinned to the bottom over a divider.
+
+```html
+<article class="gos-card gos-card--default gos-card--md gos-card--side">
+  <div class="gos-card__media gos-card__media--fixed gos-card__media--icon"><!-- icon('ruler', { size: 'lg' }) --></div>
+  <div class="gos-card__main">
+    <h3 class="gos-card__title">Measured by the fitter</h3>
+    <p class="gos-card__body gos-card__body--lead">The person who measures is the person who fits.</p>
+    <p class="gos-card__body gos-card__body--foot">Sizes do not get lost between a salesman and a subcontractor.</p>
+  </div>
+</article>
+```
+
 ### Image tiles
 
 `gos-tile` is a photo link tile: the image, a scrim, a title and body at the bottom, and an arrow disc. Make the tile a `gos-link-host` and wrap the title's words in a `gos-link--draw`, so the gold line draws under the title on hover too.
