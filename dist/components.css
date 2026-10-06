@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.5.0 — components — built 2026-10-06 */
+/*! glazeos-design-system v0.6.0 — components — built 2026-10-06 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -342,9 +342,21 @@
   font-size: var(--text-sm);
   color: var(--ink);
 }
-.gos-field__input:focus-visible { border-color: var(--primary); background: var(--paper); box-shadow: var(--ring); }
+.gos-field__input:focus-visible { border-color: var(--primary); background-color: var(--paper); box-shadow: var(--ring); }
 textarea.gos-field__input { height: auto; min-height: var(--space-24); padding: var(--space-3) var(--space-4); resize: vertical; }
-select.gos-field__input { appearance: auto; }
+/* Select: the browser's own arrow is replaced by Lucide's chevron-down (the design system's icon set), 14px (the md
+   icon size) and as far in from the right edge as the text is from the left (--space-4), so it never sits on the
+   border. The text's right padding clears it. A background image can't use currentColor, so the stroke is the --mute
+   grey written out (#6C7E8C); the path is Lucide's chevron-down (lucide-static, see src/icons/icons.json). */
+select.gos-field__input {
+  -webkit-appearance: none;
+          appearance: none;
+  padding-right: calc(var(--space-4) + 14px + var(--space-2));
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C7E8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 14px 14px;
+}
 
 /* ---- sizes ---- */
 .gos-field--sm .gos-field__input { height: var(--control-sm); }
