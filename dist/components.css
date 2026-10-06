@@ -520,7 +520,9 @@ select.gos-field__input {
   background: linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--scrim) 45%, transparent) 62%, color-mix(in srgb, var(--scrim) 90%, transparent));
 }
 .gos-tile .gos-tag { position: absolute; top: var(--inset); left: var(--inset); z-index: 1; }
-.gos-tile__in { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gap-sm); }
+/* White set here, not only on .gos-tile: a tile that is also a .gos-link-host (or sits under a site's own link-colour
+   reset) inherits its link colour, which would put dark text on the scrim. */
+.gos-tile__in { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gap-sm); color: #fff; }
 .gos-tile__title { display: block; font-family: var(--font-heading); font-size: var(--text-title); font-weight: var(--weight-semibold); letter-spacing: -.02em; }
 .gos-tile__body { display: block; margin-top: var(--space-1); font-size: var(--text-sm); color: var(--on-dark-body); }
 
