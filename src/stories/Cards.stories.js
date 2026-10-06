@@ -1,4 +1,5 @@
 import { I, stars } from './_helpers.js';
+import { icon } from '../../dist/icons.mjs';
 // Local stand-in photos (Storybook only, not shipped). Each has a dashed red edge and a circle, so cropping or stretching shows.
 import house from './assets/house-4x3.svg';
 import doorTall from './assets/door-tall.svg';
@@ -26,10 +27,11 @@ export const AllVariants = {
   render: () => `<div class="gos-grid gos-grid--3">${['default', 'surface', 'dark', 'link'].map((v) => card({ variant: v })).join('')}</div>`,
 };
 
+/** Image link tiles. Hover one: the arrow disc fills gold and nudges right, the photo zooms in slightly, and the title's gold line draws in (gos-link-host on the tile, gos-link--draw on the title). */
 export const Tiles = {
   render: () => `<div style="display:grid;grid-template-columns:1.64fr 1fr;gap:var(--gap-md)">
-    <a href="#" class="gos-tile gos-tile--lg"><span class="gos-tag gos-tag--gold">Most popular</span><span class="gos-tile__in"><span><b class="gos-tile__title">Whole house</b><span class="gos-tile__body">Every window and door, one fixed price.</span></span><span class="gos-disc gos-disc--light gos-disc--lg">${I.arrow}</span></span></a>
-    <a href="#" class="gos-tile gos-tile--md"><span class="gos-tile__in"><span><b class="gos-tile__title">Windows</b><span class="gos-tile__body">uPVC, aluminium, sash.</span></span><span class="gos-disc gos-disc--light">${I.arrow}</span></span></a>
+    <a href="#" class="gos-tile gos-tile--lg gos-link-host"><span class="gos-tag gos-tag--gold">Most popular</span><span class="gos-tile__in"><span><b class="gos-tile__title"><span class="gos-link gos-link--draw">Whole house</span></b><span class="gos-tile__body">Every window and door, one fixed price.</span></span><span class="gos-disc gos-disc--light gos-disc--lg">${icon('arrow-right', { size: 'lg' })}</span></span></a>
+    <a href="#" class="gos-tile gos-tile--md gos-link-host"><span class="gos-tile__in"><span><b class="gos-tile__title"><span class="gos-link gos-link--draw">Windows</span></b><span class="gos-tile__body">uPVC, aluminium, sash.</span></span><span class="gos-disc gos-disc--light">${icon('arrow-right', { size: 'md' })}</span></span></a>
     <div class="gos-tile gos-tile--dark gos-tile--md"><div><b class="gos-tile__title">Not sure which?</b><p>Send a photo of the opening and we'll tell you what it needs.</p></div><a href="#" class="gos-btn gos-btn--primary gos-btn--md">Send a photo ${I.arrow}</a></div>
   </div>`,
 };

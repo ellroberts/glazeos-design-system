@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.6.1 — components — built 2026-10-06 */
+/*! glazeos-design-system v0.7.0 — components — built 2026-10-06 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -430,6 +430,8 @@ select.gos-field__input {
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
      action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
+              arrow: a .gos-disc--light (--lg on the big tile) as the last thing in __in; on hover (mouse only)
+              the disc fills gold, its arrow nudges right and the photo zooms in slightly
    .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
    ============================================================================= */
 
@@ -511,9 +513,11 @@ select.gos-field__input {
   text-decoration: none;
 }
 .gos-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Scrim: clear over the top of the photo, darkening through the lower half where the text sits, so the title and
+   body stay readable over a bright or busy photo (v0.7.0; was 5% at 35% to 86%). */
 .gos-tile::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--scrim) 5%, transparent) 35%, color-mix(in srgb, var(--scrim) 86%, transparent));
+  background: linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--scrim) 45%, transparent) 62%, color-mix(in srgb, var(--scrim) 90%, transparent));
 }
 .gos-tile .gos-tag { position: absolute; top: var(--inset); left: var(--inset); z-index: 1; }
 .gos-tile__in { position: absolute; left: var(--card-pad); right: var(--card-pad); bottom: var(--card-pad); z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gap-sm); }
@@ -524,6 +528,23 @@ select.gos-field__input {
 .gos-tile--lg { grid-row: span 2; min-height: calc(var(--tile-min) * 2 + var(--gap-md)); }
 .gos-tile--lg .gos-tile__title { font-size: var(--text-h2); font-weight: var(--weight-bold); }
 .gos-tile--lg .gos-tile__body { max-width: var(--measure-sm); }
+
+/* Hover (a real mouse) and keyboard focus: the arrow disc fills gold and its arrow nudges right; the photo zooms in a
+   little. Colour changes always; the movement only with motion allowed. */
+.gos-tile .gos-disc { transition: background-color .3s, color .3s; }
+.gos-tile:focus-visible .gos-disc { background: var(--gold); color: var(--gold-ink); }
+@media (hover: hover) and (pointer: fine) {
+  .gos-tile:hover .gos-disc { background: var(--gold); color: var(--gold-ink); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gos-tile img { transition: transform .6s var(--ease-out); }
+  .gos-tile .gos-disc svg { transition: transform .3s var(--ease-out); }
+  .gos-tile:focus-visible .gos-disc svg { transform: translateX(3px); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gos-tile:hover img { transform: scale(1.04); }
+  .gos-tile:hover .gos-disc svg { transform: translateX(3px); }
+}
 
 .gos-tile--dark { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-sm); padding: var(--card-pad); background: var(--primary); text-align: center; }
 .gos-tile--dark::after { display: none; }
@@ -953,6 +974,7 @@ select.gos-field__input {
 /* ---- sizes ---- */
 .gos-disc--md { width: var(--disc); height: var(--disc); }
 .gos-disc--lg { width: var(--disc-lg); height: var(--disc-lg); }
+.gos-disc--lg svg { width: 20px; height: 20px; }
 
 /* =============================================================================
    S. Tick & link lists  🔁  replaces .m-towns, .checklist, .page .areas / .links /

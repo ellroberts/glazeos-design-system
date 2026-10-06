@@ -34,3 +34,4 @@
 /* ---- sizes ---- */
 .gos-disc--md { width: var(--disc); height: var(--disc); }
 .gos-disc--lg { width: var(--disc-lg); height: var(--disc-lg); }
+.gos-disc--lg svg { width: 20px; height: 20px; }

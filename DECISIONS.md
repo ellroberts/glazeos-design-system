@@ -209,3 +209,8 @@ No value was invented. Every pick below is one of the values in the audit's tabl
   - `.gos-field__input:focus-visible` now sets `background-color` rather than the `background` shorthand, which would have wiped the arrow on focus. No visible change for other fields.
   - `check` added to the approved icons, for the ticks under the forms' button.
 - **`arrow-right` icon** (branch `design/arrow-icon`, 6 Oct 2026, v0.6.1): added to the approved Lucide icons for the Master Template's "Where to start" tile buttons (and, later, its other "go" arrows).
+- **Tile hover and a stronger scrim** (branch `design/tile-hover`, 6 Oct 2026, v0.7.0). The Master Template's "Where to start" tiles move onto `gos-tile`, and the owner wanted the whole tile to respond and the text to read better.
+  - **Hover**: the arrow disc fills `--gold` (text `--gold-ink`) and its icon nudges 3px right; the photo scales to 1.04 over .6s (`--ease-out`). Mouse only (`hover: hover`, `pointer: fine`); keyboard focus gets the disc colour and nudge, not the zoom. Movement only with `prefers-reduced-motion: no-preference`; the colour change always.
+  - **Title underline**: no new CSS. The tile is a `gos-link-host` and the title's words a `gos-link--draw` (README).
+  - **Scrim**: was 5% at 35% to 86% at the bottom; now clear to 30%, 45% at 62%, 90% at the bottom. The upper photo stays clear and the lower half, where the text sits, is darker, so the small tiles' text reads over bright photos.
+  - **`.gos-disc--lg svg`** is 20px (was the disc's 16px for every size), so the big tile's arrow is in proportion to its 52px disc.

@@ -86,6 +86,23 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - For the links to line up across a row, leave the grid at its default stretch (don't add `align-items: start`).
 - `gos-card--hover` is for cards that hold their own links. A card that is one big link uses `gos-card--link` instead (it lifts as well).
 
+### Image tiles
+
+`gos-tile` is a photo link tile: the image, a scrim, a title and body at the bottom, and an arrow disc. Make the tile a `gos-link-host` and wrap the title's words in a `gos-link--draw`, so the gold line draws under the title on hover too.
+
+```html
+<a class="gos-tile gos-tile--md gos-link-host" href="/services/windows/">
+  <img src="windows.jpg" alt="" width="1200" height="800">
+  <span class="gos-tile__in">
+    <span><b class="gos-tile__title"><span class="gos-link gos-link--draw">Windows</span></b><span class="gos-tile__body">uPVC, aluminium, sash.</span></span>
+    <span class="gos-disc gos-disc--light"><!-- icon('arrow-right') --></span>
+  </span>
+</a>
+```
+
+- Hover (mouse only) and keyboard focus: the disc fills gold and its arrow nudges right; the photo zooms in slightly. No movement with reduced motion on.
+- `--lg` is the big tile (two rows tall); give it a `gos-disc--lg`.
+
 ### Text links
 
 `gos-link` is an inline link with a gold underline that draws across on hover. Text colour is inherited, so it works on light and dark backgrounds, and the line follows the words when a link wraps.
