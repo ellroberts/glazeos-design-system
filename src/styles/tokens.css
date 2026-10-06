@@ -68,6 +68,7 @@
   --gold-soft: color-mix(in srgb, var(--gold) 9%, transparent);   /* merged gold 10% */
   --gold-line: color-mix(in srgb, var(--gold) 55%, transparent);  /* merged gold 60% */
   --gold-edge: color-mix(in srgb, var(--gold) 70%, transparent);
+  --gold-text: color-mix(in srgb, var(--gold) 60%, #000);        /* gold TEXT on light backgrounds: 5.2:1 on white for #F0A81E */
   --primary-tint-5: color-mix(in srgb, var(--primary) 5%, #fff);
   --primary-tint-10: color-mix(in srgb, var(--primary) 10%, #fff);
 

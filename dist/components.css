@@ -1359,6 +1359,7 @@ select.gos-field__input { appearance: auto; }
                        column links)
      colour   inherited by default | --gold (gold text, for dark backgrounds: with --track it is the hero "Liam" link
               exactly; with --draw the text is gold and the line only appears on hover)
+              | --gold-deep (darker gold text, --gold-text, for light backgrounds; the underline stays --gold)
    The line follows the words across a wrap.
    ============================================================================= */
 
@@ -1381,6 +1382,8 @@ select.gos-field__input { appearance: auto; }
 
 /* --gold: gold text, kept on hover and focus. Dark backgrounds only: gold text on white is too low-contrast to read. */
 .gos-link--gold, .gos-link--gold:hover, .gos-link--gold:focus-visible { color: var(--gold); }
+/* --gold-deep: the readable gold for light backgrounds (--gold-text passes AA on white and --surface). */
+.gos-link--gold-deep, .gos-link--gold-deep:hover, .gos-link--gold-deep:focus-visible { color: var(--gold-text); }
 
 /* Keyboard focus always shows the full line. */
 .gos-link:focus-visible { background-size: 100% 2px; }
