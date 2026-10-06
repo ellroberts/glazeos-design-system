@@ -208,3 +208,4 @@ No value was invented. Every pick below is one of the values in the audit's tabl
   - The stroke is `#6C7E8C`, the `--mute` value written out: a background image can't use `currentColor` or a custom property. Same path and weight (2) as `icon('chevron-down')`.
   - `.gos-field__input:focus-visible` now sets `background-color` rather than the `background` shorthand, which would have wiped the arrow on focus. No visible change for other fields.
   - `check` added to the approved icons, for the ticks under the forms' button.
+- **`arrow-right` icon** (branch `design/arrow-icon`, 6 Oct 2026, v0.6.1): added to the approved Lucide icons for the Master Template's "Where to start" tile buttons (and, later, its other "go" arrows).
