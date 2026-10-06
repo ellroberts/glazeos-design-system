@@ -1,4 +1,4 @@
 {
   "_comment": "The approved Lucide icons (lucide-static, pinned in package.json). Add a name here, run npm run build, and it is in dist/icons.mjs. Names are Lucide's own (lucide.dev/icons).",
-  "icons": ["chevron-down", "check", "arrow-right"]
+  "icons": ["chevron-down", "check", "arrow-right", "arrow-down", "phone"]
 }

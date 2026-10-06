@@ -215,3 +215,4 @@ No value was invented. Every pick below is one of the values in the audit's tabl
   - **Scrim**: was 5% at 35% to 86% at the bottom; now clear to 30%, 45% at 62%, 90% at the bottom. The upper photo stays clear and the lower half, where the text sits, is darker, so the small tiles' text reads over bright photos.
   - **`.gos-disc--lg svg`** is 20px (was the disc's 16px for every size), so the big tile's arrow is in proportion to its 52px disc.
   - **`.gos-tile__in` is white itself**: a tile that is also a `gos-link-host` gets `color: inherit` from links.css (which loads after cards.css), and a site's link-colour reset can do the same, so `.gos-tile`'s own white could lose and put dark text on the scrim.
+- **`arrow-down` and `phone` icons** (branch `design/tile-hover`, 6 Oct 2026): added to the approved Lucide icons for the Master Template's promise section buttons ("See recent jobs" and the call button), and later its other call buttons.
