@@ -95,6 +95,11 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - `gos-link--gold`: gold text instead of the inherited colour, kept on hover. Add it to either effect, on dark backgrounds only (gold text on white is too low-contrast). `gos-link--track gos-link--gold` is the hero "Liam" link; `gos-link--draw gos-link--gold` keeps the line hidden until hover.
 - `gos-link--gold-deep`: the light-background version, darker gold text from the `--gold-text` token (5.2:1 on white for the default `#F0A81E`); the underline stays `--gold`.
 - Keyboard focus always shows the full line. Hover is mouse-only, and with reduced motion on the line appears without the draw.
+- `gos-link-host`: for a block that is one big link with the underline on one piece of text inside it (a hero stat, a tile). Put `gos-link-host` on the `<a>` and `gos-link` (with its effect) on the text; hovering or focusing anywhere on the block draws the line.
+
+```html
+<a class="gos-link-host" href="#jobs"><b>2,800</b><span class="gos-link gos-link--track">Windows fitted</span></a>
+```
 
 ```html
 <a class="gos-link gos-link--track" href="/services/">Find out more</a>
