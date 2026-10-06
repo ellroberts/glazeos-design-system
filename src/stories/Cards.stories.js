@@ -147,3 +147,17 @@ export const ActionRowAligned = {
     ${fullCard({ media: 'logo', width: '', body: 'Medium length, about two lines of text here.' })}
   </div>`,
 };
+
+/* ---- icon media and the side layout ---- */
+const iconSlot = (name) => `<div class="gos-card__media gos-card__media--fixed gos-card__media--icon">${icon(name, { size: 'lg' })}</div>`;
+const photoSlot = `<div class="gos-card__media gos-card__media--fixed">${PHOTO.house}</div>`;
+const promise = ({ media, side = false, width = '780px' }) => `<article class="gos-card gos-card--default gos-card--md${side ? ' gos-card--side' : ''}"${width ? ` style="max-width:${width}"` : ''}>${media}${side ? '<div class="gos-card__main">' : ''}<h3 class="gos-card__title">Measured by the fitter</h3><p class="gos-card__body gos-card__body--lead">The person who measures is the person who fits.</p><p class="gos-card__body gos-card__body--foot">Sizes do not get lost between a salesman and a subcontractor.</p>${side ? '</div>' : ''}</article>`;
+
+/** gos-card--side: the media beside the text, for one wide card at a time (the promise carousel). Icon by default, a real photo when there is one. Narrow the window: under 40rem it stacks, media on top. */
+export const SideWithIcon = { render: () => promise({ media: iconSlot('ruler'), side: true }) };
+/** The same card with a photo in place of the icon. */
+export const SideWithPhoto = { render: () => promise({ media: photoSlot, side: true }) };
+/** gos-card__media--icon in ordinary stacked cards, e.g. an accreditation with no logo yet. */
+export const IconMedia = {
+  render: () => `<div class="gos-grid gos-grid--3">${['shield-check', 'badge-check', 'search-check'].map((n) => promise({ media: iconSlot(n), width: '' })).join('')}</div>`,
+};
