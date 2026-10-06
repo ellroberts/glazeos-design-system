@@ -1,0 +1,48 @@
+/* =============================================================================
+   AA. Text links  🔁  replaces the Master Template's own underline effects:
+       .m-hero-sub a and a.m-stat > span (hero), .ft-links a > span (footer)
+   .gos-link   an inline text link with a gold underline that draws across on hover
+     variant  --track (a faint gold line at rest; the solid line sweeps across it on hover. Was the hero "Liam" link)
+            | --draw  (no line at rest; the solid line draws in from the left and leaves to the right. Was the footer
+                       column links)
+     colour   inherited by default | --gold (gold text, for dark backgrounds: with --track it is the hero "Liam" link
+              exactly; with --draw the text is gold and the line only appears on hover)
+              | --gold-deep (darker gold text, --gold-text, for light backgrounds; the underline stays --gold)
+   The line follows the words across a wrap.
+   ============================================================================= */
+
+.gos-link {
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 3px;
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat right bottom / 0 2px;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+.gos-link--track {
+  background:
+    linear-gradient(var(--gold), var(--gold)) no-repeat right bottom / 0 2px,
+    linear-gradient(var(--gold-line), var(--gold-line)) no-repeat left bottom / 100% 1px;
+}
+
+/* The line is the hover signal, so the text keeps its colour (beats a site-wide `a:hover` colour). */
+.gos-link:hover, .gos-link:focus-visible { color: inherit; }
+
+/* --gold: gold text, kept on hover and focus. Dark backgrounds only: gold text on white is too low-contrast to read. */
+.gos-link--gold, .gos-link--gold:hover, .gos-link--gold:focus-visible { color: var(--gold); }
+/* --gold-deep: the readable gold for light backgrounds (--gold-text passes AA on white and --surface). */
+.gos-link--gold-deep, .gos-link--gold-deep:hover, .gos-link--gold-deep:focus-visible { color: var(--gold-text); }
+
+/* Keyboard focus always shows the full line. */
+.gos-link:focus-visible { background-size: 100% 2px; }
+.gos-link--track:focus-visible { background-size: 100% 2px, 100% 1px; }
+
+/* Hover: a real mouse only, so a tap on a touch screen never leaves the line stuck on. */
+@media (hover: hover) and (pointer: fine) {
+  .gos-link:hover { background-size: 100% 2px; background-position: left bottom; }
+  .gos-link--track:hover { background-size: 100% 2px, 100% 1px; background-position: left bottom, left bottom; }
+}
+/* The draw itself only with motion allowed; with reduced motion on, the line simply appears. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gos-link { transition: background-size .5s var(--ease-out); }
+}

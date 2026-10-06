@@ -3,9 +3,11 @@
    .gos-card   replaces .m-step, .card, .card--link, .m-cred, .creds__item,
                .m-notlist, .empty
      variant  --default | --surface | --dark | --link
+     hover    --hover: the border changes colour when the mouse is anywhere over the card (cards that hold their
+              own links, so the whole card can't be one <a> like --link)
      size     --sm | --md | --lg (padding)
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
-     action   optional .gos-card__action, last child, pinned to the bottom
+     action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
    .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
    ============================================================================= */
@@ -66,15 +68,14 @@
 .gos-card__media--contain { background: var(--paper); }
 .gos-card__media--contain > img { object-fit: contain; padding: var(--space-6); }
 
-/* Border: always there (so nothing shifts), changes colour under a real mouse only. */
+/* Border: a fixed hairline. The hover colour is on the card (--hover), not here. */
 .gos-card__media { border: var(--border) solid var(--line); }
 .gos-card--dark .gos-card__media { border-color: var(--on-dark-border); }
+
+/* --hover: the card's own border changes colour under a real mouse (the card's existing border-color transition) */
 @media (hover: hover) and (pointer: fine) {
-  .gos-card__media:hover { border-color: var(--primary); }
-  .gos-card--dark .gos-card__media:hover { border-color: var(--on-dark-strong); }
-}
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .gos-card__media { transition: border-color .3s; }
+  .gos-card--hover:hover { border-color: var(--primary); }
+  .gos-card--dark.gos-card--hover:hover { border-color: var(--on-dark-strong); }
 }
 
 /* =============== tile =============== */
