@@ -669,7 +669,7 @@ select.gos-field__input {
      size     --sm | --md | --lg (padding)
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
      action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
-     body     --lead (larger, ink: a card's main statement) | --foot (a small closing line, pinned to the bottom over a divider)
+     body     --lead (larger, ink: a card's main statement) | --foot (a closing line, pinned to the bottom)
      media    fit --icon: a large Lucide icon on the brand gradient instead of a photo
      layout   --side: media beside the text (wrap the text in .gos-card__main); stacks, media on top, on phones
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
@@ -696,7 +696,7 @@ select.gos-field__input {
 .gos-card__body--lead { font-size: var(--text-md); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--ink); }
 /* .gos-card + the element (two classes) for the pinned-to-bottom margins, so a site's paragraph reset (e.g. .m p{margin:0})
    can't undo them. */
-.gos-card .gos-card__body--foot { margin-top: auto; padding-top: var(--gap-sm); border-top: var(--border) solid var(--line); }
+.gos-card .gos-card__body--foot { margin-top: auto; padding-top: var(--gap-sm); }
 .gos-card .gos-card__action { margin: auto 0 0; padding-top: var(--gap-xs); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
 
 /* ---- variants ---- */

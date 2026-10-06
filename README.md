@@ -90,7 +90,7 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 
 - `gos-card__media--icon`: put a Lucide icon (`icon('shield-check', { size: 'lg' })`) in the media slot instead of a photo. It sits large and gold on the brand gradient. When there's a real photo, use an `<img>` and drop `--icon`.
 - `gos-card--side`: the media beside the text, for a single wide card (a carousel). Wrap the title and text in `<div class="gos-card__main">`. It stacks, media on top, under 40rem.
-- `gos-card__body--lead`: a card's main statement (17px, ink). `gos-card__body--foot`: a small closing line pinned to the bottom over a divider.
+- `gos-card__body--lead`: a card's main statement (17px, ink). `gos-card__body--foot`: a closing line pinned to the bottom of the card.
 
 ```html
 <article class="gos-card gos-card--default gos-card--md gos-card--side">
