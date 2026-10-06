@@ -1175,7 +1175,7 @@ select.gos-field__input {
 /* =============================================================================
    W. Process & stepper  🏠  new shared family (was .m-steps / .m-step and .m-blist)
    .gos-steps    horizontal row of step cards; the last step is the dark card
-     layout  --cols-3 | --cols-5
+     layout  --cols-3 | --cols-4 | --cols-5 (match the number of steps, so the row has no empty slot)
    .gos-stepper  vertical numbered list with a connecting line
      variant --on-dark (default, was .m-blist) | --on-light
    ============================================================================= */
@@ -1183,9 +1183,10 @@ select.gos-field__input {
 /* ---- step cards ---- */
 .gos-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-sm); list-style: none; margin: 0; padding: 0; }
 .gos-steps--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.gos-steps--cols-4 { grid-template-columns: repeat(4, 1fr); }
 .gos-steps--cols-5 { grid-template-columns: repeat(5, 1fr); }
-@media (max-width: 64rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-5 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 40rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-5 { grid-template-columns: 1fr; } }
+@media (max-width: 64rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-4, .gos-steps--cols-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 40rem) { .gos-steps, .gos-steps--cols-3, .gos-steps--cols-4, .gos-steps--cols-5 { grid-template-columns: 1fr; } }
 
 .gos-step { display: flex; flex-direction: column; gap: var(--gap-xs); padding: var(--card-pad); border: var(--border) solid var(--line); border-radius: var(--r); background: var(--paper); }
 .gos-step__title { margin-top: var(--gap-xs); font-family: var(--font-heading); font-size: var(--text-lg); font-weight: var(--weight-semibold); }

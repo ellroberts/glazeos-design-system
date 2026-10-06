@@ -24,3 +24,8 @@ const stepper = (variant) => `<ol class="gos-stepper gos-stepper--${variant}" st
 
 export const StepperOnDark = { render: () => dark(stepper('on-dark')) };
 export const StepperOnLight = { render: () => stepper('on-light') };
+
+/** Four steps: --cols-4, one row with no empty slot. */
+export const StepCardsFour = {
+  render: () => `<ol class="gos-steps gos-steps--cols-4">${STEPS.slice(0, 4).map(([t, w, p], i) => `<li class="gos-step"><span class="gos-disc gos-disc--gold">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
+};
