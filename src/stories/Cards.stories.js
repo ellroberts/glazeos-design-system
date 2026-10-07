@@ -161,3 +161,8 @@ export const SideWithPhoto = { render: () => promise({ media: photoSlot, side: t
 export const IconMedia = {
   render: () => `<div class="gos-grid gos-grid--3">${['shield-check', 'badge-check', 'search-check'].map((n) => promise({ media: iconSlot(n), width: '' })).join('')}</div>`,
 };
+
+/** gos-card__badge: an icon disc in the media's bottom-right corner, over the photo. */
+export const PhotoWithBadge = {
+  render: () => promise({ media: `<div class="gos-card__media gos-card__media--fixed">${PHOTO.house}<span class="gos-card__badge gos-disc gos-disc--light">${icon('ruler', { size: 'md' })}</span></div>`, width: '360px' }),
+};

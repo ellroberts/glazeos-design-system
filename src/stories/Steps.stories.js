@@ -24,3 +24,18 @@ const stepper = (variant) => `<ol class="gos-stepper gos-stepper--${variant}" st
 
 export const StepperOnDark = { render: () => dark(stepper('on-dark')) };
 export const StepperOnLight = { render: () => stepper('on-light') };
+
+/** Four steps: --cols-4, one row with no empty slot. */
+export const StepCardsFour = {
+  render: () => `<ol class="gos-steps gos-steps--cols-4">${STEPS.slice(0, 4).map(([t, w, p], i) => `<li class="gos-step"><span class="gos-disc gos-disc--gold">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
+};
+
+/** Step numbers in a neutral (light grey) disc, the dark last card's in a light (white) disc. */
+export const StepCardsNeutralDiscs = {
+  render: () => `<ol class="gos-steps gos-steps--cols-4">${STEPS.slice(0, 4).map(([t, w, p], i, all) => `<li class="gos-step"><span class="gos-disc ${i === all.length - 1 ? 'gos-disc--light' : 'gos-disc--neutral'}">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
+};
+
+/** --plain: every step the same white card, all with the neutral disc. */
+export const StepCardsPlain = {
+  render: () => `<ol class="gos-steps gos-steps--cols-4 gos-steps--plain">${STEPS.slice(0, 4).map(([t, w, p], i) => `<li class="gos-step"><span class="gos-disc gos-disc--neutral">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
+};
