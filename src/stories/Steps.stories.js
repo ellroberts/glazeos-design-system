@@ -34,3 +34,8 @@ export const StepCardsFour = {
 export const StepCardsNeutralDiscs = {
   render: () => `<ol class="gos-steps gos-steps--cols-4">${STEPS.slice(0, 4).map(([t, w, p], i, all) => `<li class="gos-step"><span class="gos-disc ${i === all.length - 1 ? 'gos-disc--light' : 'gos-disc--neutral'}">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
 };
+
+/** --plain: every step the same white card, all with the neutral disc. */
+export const StepCardsPlain = {
+  render: () => `<ol class="gos-steps gos-steps--cols-4 gos-steps--plain">${STEPS.slice(0, 4).map(([t, w, p], i) => `<li class="gos-step"><span class="gos-disc gos-disc--neutral">${i + 1}</span><b class="gos-step__title">${t}</b><span class="gos-step__when">${w}</span><p>${p}</p></li>`).join('')}</ol>`,
+};

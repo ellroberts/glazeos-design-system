@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.8.0 — components — built 2026-10-06 */
+/*! glazeos-design-system v0.8.0 — components — built 2026-10-07 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -1176,7 +1176,7 @@ select.gos-field__input {
 
 /* =============================================================================
    W. Process & stepper  🏠  new shared family (was .m-steps / .m-step and .m-blist)
-   .gos-steps    horizontal row of step cards; the last step is the dark card
+   .gos-steps    horizontal row of step cards; the last step is the dark card (--plain: every card white)
      layout  --cols-3 | --cols-4 | --cols-5 (match the number of steps, so the row has no empty slot)
    .gos-stepper  vertical numbered list with a connecting line
      variant --on-dark (default, was .m-blist) | --on-light
@@ -1197,6 +1197,10 @@ select.gos-field__input {
 .gos-step:last-child { background: var(--primary); border-color: var(--primary); color: #fff; }
 .gos-step:last-child .gos-step__when { color: var(--on-dark-muted); }
 .gos-step:last-child p { color: var(--on-dark-body); }
+/* --plain: no dark last card, every step the same white card. */
+.gos-steps--plain .gos-step:last-child { background: var(--paper); border-color: var(--line); color: inherit; }
+.gos-steps--plain .gos-step:last-child .gos-step__when { color: var(--mute); }
+.gos-steps--plain .gos-step:last-child p { color: var(--body); }
 
 /* ---- vertical stepper ---- */
 .gos-stepper { display: flex; flex-direction: column; gap: var(--gap-sm); list-style: none; margin: 0; padding: 0; }
