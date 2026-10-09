@@ -1,6 +1,6 @@
 {
   "name": "glazeos-design-system",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": false,
   "description": "Plain-CSS design system (tokens + components) for GlazeOS client websites. No client-side JavaScript.",
   "type": "module",
