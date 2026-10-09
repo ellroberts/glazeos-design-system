@@ -36,6 +36,19 @@ export const Tiles = {
   </div>`,
 };
 
+/** gos-zoom: the same slight zoom as the tile, for any clickable image. Hover each: only the ones inside a link zoom (mouse only, none with reduced motion on). */
+export const Zoom = {
+  render: () => {
+    const frame = (inner) => `<div class="gos-zoom" style="width:280px;aspect-ratio:4/3;border-radius:var(--r)">${inner.replace('<img', '<img style="display:block;width:100%;height:100%;object-fit:cover"')}</div>`;
+    const lbl = (text, inner) => `<div style="display:flex;flex-direction:column;gap:8px"><code style="font-size:12px;color:var(--mute)">${text}</code>${inner}</div>`;
+    return `<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+    ${lbl('inside a link: zooms', `<a href="#" style="display:block">${frame(`<img src="${house}" alt="A finished house front" width="1200" height="900">`)}</a>`)}
+    ${lbl('no link: does not zoom', frame(`<img src="${house}" alt="A finished house front" width="1200" height="900">`))}
+    ${lbl('gos-tile, for comparison', `<a href="#" class="gos-tile gos-tile--md" style="width:280px"><img src="${house}" alt="" width="1200" height="900"><span class="gos-tile__in"><span><b class="gos-tile__title">Windows</b></span><span class="gos-disc gos-disc--light">${icon('arrow-right', { size: 'md' })}</span></span></a>`)}
+  </div>`;
+  },
+};
+
 export const JobCards = {
   render: () => `<div style="display:grid;grid-template-columns:1.62fr 1fr;gap:var(--gap-md);align-items:stretch">
     <article class="gos-job gos-job--feature"><div class="gos-job__photo">${I.camera}<span class="gos-tag gos-tag--light"><i class="gos-tag__dot"></i>Leeds</span></div>

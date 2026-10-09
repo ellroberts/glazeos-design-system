@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.8.0 — components — built 2026-10-07 */
+/*! glazeos-design-system v0.9.0 — components — built 2026-10-09 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -436,6 +436,8 @@ select.gos-field__input {
    .gos-tile  image link tile (was .m-tile); variant --dark, size --md | --lg (was --big)
               arrow: a .gos-disc--light (--lg on the big tile) as the last thing in __in; on hover (mouse only)
               the disc fills gold, its arrow nudges right and the photo zooms in slightly
+   .gos-zoom  image zoom for any clickable image: on the image's frame (or on the <a> when it is the frame);
+              zooms on hover only inside a link (v0.9.0)
    .gos-job    job photo + quote card (was .m-jc); variant --feature (was --big) | --side
    ============================================================================= */
 
@@ -566,13 +568,26 @@ select.gos-field__input {
   .gos-tile:hover .gos-disc { background: var(--gold); color: var(--gold-ink); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .gos-tile img { transition: transform .6s var(--ease-out); }
+  .gos-tile img { transition: transform var(--zoom-duration) var(--ease-out); }
   .gos-tile .gos-disc svg { transition: transform .3s var(--ease-out); }
   .gos-tile:focus-visible .gos-disc svg { transform: translateX(3px); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .gos-tile:hover img { transform: scale(1.04); }
+  .gos-tile:hover img { transform: scale(var(--zoom-scale)); }
   .gos-tile:hover .gos-disc svg { transform: translateX(3px); }
+}
+
+/* Image zoom, the standard for every clickable image (v0.9.0). Put .gos-zoom on the image's frame (the element that
+   holds the <img>), or on the <a> itself when the link is the frame. The frame clips the zoomed photo, so give any
+   rounded corners to the frame, not the image. It only zooms inside a link: an image with no <a> around it never
+   moves. Amount and speed are --zoom-scale and --zoom-duration; nothing moves with reduced motion on. */
+.gos-zoom { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .gos-zoom img { transition: transform var(--zoom-duration) var(--ease-out); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  a:hover .gos-zoom img,
+  a.gos-zoom:hover img { transform: scale(var(--zoom-scale)); }
 }
 
 .gos-tile--dark { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-sm); padding: var(--card-pad); background: var(--primary); text-align: center; }

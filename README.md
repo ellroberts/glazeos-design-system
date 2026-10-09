@@ -121,6 +121,20 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - Hover (mouse only) and keyboard focus: the disc fills gold and its arrow nudges right; the photo zooms in slightly. No movement with reduced motion on.
 - `--lg` is the big tile (two rows tall); give it a `gos-disc--lg`.
 
+### Image zoom
+
+`gos-zoom` gives any clickable image the same slight zoom as the tile. Put it on the image's frame (the element that holds the `<img>`), or on the link itself when the link is the frame:
+
+```html
+<a href="/gallery/leeds/"><div class="gos-zoom"><img src="leeds.jpg" alt="" width="1200" height="800"></div></a>
+<a class="gos-zoom" href="/gallery/leeds/"><img src="leeds.jpg" alt="" width="1200" height="800"></a>
+```
+
+- It only zooms inside a link (`a:hover .gos-zoom img`, `a.gos-zoom:hover img`). An image with no `<a>` around it never moves, so don't use it on card photos (`gos-card__media`) or logos.
+- The frame clips the zoomed photo (`overflow: hidden`). Give rounded corners to the frame, not the image.
+- Amount and speed are tokens: `--zoom-scale` (1.04) and `--zoom-duration` (.6s), shared with `gos-tile`.
+- Mouse hover only. No movement with reduced motion on.
+
 ### Text links
 
 `gos-link` is an inline link with a gold underline that draws across on hover. Text colour is inherited, so it works on light and dark backgrounds, and the line follows the words when a link wraps.
@@ -205,7 +219,7 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | E | Chips + choice chips | `chips.css` | 🔁 |
 | F | Form fields | `fields.css` | 🔁 |
 | G | Form card | `form-card.css` | 🔁 |
-| H | Cards, tiles, job cards | `cards.css` | 🔁 (+ optional photo slot, `gos-card__media`, logo fit `--contain`, bottom link `gos-card__action`, card hover `--hover`) |
+| H | Cards, tiles, job cards | `cards.css` | 🔁 (+ optional photo slot, `gos-card__media`, logo fit `--contain`, bottom link `gos-card__action`, card hover `--hover`, image zoom `gos-zoom`) |
 | I | Glass cards (dark sections) | `glass.css` | 🏠 |
 | J | Stat displays + rating | `stats.css` | 🔁 |
 | K | Accreditation badges | `badges.css` | 🔁 |

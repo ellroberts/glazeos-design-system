@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.8.0 — tokens + base — built 2026-10-07 */
+/*! glazeos-design-system v0.9.0 — tokens + base — built 2026-10-09 */
 /* GlazeOS foundations: tokens + base element styles. */
 /* =============================================================================
    GlazeOS Design Tokens - Single Source of Truth (v0.1.0)
@@ -183,6 +183,8 @@
 
   /* ===== MOTION ===== */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --zoom-scale: 1.04;                           /* image zoom on hover: tiles and gos-zoom (v0.9.0) */
+  --zoom-duration: .6s;
   --lift: translateY(-1px);
   --ease-wipe: cubic-bezier(0.4, 0.15, 0, 1);   /* button hover wipe (clip-path + border colour) */
   --btn-scale-hover: 1.02 1.05;                 /* `scale` x y on button hover / focus */
