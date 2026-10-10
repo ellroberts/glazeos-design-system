@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.9.0 — components — built 2026-10-09 */
+/*! glazeos-design-system v0.10.0 — components — built 2026-10-10 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -793,6 +793,7 @@ select.gos-field__input {
 /* =============================================================================
    M. FAQ accordion  🔁  replaces .m-faq and .faq / .faq__item (identical structure)
    layout  --cols-1 (default, inner pages) | --cols-2 (home page grid)
+   hover   (mouse only, v0.10.0) the border and the +/− disc turn gold, open or closed
    Markup (no JS — native <details>):
    <div class="gos-faq gos-faq--cols-2">
      <details class="gos-faq__item" open><summary>Question?</summary><p>Answer.</p></details>
@@ -828,8 +829,14 @@ select.gos-field__input {
   font-size: var(--text-lg);
   font-weight: var(--weight-medium);
   line-height: 1;
+  transition: background-color .3s, color .3s;
 }
 .gos-faq__item[open] summary::after { content: '−'; background: var(--primary); color: #fff; }
+/* Hover (v0.10.0): gold border and a gold disc with a --gold-ink sign (the gos-disc--gold pair), mouse only, as gos-card--hover. */
+@media (hover: hover) and (pointer: fine) {
+  .gos-faq__item:hover { border-color: var(--gold); }
+  .gos-faq__item:hover summary::after { background: var(--gold); color: var(--gold-ink); }
+}
 .gos-faq__item p { margin: 0; padding: 0 var(--card-pad) var(--gap-md); font-size: var(--text-sm); line-height: 1.65; color: var(--body); }
 
 .gos-faq-ask { margin-top: var(--gap-sm); font-size: var(--text-sm); color: var(--body); }
