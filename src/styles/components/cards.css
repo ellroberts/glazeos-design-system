@@ -5,6 +5,8 @@
      variant  --default | --surface | --dark | --link
      hover    --hover: the border changes colour when the mouse is anywhere over the card (cards that hold their
               own links, so the whole card can't be one <a> like --link)
+     whole    --link + .gos-link-host on the <a>, a .gos-link span in __action, .gos-zoom on the media: the whole card
+              is one link; hovering anywhere lifts it, draws the line and zooms the photo (v0.11.0)
      size     --sm | --md | --lg (padding)
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
      action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
@@ -48,7 +50,7 @@
 .gos-card--dark .gos-card__meta { color: var(--on-dark-muted); }
 .gos-card--dark .gos-card__body { color: var(--on-dark-body); }
 .gos-card--link { text-decoration: none; color: inherit; }
-.gos-card--link:hover { transform: var(--lift); box-shadow: var(--shadow-lift); border-color: var(--primary); }
+.gos-card--link:hover { transform: var(--lift); box-shadow: var(--shadow-lift); border-color: var(--primary); color: inherit; } /* color: a site's a:hover can't recolour the card's text (v0.11.0) */
 
 /* ---- sizes ---- */
 .gos-card--sm { padding: var(--gap-sm); }

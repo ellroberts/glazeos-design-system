@@ -86,6 +86,21 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - For the links to line up across a row, leave the grid at its default stretch (don't add `align-items: start`).
 - `gos-card--hover` is for cards that hold their own links. A card that is one big link uses `gos-card--link` instead (it lifts as well).
 
+### Whole card as one link
+
+For an index of pages (areas, services), make the whole card the link. Put `gos-card--link` and `gos-link-host` on the `<a>`, the bottom words in a `gos-link` span inside `gos-card__action`, and `gos-zoom` on the photo slot. Hovering anywhere on the card lifts it, draws the line under the words and zooms the photo; the text keeps its colour (a site's own `a:hover` colour can't reach it):
+
+```html
+<a class="gos-card gos-card--link gos-card--md gos-link-host" href="/areas/leeds/">
+  <div class="gos-card__media gos-card__media--fixed gos-zoom"><img src="leeds.jpg" alt="" width="1200" height="800"></div>
+  <h2 class="gos-card__title">Leeds</h2>
+  <p class="gos-card__body">Windows and doors fitted across Leeds.</p>
+  <p class="gos-card__action"><span class="gos-link gos-link--track">Find out more<span class="gos-visually-hidden"> about Leeds</span></span></p>
+</a>
+```
+
+- No other link inside it (links can't nest). A card with several links stays an `<article>` with `gos-card--hover`.
+
 ### Icon media, side layout, lead and foot text
 
 - `gos-card__media--icon`: put a Lucide icon (`icon('shield-check', { size: 'lg' })`) in the media slot instead of a photo. It sits large and gold on the brand gradient. When there's a real photo, use an `<img>` and drop `--icon`.
@@ -130,7 +145,7 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 <a class="gos-zoom" href="/gallery/leeds/"><img src="leeds.jpg" alt="" width="1200" height="800"></a>
 ```
 
-- It only zooms inside a link (`a:hover .gos-zoom img`, `a.gos-zoom:hover img`). An image with no `<a>` around it never moves, so don't use it on card photos (`gos-card__media`) or logos.
+- It only zooms inside a link (`a:hover .gos-zoom img`, `a.gos-zoom:hover img`). An image with no `<a>` around it never moves, so use it on a card photo (`gos-card__media`) only when the card or the photo is a link (a whole-card link, a lightbox trigger), and never on logos.
 - The frame clips the zoomed photo (`overflow: hidden`). Give rounded corners to the frame, not the image.
 - Amount and speed are tokens: `--zoom-scale` (1.04) and `--zoom-duration` (.6s), shared with `gos-tile`.
 - Mouse hover only. No movement with reduced motion on.
@@ -144,7 +159,7 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 - `gos-link--gold`: gold text instead of the inherited colour, kept on hover. Add it to either effect, on dark backgrounds only (gold text on white is too low-contrast). `gos-link--track gos-link--gold` is the hero "Liam" link; `gos-link--draw gos-link--gold` keeps the line hidden until hover.
 - `gos-link--gold-deep`: the light-background version, darker gold text from the `--gold-text` token (5.2:1 on white for the default `#F0A81E`); the underline stays `--gold`.
 - Keyboard focus always shows the full line. Hover is mouse-only, and with reduced motion on the line appears without the draw.
-- `gos-link-host`: for a block that is one big link with the underline on one piece of text inside it (a hero stat, a tile). Put `gos-link-host` on the `<a>` and `gos-link` (with its effect) on the text; hovering or focusing anywhere on the block draws the line.
+- `gos-link-host`: for a block that is one big link with the underline on one piece of text inside it (a hero stat, a tile, a whole card). Put `gos-link-host` on the `<a>` and `gos-link` (with its effect) on the text; hovering or focusing anywhere on the block draws the line. The block keeps its colour on hover (v0.11.0), so a site's own `a:hover` colour never recolours it.
 
 ```html
 <a class="gos-link-host" href="#jobs"><b>2,800</b><span class="gos-link gos-link--track">Windows fitted</span></a>
@@ -154,6 +169,23 @@ Add `gos-card__media--contain` to the slot for logos: the whole image sits on wh
 <a class="gos-link gos-link--track" href="/services/">Find out more</a>
 ```
 - Why: see the "Card action and logo fit" entry in [DECISIONS.md](DECISIONS.md).
+
+### Lightbox
+
+A photo viewer for a gallery of job photos: one photo large over a dark layer, its title and a count above, previous / next over its edges (under it on phones). CSS only: the site adds the behaviour (open on a trigger click, arrow keys, swipe, Escape, focus kept inside) and builds the layer at the end of `<body>`. Each thumbnail is a `gos-lightbox-trigger` link to its full-size file, so without the script it still opens the photo.
+
+```html
+<a class="gos-card__media gos-card__media--natural gos-zoom gos-lightbox-trigger" href="job-1.webp" aria-label="View larger photo: Bifold doors"><img src="job-1.webp" alt="…" width="1024" height="682"></a>
+
+<div class="gos-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <div class="gos-lightbox__bar"><p class="gos-lightbox__caption">Bifold doors</p><p class="gos-lightbox__count">1 of 6</p><button type="button" class="gos-lightbox__btn gos-lightbox__close" aria-label="Close photo viewer"><!-- icon('x', { size: 'lg' }) --></button></div>
+  <div class="gos-lightbox__stage"><button type="button" class="gos-lightbox__btn gos-lightbox__prev" aria-label="Previous photo"><!-- icon('chevron-left', { size: 'lg' }) --></button><img class="gos-lightbox__img" src="job-1.webp" alt="…"><button type="button" class="gos-lightbox__btn gos-lightbox__next" aria-label="Next photo"><!-- icon('chevron-right', { size: 'lg' }) --></button></div>
+  <div class="gos-lightbox__bar gos-lightbox__nav"><!-- the same previous / next buttons, for phones --></div>
+</div>
+```
+
+- `hidden` closes it. `gos-lightbox--single` hides previous / next. Put `gos-lightbox-open` on `<html>` while it is open so the page behind doesn't scroll.
+- The layer is `--shade` at 88%, above the sticky bar and nav (`z-index: 1000`).
 
 ### Icons
 
@@ -240,3 +272,4 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | Z | Footer | `footer.css` | ✅ |
 | AA | Text links | `links.css` | 🔁 |
 | AB | Icons (Lucide) | `icons.css` + `dist/icons.mjs` | 🔁 |
+| AC | Lightbox | `lightbox.css` | 🏠 new (v0.11.0) |

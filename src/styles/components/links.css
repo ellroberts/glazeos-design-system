@@ -38,6 +38,9 @@
 
 /* --host: the block link around a gos-link. No underline or colour of its own. */
 .gos-link-host { color: inherit; text-decoration: none; }
+/* The colour stays put on hover and focus (v0.11.0): the moving line is the signal. Two classes, so a site's own
+   a:hover colour can't win: on a dark footer a brand-coloured a:hover made the words disappear. */
+.gos-link-host:hover, .gos-link-host:focus-visible { color: inherit; }
 
 /* Keyboard focus always shows the full line (on the link, or on the host around it). */
 .gos-link:focus-visible, .gos-link-host:focus-visible .gos-link { background-size: 100% 2px; }
