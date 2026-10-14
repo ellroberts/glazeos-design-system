@@ -102,6 +102,19 @@ export const MediaLink = {
   ),
 };
 
+/** A whole card that is one link with a bottom link's words (v0.11.0): gos-card--link + gos-link-host on the <a>, a
+ *  gos-link span in gos-card__action, gos-zoom on the photo. Hover anywhere: the card lifts, the line draws under
+ *  "Find out more" and the photo zooms; the text keeps its colour. */
+export const WholeCardLink = {
+  render: () => `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:24px;max-width:900px">${['Leeds', 'Harrogate', 'Wetherby']
+    .map((t) => `<a class="gos-card gos-card--link gos-card--md gos-link-host" href="#">
+  <div class="gos-card__media gos-card__media--fixed gos-zoom"><img src="${house}" alt="" width="1200" height="900"></div>
+  <h3 class="gos-card__title">${t}</h3>
+  <p class="gos-card__body">Windows and doors fitted across ${t} and the villages around it.</p>
+  <p class="gos-card__action"><span class="gos-link gos-link--track">Find out more<span class="gos-visually-hidden"> about ${t}</span></span></p>
+</a>`).join('')}</div>`,
+};
+
 /** Every variant and size with a fixed-shape photo. */
 export const MediaVariantsAndSizes = {
   render: () => `<div style="display:flex;flex-direction:column;gap:24px">

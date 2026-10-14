@@ -1,4 +1,4 @@
-/*! glazeos-design-system v0.10.0 — components — built 2026-10-10 */
+/*! glazeos-design-system v0.11.0 — components — built 2026-10-14 */
 /* GlazeOS component styles — one file per family (audit Part 2, A–Z). Load tokens.css (the ./styles export) first. */
 /* =============================================================================
    A. Buttons  🔁  one implementation replacing .m-btn, .btn and .ft-btn
@@ -426,6 +426,8 @@ select.gos-field__input {
      variant  --default | --surface | --dark | --link
      hover    --hover: the border changes colour when the mouse is anywhere over the card (cards that hold their
               own links, so the whole card can't be one <a> like --link)
+     whole    --link + .gos-link-host on the <a>, a .gos-link span in __action, .gos-zoom on the media: the whole card
+              is one link; hovering anywhere lifts it, draws the line and zooms the photo (v0.11.0)
      size     --sm | --md | --lg (padding)
      media    optional .gos-card__media, shape --fixed | --natural, fit --contain (logos)
      action   optional .gos-card__action, last child, pinned to the bottom; its link is a .gos-link
@@ -469,7 +471,7 @@ select.gos-field__input {
 .gos-card--dark .gos-card__meta { color: var(--on-dark-muted); }
 .gos-card--dark .gos-card__body { color: var(--on-dark-body); }
 .gos-card--link { text-decoration: none; color: inherit; }
-.gos-card--link:hover { transform: var(--lift); box-shadow: var(--shadow-lift); border-color: var(--primary); }
+.gos-card--link:hover { transform: var(--lift); box-shadow: var(--shadow-lift); border-color: var(--primary); color: inherit; } /* color: a site's a:hover can't recolour the card's text (v0.11.0) */
 
 /* ---- sizes ---- */
 .gos-card--sm { padding: var(--gap-sm); }
@@ -1482,6 +1484,9 @@ select.gos-field__input {
 
 /* --host: the block link around a gos-link. No underline or colour of its own. */
 .gos-link-host { color: inherit; text-decoration: none; }
+/* The colour stays put on hover and focus (v0.11.0): the moving line is the signal. Two classes, so a site's own
+   a:hover colour can't win: on a dark footer a brand-coloured a:hover made the words disappear. */
+.gos-link-host:hover, .gos-link-host:focus-visible { color: inherit; }
 
 /* Keyboard focus always shows the full line (on the link, or on the host around it). */
 .gos-link:focus-visible, .gos-link-host:focus-visible .gos-link { background-size: 100% 2px; }
@@ -1510,4 +1515,75 @@ select.gos-field__input {
 .gos-icon--sm { width: 12px; height: 12px; stroke-width: 2.5; }
 .gos-icon--md { width: 14px; height: 14px; stroke-width: 2; }
 .gos-icon--lg { width: 20px; height: 20px; stroke-width: 1.75; }
+
+/* =============================================================================
+   Lightbox (v0.11.0): one photo large over a dark layer, with its title, a count and previous / next. For a gallery
+   of job photos (a site's /showcase/).
+   .gos-lightbox          the layer: fixed over the whole page, the photo centred. `hidden` attribute = closed
+     __bar                a row above the photo: __caption (the photo's title), __count ("2 of 6"), __close
+     __stage              the photo (__img) with __prev / __next over its left and right edges
+     __nav                a row under the photo with __prev / __next, phones only (the edge buttons hide there)
+     __btn                every round button (close, previous, next), holding an icon: icon('x'),
+                          icon('chevron-left'), icon('chevron-right'), size 'lg'
+     --single             one photo: no previous / next
+   .gos-lightbox-trigger  the link around each thumbnail that opens it (href = the full-size file)
+   .gos-lightbox-open     on <html> while open: the page behind doesn't scroll
+   CSS only, like everything here. The site adds the behaviour (open on a trigger click, keys, swipe, focus) and
+   builds the layer at the end of <body>; without it each trigger is a plain link to the full-size photo.
+   ============================================================================= */
+
+.gos-lightbox-trigger { display: block; cursor: zoom-in; }
+.gos-lightbox-open { overflow: hidden; }
+
+.gos-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;   /* above the sticky bar and the nav */
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  justify-items: center;
+  gap: var(--gap-sm);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--shade) 88%, transparent);
+  color: #fff;
+}
+.gos-lightbox[hidden] { display: none; }
+
+.gos-lightbox__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-sm); width: min(100%, 1400px); }
+.gos-lightbox__caption { margin: 0; font-weight: var(--weight-semibold); }
+.gos-lightbox__count { margin: 0 0 0 auto; white-space: nowrap; color: var(--on-dark-muted); font-variant-numeric: tabular-nums; }
+
+.gos-lightbox__stage { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; }
+.gos-lightbox__img { max-width: min(100%, 1400px); max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: var(--radius); }
+
+.gos-lightbox__btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  border: var(--border) solid var(--on-dark-border);
+  border-radius: var(--pill);
+  background: color-mix(in srgb, var(--shade) 40%, transparent);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.gos-lightbox__btn:hover { border-color: var(--gold); }
+.gos-lightbox__btn:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.gos-lightbox__stage .gos-lightbox__btn { position: absolute; top: 50%; transform: translateY(-50%); }
+.gos-lightbox__stage .gos-lightbox__prev { left: 0; }
+.gos-lightbox__stage .gos-lightbox__next { right: 0; }
+
+.gos-lightbox__nav { display: none; }
+@media (max-width: 40rem) {
+  .gos-lightbox__stage .gos-lightbox__btn { display: none; }
+  .gos-lightbox__nav { display: flex; justify-content: center; gap: var(--gap-sm); }
+}
+.gos-lightbox--single .gos-lightbox__stage .gos-lightbox__btn,
+.gos-lightbox--single .gos-lightbox__nav { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .gos-lightbox__btn { transition: none; } }
 
