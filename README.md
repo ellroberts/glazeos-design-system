@@ -170,6 +170,15 @@ For an index of pages (areas, services), make the whole card the link. Put `gos-
 ```
 - Why: see the "Card action and logo fit" entry in [DECISIONS.md](DECISIONS.md).
 
+### Google ratings
+
+Stars and scores from Google use Google's own star yellow, `--google-gold` (`#FBBC04`), not the client's gold, so they read as Google's on every site. It's fixed, not themed. Stars: add `gos-stars--google`. A score or any other figure: `color: var(--google-gold)`.
+
+```html
+<b style="color: var(--google-gold)">5.0</b>
+<span class="gos-stars gos-stars--google gos-stars--md" aria-label="5 out of 5"><!-- 5 star svgs --></span>
+```
+
 ### Lightbox
 
 A photo viewer for a gallery of job photos: one photo large over a dark layer, its title and a count above, previous / next over its edges (under it on phones). CSS only: the site adds the behaviour (open on a trigger click, arrow keys, swipe, Escape, focus kept inside) and builds the layer at the end of `<body>`. Each thumbnail is a `gos-lightbox-trigger` link to its full-size file, so without the script it still opens the photo.
@@ -255,7 +264,7 @@ To build a static copy: `npm run build-storybook` (output goes to `storybook-sta
 | I | Glass cards (dark sections) | `glass.css` | 🏠 |
 | J | Stat displays + rating | `stats.css` | 🔁 |
 | K | Accreditation badges | `badges.css` | 🔁 |
-| L | Star rating | `stars.css` | 🔁 |
+| L | Star rating | `stars.css` | 🔁 (+ `--google`: Google's star yellow, `--google-gold`, v0.12.0) |
 | M | FAQ accordion | `faq.css` | 🔁 |
 | N | Section heading | `section-head.css` | 🔁 |
 | O | Layout (wrap, section, grid) | `layout.css` | 🔁 |
